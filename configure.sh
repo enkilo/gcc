@@ -9,9 +9,9 @@ CC=`which ${CC-gcc}`
 prefix=${CC%/bin/*}
 build=`$CC -dumpmachine`
 
-#case "$build" in
-#  x86_64-*) CFLAGS="-m32" build=i686-${build#*-} ;;
-#esac
+case "$build" in
+  x86_64-*) CC="$CC -m32" build=i686-${build#*-} ;;
+esac
 
 : ${host=$build}
 
@@ -43,8 +43,8 @@ BUILDDIR=build/$build                          # installation directory
 target=mapip
 progpref=mapip-
 
-export CFLAGS="$CFLAGS -g -O2 -pipe"
-export CXXFLAGS="$CXXFLAGS -g -O2 -pipe"
+export CFLAGS="$CFLAGS -g -ggdb -O0"
+export CXXFLAGS="$CXXFLAGS -g -ggdb -O0"
 export LDFLAGS=""
 export DEBUG_FLAGS=''
 
@@ -61,7 +61,9 @@ fi
 mkdir -p "$BUILDDIR"
 cd "$BUILDDIR"
 
-"$SRCDIR"/configure \
+(set -x
+        CC="$CC" \
+ "$SRCDIR"/configure \
         ${prefix+--prefix="$prefix"} \
         --enable-languages=c,c++ \
         --with-gcc --with-stabs \
@@ -72,13 +74,13 @@ cd "$BUILDDIR"
         --without-headers \
         --program-prefix="$progpref" -v \
         ${SYSROOT+--with-sysroot="$SYSROOT"} \
-        "$@" \
+        "$@") \
         2>&1 | tee gcc_configure.log
 
 echo "Configuration in $BUILDDIR. Now type build using:" 1>&2
 
 echo "
     make -C $BUILDDIR  \\
-      CFLAGS_FOR_TARGET=\"-g -O2\" NATIVE_SYSTEM_HEADER_DIR=\"/include\"
+      CFLAGS_FOR_TARGET=\"-g -O0\" NATIVE_SYSTEM_HEADER_DIR=\"/include\"
 "
 

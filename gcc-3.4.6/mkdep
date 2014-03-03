@@ -72,7 +72,7 @@ _EOF_
 gcc -MM $* |
 sed "
 	s; \./; ;g
-	$SED" >> $TMP
+	sed" >> $TMP
 
 cat << _EOF_ >> $TMP
 

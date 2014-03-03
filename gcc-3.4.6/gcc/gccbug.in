@@ -405,7 +405,7 @@ while [ -z "$REQUEST_ID" ]; do
   # 1) Confidential
   #
   PATTERN=">Confidential:"
-  CONFIDENTIAL=`eval sed -n -e "\"$SED_CMD\"" $TEMP`
+  CONFIDENTIAL=`eval sed -n -e "\"sed_CMD\"" $TEMP`
   case "$CONFIDENTIAL" in
     no) CNT=`expr $CNT + 1` ;;
     *) echo "$COMMAND: \`$CONFIDENTIAL' is not a valid value for \`Confidential'." ;;
@@ -414,7 +414,7 @@ while [ -z "$REQUEST_ID" ]; do
   # 2) Severity
   #
   PATTERN=">Severity:"
-  SEVERITY=`eval sed -n -e "\"$SED_CMD\"" $TEMP`
+  SEVERITY=`eval sed -n -e "\"sed_CMD\"" $TEMP`
   case "$SEVERITY" in
     ""|non-critical|serious|critical) CNT=`expr $CNT + 1` ;;
     *)  echo "$COMMAND: \`$SEVERITY' is not a valid value for \`Severity'."
@@ -423,7 +423,7 @@ while [ -z "$REQUEST_ID" ]; do
   # 3) Priority
   #
   PATTERN=">Priority:"
-  PRIORITY=`eval sed -n -e "\"$SED_CMD\"" $TEMP`
+  PRIORITY=`eval sed -n -e "\"sed_CMD\"" $TEMP`
   case "$PRIORITY" in
     ""|low|medium) CNT=`expr $CNT + 1` ;;
     high) echo "$COMMAND: \`Priority: high' is reserved for GCC maintainers." ;;
@@ -433,7 +433,7 @@ while [ -z "$REQUEST_ID" ]; do
   # 4) Category
   #
   PATTERN=">Category:"
-  CATEGORY=`eval sed -n -e "\"$SED_CMD\"" $TEMP`
+  CATEGORY=`eval sed -n -e "\"sed_CMD\"" $TEMP`
   FOUND=
   for C in $CATEGORIES
   do
@@ -452,7 +452,7 @@ while [ -z "$REQUEST_ID" ]; do
   # 5) Class
   #
   PATTERN=">Class:"
-  CLASS=`eval sed -n -e "\"$SED_CMD\"" $TEMP`
+  CLASS=`eval sed -n -e "\"sed_CMD\"" $TEMP`
   case "$CLASS" in
     ""|doc-bug|accepts-illegal|rejects-legal|wrong-code|ice-on-legal-code|ice-on-illegal-code|pessimizes-code|sw-bug|change-request|support) CNT=`expr $CNT + 1` ;;
     *)  echo "$COMMAND: \`$CLASS' is not a valid value for \`Class'."

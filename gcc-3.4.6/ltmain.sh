@@ -142,7 +142,7 @@ test "${ECHO+set}" = set || ECHO=${as_echo-'printf %s\n'}
 : ${MV="mv -f"}
 : ${RM="rm -f"}
 : ${SHELL="${CONFIG_SHELL-/bin/sh}"}
-: ${Xsed="$SED -e 1s/^X//"}
+: ${Xsed="sed -e 1s/^X//"}
 
 # Global variables:
 EXIT_SUCCESS=0
@@ -165,7 +165,7 @@ basename="s,^.*/,,"
 # otherwise set result to NONDIR_REPLACEMENT.
 func_dirname ()
 {
-    func_dirname_result=`$ECHO "${1}" | $SED "$dirname"`
+    func_dirname_result=`$ECHO "${1}" | sed "$dirname"`
     if test "X$func_dirname_result" = "X${1}"; then
       func_dirname_result="${3}"
     else
@@ -177,7 +177,7 @@ func_dirname ()
 # func_basename file
 func_basename ()
 {
-    func_basename_result=`$ECHO "${1}" | $SED "$basename"`
+    func_basename_result=`$ECHO "${1}" | sed "$basename"`
 } # func_basename may be replaced by extended shell implementation
 
 
@@ -196,13 +196,13 @@ func_basename ()
 func_dirname_and_basename ()
 {
     # Extract subdirectory from the argument.
-    func_dirname_result=`$ECHO "${1}" | $SED -e "$dirname"`
+    func_dirname_result=`$ECHO "${1}" | sed -e "$dirname"`
     if test "X$func_dirname_result" = "X${1}"; then
       func_dirname_result="${3}"
     else
       func_dirname_result="$func_dirname_result${2}"
     fi
-    func_basename_result=`$ECHO "${1}" | $SED -e "$basename"`
+    func_basename_result=`$ECHO "${1}" | sed -e "$basename"`
 } # func_dirname_and_basename may be replaced by extended shell implementation
 
 
@@ -215,8 +215,8 @@ func_dirname_and_basename ()
 func_stripname ()
 {
     case ${2} in
-      .*) func_stripname_result=`$ECHO "${3}" | $SED "s%^${1}%%; s%\\\\${2}\$%%"`;;
-      *)  func_stripname_result=`$ECHO "${3}" | $SED "s%^${1}%%; s%${2}\$%%"`;;
+      .*) func_stripname_result=`$ECHO "${3}" | sed "s%^${1}%%; s%\\\\${2}\$%%"`;;
+      *)  func_stripname_result=`$ECHO "${3}" | sed "s%^${1}%%; s%${2}\$%%"`;;
     esac
 } # func_stripname may be replaced by extended shell implementation
 
@@ -272,7 +272,7 @@ func_normal_abspath ()
   # Cancel out all the simple stuff to save iterations.  We also want
   # the path to end with a slash for ease of parsing, so make sure
   # there is one (and only one) here.
-  func_normal_abspath_tpath=`$ECHO "$func_normal_abspath_tpath" | $SED \
+  func_normal_abspath_tpath=`$ECHO "$func_normal_abspath_tpath" | sed \
         -e "$removedotparts" -e "$collapseslashes" -e "$finalslash"`
   while :; do
     # Processed it all yet?
@@ -283,9 +283,9 @@ func_normal_abspath ()
       fi
       break
     fi
-    func_normal_abspath_tcomponent=`$ECHO "$func_normal_abspath_tpath" | $SED \
+    func_normal_abspath_tcomponent=`$ECHO "$func_normal_abspath_tpath" | sed \
         -e "$pathcar"`
-    func_normal_abspath_tpath=`$ECHO "$func_normal_abspath_tpath" | $SED \
+    func_normal_abspath_tpath=`$ECHO "$func_normal_abspath_tpath" | sed \
         -e "$pathcdr"`
     # Figure out what to do with it
     case $func_normal_abspath_tcomponent in
@@ -529,9 +529,9 @@ func_mkdir_p ()
         case $my_directory_path in */*) ;; *) break ;; esac
 
         # ...otherwise throw away the child directory and loop
-        my_directory_path=`$ECHO "$my_directory_path" | $SED -e "$dirname"`
+        my_directory_path=`$ECHO "$my_directory_path" | sed -e "$dirname"`
       done
-      my_dir_list=`$ECHO "$my_dir_list" | $SED 's,:*$,,'`
+      my_dir_list=`$ECHO "$my_dir_list" | sed 's,:*$,,'`
 
       save_mkdir_p_IFS="$IFS"; IFS=':'
       for my_dir in $my_dir_list; do
@@ -595,7 +595,7 @@ func_quote_for_eval ()
 {
     case $1 in
       *[\\\`\"\$]*)
-	func_quote_for_eval_unquoted_result=`$ECHO "$1" | $SED "$sed_quote_subst"` ;;
+	func_quote_for_eval_unquoted_result=`$ECHO "$1" | sed "$sed_quote_subst"` ;;
       *)
         func_quote_for_eval_unquoted_result="$1" ;;
     esac
@@ -622,7 +622,7 @@ func_quote_for_expand ()
 {
     case $1 in
       *[\\\`\"]*)
-	my_arg=`$ECHO "$1" | $SED \
+	my_arg=`$ECHO "$1" | sed \
 	    -e "$double_quote_subst" -e "$sed_double_backslash"` ;;
       *)
         my_arg="$1" ;;
@@ -700,7 +700,7 @@ func_tr_sh ()
 {
   case $1 in
   [0-9]* | *[!a-zA-Z0-9_]*)
-    func_tr_sh_result=`$ECHO "$1" | $SED 's/^\([0-9]\)/_\1/; s/[^a-zA-Z0-9_]/_/g'`
+    func_tr_sh_result=`$ECHO "$1" | sed 's/^\([0-9]\)/_\1/; s/[^a-zA-Z0-9_]/_/g'`
     ;;
   * )
     func_tr_sh_result=$1
@@ -715,7 +715,7 @@ func_version ()
 {
     $opt_debug
 
-    $SED -n '/(C)/!b go
+    sed -n '/(C)/!b go
 	:more
 	/\./!{
 	  N
@@ -738,7 +738,7 @@ func_usage ()
 {
     $opt_debug
 
-    $SED -n '/^# Usage:/,/^#  *.*--help/ {
+    sed -n '/^# Usage:/,/^#  *.*--help/ {
         s/^# //
 	s/^# *$//
 	s/\$progname/'$progname'/
@@ -756,7 +756,7 @@ func_help ()
 {
     $opt_debug
 
-    $SED -n '/^# Usage:/,/# Report bugs to/ {
+    sed -n '/^# Usage:/,/# Report bugs to/ {
 	:print
         s/^# //
 	s/^# *$//
@@ -767,8 +767,8 @@ func_help ()
 	s*\$LTCFLAGS*'"$LTCFLAGS"'*
 	s*\$LD*'"$LD"'*
 	s/\$with_gnu_ld/'"$with_gnu_ld"'/
-	s/\$automake_version/'"`(${AUTOMAKE-automake} --version) 2>/dev/null |$SED 1q`"'/
-	s/\$autoconf_version/'"`(${AUTOCONF-autoconf} --version) 2>/dev/null |$SED 1q`"'/
+	s/\$automake_version/'"`(${AUTOMAKE-automake} --version) 2>/dev/null |sed 1q`"'/
+	s/\$autoconf_version/'"`(${AUTOCONF-autoconf} --version) 2>/dev/null |sed 1q`"'/
 	p
 	d
      }
@@ -801,8 +801,8 @@ func_split_short_opt ()
     my_sed_short_opt='1s/^\(..\).*$/\1/;q'
     my_sed_short_rest='1s/^..\(.*\)$/\1/;q'
 
-    func_split_short_opt_name=`$ECHO "$1" | $SED "$my_sed_short_opt"`
-    func_split_short_opt_arg=`$ECHO "$1" | $SED "$my_sed_short_rest"`
+    func_split_short_opt_name=`$ECHO "$1" | sed "$my_sed_short_opt"`
+    func_split_short_opt_arg=`$ECHO "$1" | sed "$my_sed_short_rest"`
 } # func_split_short_opt may be replaced by extended shell implementation
 
 
@@ -814,8 +814,8 @@ func_split_long_opt ()
     my_sed_long_opt='1s/^\(--[^=]*\)=.*/\1/;q'
     my_sed_long_arg='1s/^--[^=]*=//'
 
-    func_split_long_opt_name=`$ECHO "$1" | $SED "$my_sed_long_opt"`
-    func_split_long_opt_arg=`$ECHO "$1" | $SED "$my_sed_long_arg"`
+    func_split_long_opt_name=`$ECHO "$1" | sed "$my_sed_long_opt"`
+    func_split_long_opt_arg=`$ECHO "$1" | sed "$my_sed_long_arg"`
 } # func_split_long_opt may be replaced by extended shell implementation
 
 exit_cmd=:
@@ -875,14 +875,14 @@ func_len ()
 # func_lo2o object
 func_lo2o ()
 {
-    func_lo2o_result=`$ECHO "${1}" | $SED "$lo2o"`
+    func_lo2o_result=`$ECHO "${1}" | sed "$lo2o"`
 } # func_lo2o may be replaced by extended shell implementation
 
 
 # func_xform libobj-or-source
 func_xform ()
 {
-    func_xform_result=`$ECHO "${1}" | $SED 's/\.[^.]*$/.lo/'`
+    func_xform_result=`$ECHO "${1}" | sed 's/\.[^.]*$/.lo/'`
 } # func_xform may be replaced by extended shell implementation
 
 
@@ -905,11 +905,11 @@ func_config ()
     re_endcf='^# ### END LIBTOOL'
 
     # Default configuration.
-    $SED "1,/$re_begincf CONFIG/d;/$re_endcf CONFIG/,\$d" < "$progpath"
+    sed "1,/$re_begincf CONFIG/d;/$re_endcf CONFIG/,\$d" < "$progpath"
 
     # Now print the configurations for the tags.
     for tagname in $taglist; do
-      $SED -n "/$re_begincf TAG CONFIG: $tagname\$/,/$re_endcf TAG CONFIG: $tagname\$/p" < "$progpath"
+      sed -n "/$re_begincf TAG CONFIG: $tagname\$/,/$re_endcf TAG CONFIG: $tagname\$/p" < "$progpath"
     done
 
     exit $?
@@ -966,7 +966,7 @@ func_enable_tag ()
 	# and the sed script, to avoid splitting on whitespace, but
 	# also don't use non-portable quotes within backquotes within
 	# quotes we have to do it in 2 steps:
-	extractedcf=`$SED -n -e "$sed_extractcf" < "$progpath"`
+	extractedcf=`sed -n -e "$sed_extractcf" < "$progpath"`
 	eval "$extractedcf"
       else
 	func_error "ignoring unknown tag $tagname"
@@ -1231,7 +1231,7 @@ func_enable_tag "$optarg"
 func_lalib_p ()
 {
     test -f "$1" &&
-      $SED -e 4q "$1" 2>/dev/null \
+      sed -e 4q "$1" 2>/dev/null \
         | $GREP "^# Generated by .*$PACKAGE" > /dev/null 2>&1
 }
 
@@ -1493,7 +1493,7 @@ func_convert_core_file_wine_to_w32 ()
     func_convert_core_file_wine_to_w32_tmp=`winepath -w "$1" 2>/dev/null`
     if test "$?" -eq 0 && test -n "${func_convert_core_file_wine_to_w32_tmp}"; then
       func_convert_core_file_wine_to_w32_result=`$ECHO "$func_convert_core_file_wine_to_w32_tmp" |
-        $SED -e "$lt_sed_naive_backslashify"`
+        sed -e "$lt_sed_naive_backslashify"`
     else
       func_convert_core_file_wine_to_w32_result=
     fi
@@ -1577,7 +1577,7 @@ func_convert_core_msys_to_w32 ()
   $opt_debug
   # awkward: cmd appends spaces to result
   func_convert_core_msys_to_w32_result=`( cmd //c echo "$1" ) 2>/dev/null |
-    $SED -e 's/[ ]*$//' -e "$lt_sed_naive_backslashify"`
+    sed -e 's/[ ]*$//' -e "$lt_sed_naive_backslashify"`
 }
 #end: func_convert_core_msys_to_w32
 
@@ -1616,7 +1616,7 @@ func_convert_path_check ()
     if test "x$1" != "x$2"; then
       lt_replace_pathsep_chars="s|$1|$2|g"
       func_to_host_path_result=`echo "$3" |
-        $SED -e "$lt_replace_pathsep_chars"`
+        sed -e "$lt_replace_pathsep_chars"`
     else
       func_to_host_path_result="$3"
     fi
@@ -2135,7 +2135,7 @@ func_mode_compile ()
     # Calculate the filename of the output object if compiler does
     # not support -o with -c
     if test "$compiler_c_o" = no; then
-      output_obj=`$ECHO "$srcfile" | $SED 's%^.*/%%; s%\.[^.]*$%%'`.${objext}
+      output_obj=`$ECHO "$srcfile" | sed 's%^.*/%%; s%\.[^.]*$%%'`.${objext}
       lockfile="$output_obj.lock"
     else
       output_obj=
@@ -2673,7 +2673,7 @@ func_mode_finish ()
 
     if test -n "$libs"; then
       if test -n "$lt_sysroot"; then
-        sysroot_regex=`$ECHO "$lt_sysroot" | $SED "$sed_make_literal_regex"`
+        sysroot_regex=`$ECHO "$lt_sysroot" | sed "$sed_make_literal_regex"`
         sysroot_cmd="s/\([ ']\)$sysroot_regex/\1/g;"
       else
         sysroot_cmd=
@@ -2955,7 +2955,7 @@ func_mode_install ()
 
 	if test -n "$relink_command"; then
 	  # Determine the prefix the user has applied to our future dir.
-	  inst_prefix_dir=`$ECHO "$destdir" | $SED -e "s%$libdir\$%%"`
+	  inst_prefix_dir=`$ECHO "$destdir" | sed -e "s%$libdir\$%%"`
 
 	  # Don't allow the user to place us outside of our expected
 	  # location b/c this prevents finding dependent libraries that
@@ -2968,9 +2968,9 @@ func_mode_install ()
 
 	  if test -n "$inst_prefix_dir"; then
 	    # Stick the inst_prefix_dir data into the link command.
-	    relink_command=`$ECHO "$relink_command" | $SED "s%@inst_prefix_dir@%-inst-prefix-dir $inst_prefix_dir%"`
+	    relink_command=`$ECHO "$relink_command" | sed "s%@inst_prefix_dir@%-inst-prefix-dir $inst_prefix_dir%"`
 	  else
-	    relink_command=`$ECHO "$relink_command" | $SED "s%@inst_prefix_dir@%%"`
+	    relink_command=`$ECHO "$relink_command" | sed "s%@inst_prefix_dir@%%"`
 	  fi
 
 	  func_warning "relinking \`$file'"
@@ -3128,7 +3128,7 @@ func_mode_install ()
 	    if test -f "$lib"; then
 	      func_source "$lib"
 	    fi
-	    libfile="$libdir/"`$ECHO "$lib" | $SED 's%^.*/%%g'` ### testsuite: skip nested quoting test
+	    libfile="$libdir/"`$ECHO "$lib" | sed 's%^.*/%%g'` ### testsuite: skip nested quoting test
 	    if test -n "$libdir" && test ! -f "$libfile"; then
 	      func_warning "\`$lib' has not been installed in \`$libdir'"
 	      finalize=no
@@ -3147,7 +3147,7 @@ func_mode_install ()
 		file="$func_basename_result"
 	        outputname="$tmpdir/$file"
 	        # Replace the output file specification.
-	        relink_command=`$ECHO "$relink_command" | $SED 's%@OUTPUT@%'"$outputname"'%g'`
+	        relink_command=`$ECHO "$relink_command" | sed 's%@OUTPUT@%'"$outputname"'%g'`
 
 	        $opt_silent || {
 	          func_quote_for_expand "$relink_command"
@@ -3166,7 +3166,7 @@ func_mode_install ()
 	    }
 	  else
 	    # Install the binary that we compiled earlier.
-	    file=`$ECHO "$file$stripped_ext" | $SED "s%\([^/]*\)$%$objdir/\1%"`
+	    file=`$ECHO "$file$stripped_ext" | sed "s%\([^/]*\)$%$objdir/\1%"`
 	  fi
 	fi
 
@@ -3295,7 +3295,7 @@ extern \"C\" {
 	  $opt_dry_run || echo ': @PROGRAM@ ' > "$nlist"
 
 	  # Add our own program objects to the symbol list.
-	  progfiles=`$ECHO "$objs$old_deplibs" | $SP2NL | $SED "$lo2o" | $NL2SP`
+	  progfiles=`$ECHO "$objs$old_deplibs" | $SP2NL | sed "$lo2o" | $NL2SP`
 	  for progfile in $progfiles; do
 	    func_to_tool_file "$progfile" func_convert_file_msys_to_w32
 	    func_verbose "extracting global C symbols from \`$func_to_tool_file_result'"
@@ -3376,7 +3376,7 @@ extern \"C\" {
 	          fi
 	          func_to_tool_file "$dlprefile" func_convert_file_msys_to_w32
 	          eval "$NM \"$func_to_tool_file_result\" 2>/dev/null | $global_symbol_pipe |
-	            $SED -e '/I __imp/d' -e 's/I __nm_/D /;s/_nm__//' >> '$nlist'"
+	            sed -e '/I __imp/d' -e 's/I __nm_/D /;s/_nm__//' >> '$nlist'"
 	        }
 	      else # not an import lib
 	        $opt_dry_run || {
@@ -3504,16 +3504,16 @@ static const void *lt_preloaded_setup() {
 	case $host in
 	*cygwin* | *msys* | *mingw* | *cegcc* )
 	  if test -f "$output_objdir/$my_outputname.def"; then
-	    compile_command=`$ECHO "$compile_command" | $SED "s%@SYMFILE@%$output_objdir/$my_outputname.def $symfileobj%"`
-	    finalize_command=`$ECHO "$finalize_command" | $SED "s%@SYMFILE@%$output_objdir/$my_outputname.def $symfileobj%"`
+	    compile_command=`$ECHO "$compile_command" | sed "s%@SYMFILE@%$output_objdir/$my_outputname.def $symfileobj%"`
+	    finalize_command=`$ECHO "$finalize_command" | sed "s%@SYMFILE@%$output_objdir/$my_outputname.def $symfileobj%"`
 	  else
-	    compile_command=`$ECHO "$compile_command" | $SED "s%@SYMFILE@%$symfileobj%"`
-	    finalize_command=`$ECHO "$finalize_command" | $SED "s%@SYMFILE@%$symfileobj%"`
+	    compile_command=`$ECHO "$compile_command" | sed "s%@SYMFILE@%$symfileobj%"`
+	    finalize_command=`$ECHO "$finalize_command" | sed "s%@SYMFILE@%$symfileobj%"`
 	  fi
 	  ;;
 	*)
-	  compile_command=`$ECHO "$compile_command" | $SED "s%@SYMFILE@%$symfileobj%"`
-	  finalize_command=`$ECHO "$finalize_command" | $SED "s%@SYMFILE@%$symfileobj%"`
+	  compile_command=`$ECHO "$compile_command" | sed "s%@SYMFILE@%$symfileobj%"`
+	  finalize_command=`$ECHO "$finalize_command" | sed "s%@SYMFILE@%$symfileobj%"`
 	  ;;
 	esac
 	;;
@@ -3527,8 +3527,8 @@ static const void *lt_preloaded_setup() {
       # really was required.
 
       # Nullify the symbol file.
-      compile_command=`$ECHO "$compile_command" | $SED "s% @SYMFILE@%%"`
-      finalize_command=`$ECHO "$finalize_command" | $SED "s% @SYMFILE@%%"`
+      compile_command=`$ECHO "$compile_command" | sed "s% @SYMFILE@%%"`
+      finalize_command=`$ECHO "$finalize_command" | sed "s% @SYMFILE@%%"`
     fi
 }
 
@@ -3550,11 +3550,11 @@ func_win32_libid ()
     ;;
   *ar\ archive*) # could be an import, or static
     # Keep the egrep pattern in sync with the one in _LT_CHECK_MAGIC_METHOD.
-    if eval $OBJDUMP -f $1 | $SED -e '10q' 2>/dev/null |
+    if eval $OBJDUMP -f $1 | sed -e '10q' 2>/dev/null |
        $EGREP 'file format (pei*-i386(.*architecture: i386)?|pe-arm-wince|pe-x86-64)' >/dev/null; then
       func_to_tool_file "$1" func_convert_file_msys_to_w32
       win32_nmres=`eval $NM -f posix -A \"$func_to_tool_file_result\" |
-	$SED -n -e '
+	sed -n -e '
 	    1,100{
 		/ I /{
 		    s,.*,import,
@@ -3611,9 +3611,9 @@ func_cygming_dll_for_implib ()
 func_cygming_dll_for_implib_fallback_core ()
 {
   $opt_debug
-  match_literal=`$ECHO "$1" | $SED "$sed_make_literal_regex"`
+  match_literal=`$ECHO "$1" | sed "$sed_make_literal_regex"`
   $OBJDUMP -s --section "$1" "$2" 2>/dev/null |
-    $SED '/^Contents of section '"$match_literal"':/{
+    sed '/^Contents of section '"$match_literal"':/{
       # Place marker at beginning of archive member dllname section
       s/.*/====MARK====/
       p
@@ -3629,7 +3629,7 @@ func_cygming_dll_for_implib_fallback_core ()
     /^.\{43\}/!d
     # From remaining lines, remove first 43 characters
     s/^.\{43\}//' |
-    $SED -n '
+    sed -n '
       # Join marker and all lines until next marker into a single line
       /^====MARK====/ b para
       H
@@ -3655,7 +3655,7 @@ func_cygming_dll_for_implib_fallback_core ()
     # a '.'.
     #
     # Of those that remain, print the first one.
-    $SED -e '/^\./d;/^.\./d;q'
+    sed -e '/^\./d;/^.\./d;q'
 }
 
 # func_cygming_gnu_implib_p ARG
@@ -3781,7 +3781,7 @@ func_extract_archives ()
 	  darwin_base_archive=`basename "$darwin_archive"`
 	  darwin_arches=`$LIPO -info "$darwin_archive" 2>/dev/null | $GREP Architectures 2>/dev/null || true`
 	  if test -n "$darwin_arches"; then
-	    darwin_arches=`$ECHO "$darwin_arches" | $SED -e 's/.*are://'`
+	    darwin_arches=`$ECHO "$darwin_arches" | sed -e 's/.*are://'`
 	    darwin_arch=
 	    func_verbose "$darwin_base_archive has multiple architectures $darwin_arches"
 	    for darwin_arch in  $darwin_arches ; do
@@ -3793,7 +3793,7 @@ func_extract_archives ()
 	      $RM "unfat-$$/${darwin_base_archive}-${darwin_arch}/${darwin_base_archive}"
 	    done # $darwin_arches
             ## Okay now we've a bunch of thin objects, gotta fatten them up :)
-	    darwin_filelist=`find unfat-$$ -type f -name \*.o -print -o -name \*.lo -print | $SED -e "$basename" | sort -u`
+	    darwin_filelist=`find unfat-$$ -type f -name \*.o -print -o -name \*.lo -print | sed -e "$basename" | sort -u`
 	    darwin_file=
 	    darwin_files=
 	    for darwin_file in $darwin_filelist; do
@@ -3883,7 +3883,7 @@ else
   if test \"\$libtool_execute_magic\" != \"$magic\"; then
     file=\"\$0\""
 
-    qECHO=`$ECHO "$ECHO" | $SED "$sed_quote_subst"`
+    qECHO=`$ECHO "$ECHO" | sed "$sed_quote_subst"`
     $ECHO "\
 
 # A function that is used when there is no print builtin or printf.
@@ -3918,9 +3918,9 @@ func_parse_lt_options ()
     case \"\$lt_opt\" in
     --lt-debug) lt_option_debug=1 ;;
     --lt-dump-script)
-        lt_dump_D=\`\$ECHO \"X\$lt_script_arg0\" | $SED -e 's/^X//' -e 's%/[^/]*$%%'\`
+        lt_dump_D=\`\$ECHO \"X\$lt_script_arg0\" | sed -e 's/^X//' -e 's%/[^/]*$%%'\`
         test \"X\$lt_dump_D\" = \"X\$lt_script_arg0\" && lt_dump_D=.
-        lt_dump_F=\`\$ECHO \"X\$lt_script_arg0\" | $SED -e 's/^X//' -e 's%^.*/%%'\`
+        lt_dump_F=\`\$ECHO \"X\$lt_script_arg0\" | sed -e 's/^X//' -e 's%^.*/%%'\`
         cat \"\$lt_dump_D/\$lt_dump_F\"
         exit 0
       ;;
@@ -4003,13 +4003,13 @@ func_exec_program ()
   func_parse_lt_options \"\$0\" \${1+\"\$@\"}
 
   # Find the directory that this script lives in.
-  thisdir=\`\$ECHO \"\$file\" | $SED 's%/[^/]*$%%'\`
+  thisdir=\`\$ECHO \"\$file\" | sed 's%/[^/]*$%%'\`
   test \"x\$thisdir\" = \"x\$file\" && thisdir=.
 
   # Follow symbolic links until we get to the real thisdir.
-  file=\`ls -ld \"\$file\" | $SED -n 's/.*-> //p'\`
+  file=\`ls -ld \"\$file\" | sed -n 's/.*-> //p'\`
   while test -n \"\$file\"; do
-    destdir=\`\$ECHO \"\$file\" | $SED 's%/[^/]*\$%%'\`
+    destdir=\`\$ECHO \"\$file\" | sed 's%/[^/]*\$%%'\`
 
     # If there was a directory component, then change thisdir.
     if test \"x\$destdir\" != \"x\$file\"; then
@@ -4019,8 +4019,8 @@ func_exec_program ()
       esac
     fi
 
-    file=\`\$ECHO \"\$file\" | $SED 's%^.*/%%'\`
-    file=\`ls -ld \"\$thisdir/\$file\" | $SED -n 's/.*-> //p'\`
+    file=\`\$ECHO \"\$file\" | sed 's%^.*/%%'\`
+    file=\`ls -ld \"\$thisdir/\$file\" | sed -n 's/.*-> //p'\`
   done
 
   # Usually 'no', except on cygwin/mingw when embedded into
@@ -4033,7 +4033,7 @@ func_exec_program ()
     fi
     # remove .libs from thisdir
     case \"\$thisdir\" in
-    *[\\\\/]$objdir ) thisdir=\`\$ECHO \"\$thisdir\" | $SED 's%[\\\\/][^\\\\/]*$%%'\` ;;
+    *[\\\\/]$objdir ) thisdir=\`\$ECHO \"\$thisdir\" | sed 's%[\\\\/][^\\\\/]*$%%'\` ;;
     $objdir )   thisdir=. ;;
     esac
   fi
@@ -4108,7 +4108,7 @@ func_exec_program ()
 
     # Some systems cannot cope with colon-terminated $shlibpath_var
     # The second colon is a workaround for a bug in BeOS R4 sed
-    $shlibpath_var=\`\$ECHO \"\$$shlibpath_var\" | $SED 's/::*\$//'\`
+    $shlibpath_var=\`\$ECHO \"\$$shlibpath_var\" | sed 's/::*\$//'\`
 
     export $shlibpath_var
 "
@@ -5069,7 +5069,7 @@ void lt_dump_script (FILE* f)
 {
 EOF
 	    func_emit_wrapper yes |
-	      $SED -n -e '
+	      sed -n -e '
 s/^\(.\{79\}\)\(..*\)/\1\
 \2/
 h
@@ -5124,7 +5124,7 @@ EOF
 func_win32_import_lib_p ()
 {
     $opt_debug
-    case `eval $file_magic_cmd \"\$1\" 2>/dev/null | $SED -e 10q` in
+    case `eval $file_magic_cmd \"\$1\" 2>/dev/null | sed -e 10q` in
     *import*) : ;;
     *) false ;;
     esac
@@ -5623,7 +5623,7 @@ func_mode_link ()
 	esac
 	case $host in
 	*-*-cygwin* | *-*-msys* | *-*-mingw* | *-*-pw32* | *-*-os2* | *-cegcc*)
-	  testbindir=`$ECHO "$dir" | $SED 's*/lib$*/bin*'`
+	  testbindir=`$ECHO "$dir" | sed 's*/lib$*/bin*'`
 	  case :$dllsearchpath: in
 	  *":$dir:"*) ;;
 	  ::) dllsearchpath=$dir;;
@@ -6060,7 +6060,7 @@ func_mode_link ()
 
     if test -n "$shlibpath_var"; then
       # get the directories listed in $shlibpath_var
-      eval shlib_search_path=\`\$ECHO \"\${$shlibpath_var}\" \| \$SED \'s/:/ /g\'\`
+      eval shlib_search_path=\`\$ECHO \"\${$shlibpath_var}\" \| \sed \'s/:/ /g\'\`
     else
       shlib_search_path=
     fi
@@ -6373,7 +6373,7 @@ func_mode_link ()
 		match_pattern*)
 		  set dummy $deplibs_check_method; shift
 		  match_pattern_regex=`expr "$deplibs_check_method" : "$1 \(.*\)"`
-		  if eval "\$ECHO \"$deplib\"" 2>/dev/null | $SED 10q \
+		  if eval "\$ECHO \"$deplib\"" 2>/dev/null | sed 10q \
 		    | $EGREP "$match_pattern_regex" > /dev/null; then
 		    valid_a_lib=yes
 		  fi
@@ -6464,7 +6464,7 @@ func_mode_link ()
 
 	# Convert "-framework foo" to "foo.ltframework"
 	if test -n "$inherited_linker_flags"; then
-	  tmp_inherited_linker_flags=`$ECHO "$inherited_linker_flags" | $SED 's/-framework \([^ $]*\)/\1.ltframework/g'`
+	  tmp_inherited_linker_flags=`$ECHO "$inherited_linker_flags" | sed 's/-framework \([^ $]*\)/\1.ltframework/g'`
 	  for tmp_inherited_linker_flag in $tmp_inherited_linker_flags; do
 	    case " $new_inherited_linker_flags " in
 	      *" $tmp_inherited_linker_flag "*) ;;
@@ -6472,7 +6472,7 @@ func_mode_link ()
 	    esac
 	  done
 	fi
-	dependency_libs=`$ECHO " $dependency_libs" | $SED 's% \([^ $]*\).ltframework% -framework \1%g'`
+	dependency_libs=`$ECHO " $dependency_libs" | sed 's% \([^ $]*\).ltframework% -framework \1%g'`
 	if test "$linkmode,$pass" = "lib,link" ||
 	   test "$linkmode,$pass" = "prog,scan" ||
 	   { test "$linkmode" != prog && test "$linkmode" != lib; }; then
@@ -7146,7 +7146,7 @@ func_mode_link ()
 	  compile_deplibs="$new_inherited_linker_flags $compile_deplibs"
 	  finalize_deplibs="$new_inherited_linker_flags $finalize_deplibs"
 	else
-	  compiler_flags="$compiler_flags "`$ECHO " $new_inherited_linker_flags" | $SED 's% \([^ $]*\).ltframework% -framework \1%g'`
+	  compiler_flags="$compiler_flags "`$ECHO " $new_inherited_linker_flags" | sed 's% \([^ $]*\).ltframework% -framework \1%g'`
 	fi
       fi
       dependency_libs="$newdependency_libs"
@@ -7617,14 +7617,14 @@ func_mode_link ()
 	func_append oldlibs " $output_objdir/$libname.$libext"
 
 	# Transform .lo files to .o files.
-	oldobjs="$objs "`$ECHO "$libobjs" | $SP2NL | $SED "/\.${libext}$/d; $lo2o" | $NL2SP`
+	oldobjs="$objs "`$ECHO "$libobjs" | $SP2NL | sed "/\.${libext}$/d; $lo2o" | $NL2SP`
       fi
 
       # Eliminate all temporary directories.
       #for path in $notinst_path; do
-      #	lib_search_path=`$ECHO "$lib_search_path " | $SED "s% $path % %g"`
-      #	deplibs=`$ECHO "$deplibs " | $SED "s% -L$path % %g"`
-      #	dependency_libs=`$ECHO "$dependency_libs " | $SED "s% -L$path % %g"`
+      #	lib_search_path=`$ECHO "$lib_search_path " | sed "s% $path % %g"`
+      #	deplibs=`$ECHO "$deplibs " | sed "s% -L$path % %g"`
+      #	dependency_libs=`$ECHO "$dependency_libs " | sed "s% -L$path % %g"`
       #done
 
       if test -n "$xrpath"; then
@@ -7838,7 +7838,7 @@ EOF
 	      if test -n "$a_deplib" ; then
 		libname=`eval "\\$ECHO \"$libname_spec\""`
 		if test -n "$file_magic_glob"; then
-		  libnameglob=`func_echo_all "$libname" | $SED -e $file_magic_glob`
+		  libnameglob=`func_echo_all "$libname" | sed -e $file_magic_glob`
 		else
 		  libnameglob=$libname
 		fi
@@ -7867,11 +7867,11 @@ EOF
 			potliblink=`ls -ld $potlib | ${SED} 's/.* -> //'`
 			case $potliblink in
 			[\\/]* | [A-Za-z]:[\\/]*) potlib="$potliblink";;
-			*) potlib=`$ECHO "$potlib" | $SED 's,[^/]*$,,'`"$potliblink";;
+			*) potlib=`$ECHO "$potlib" | sed 's,[^/]*$,,'`"$potliblink";;
 			esac
 		      done
 		      if eval $file_magic_cmd \"\$potlib\" 2>/dev/null |
-			 $SED -e 10q |
+			 sed -e 10q |
 			 $EGREP "$file_magic_regex" > /dev/null; then
 			func_append newdeplibs " $a_deplib"
 			a_deplib=""
@@ -7925,7 +7925,7 @@ EOF
 		  potential_libs=`ls $i/$libname[.-]* 2>/dev/null`
 		  for potent_lib in $potential_libs; do
 		    potlib="$potent_lib" # see symlink-check above in file_magic test
-		    if eval "\$ECHO \"$potent_lib\"" 2>/dev/null | $SED 10q | \
+		    if eval "\$ECHO \"$potent_lib\"" 2>/dev/null | sed 10q | \
 		       $EGREP "$match_pattern_regex" > /dev/null; then
 		      func_append newdeplibs " $a_deplib"
 		      a_deplib=""
@@ -7959,11 +7959,11 @@ EOF
 	  ;;
 	none | unknown | *)
 	  newdeplibs=""
-	  tmp_deplibs=`$ECHO " $deplibs" | $SED 's/ -lc$//; s/ -[LR][^ ]*//g'`
+	  tmp_deplibs=`$ECHO " $deplibs" | sed 's/ -lc$//; s/ -[LR][^ ]*//g'`
 	  if test "X$allow_libtool_libs_with_static_runtimes" = "Xyes" ; then
 	    for i in $predeps $postdeps ; do
 	      # can't use Xsed below, because $i might contain '/'
-	      tmp_deplibs=`$ECHO " $tmp_deplibs" | $SED "s,$i,,"`
+	      tmp_deplibs=`$ECHO " $tmp_deplibs" | sed "s,$i,,"`
 	    done
 	  fi
 	  case $tmp_deplibs in
@@ -7989,7 +7989,7 @@ EOF
 	case $host in
 	*-*-rhapsody* | *-*-darwin1.[012])
 	  # On Rhapsody replace the C library with the System framework
-	  newdeplibs=`$ECHO " $newdeplibs" | $SED 's/ -lc / System.ltframework /'`
+	  newdeplibs=`$ECHO " $newdeplibs" | sed 's/ -lc / System.ltframework /'`
 	  ;;
 	esac
 
@@ -8041,9 +8041,9 @@ EOF
       # Time to change all our "foo.ltframework" stuff back to "-framework foo"
       case $host in
 	*-*-darwin*)
-	  newdeplibs=`$ECHO " $newdeplibs" | $SED 's% \([^ $]*\).ltframework% -framework \1%g'`
-	  new_inherited_linker_flags=`$ECHO " $new_inherited_linker_flags" | $SED 's% \([^ $]*\).ltframework% -framework \1%g'`
-	  deplibs=`$ECHO " $deplibs" | $SED 's% \([^ $]*\).ltframework% -framework \1%g'`
+	  newdeplibs=`$ECHO " $newdeplibs" | sed 's% \([^ $]*\).ltframework% -framework \1%g'`
+	  new_inherited_linker_flags=`$ECHO " $new_inherited_linker_flags" | sed 's% \([^ $]*\).ltframework% -framework \1%g'`
+	  deplibs=`$ECHO " $deplibs" | sed 's% \([^ $]*\).ltframework% -framework \1%g'`
 	  ;;
       esac
 
@@ -8168,7 +8168,7 @@ EOF
 	done
 
 	# Use standard objects if they are pic
-	test -z "$pic_flag" && libobjs=`$ECHO "$libobjs" | $SP2NL | $SED "$lo2o" | $NL2SP`
+	test -z "$pic_flag" && libobjs=`$ECHO "$libobjs" | $SP2NL | sed "$lo2o" | $NL2SP`
 	test "X$libobjs" = "X " && libobjs=
 
 	delfiles=
@@ -8183,7 +8183,7 @@ EOF
 	cygwin* | msys* | mingw* | cegcc*)
 	  if test -n "$export_symbols" && test -z "$export_symbols_regex"; then
 	    # exporting using user supplied symfile
-	    if test "x`$SED 1q $export_symbols`" != xEXPORTS; then
+	    if test "x`sed 1q $export_symbols`" != xEXPORTS; then
 	      # and it's NOT already a .def file. Must figure out
 	      # which of the given symbols are data symbols and tag
 	      # them as such. So, trigger use of export_symbols_cmds.
@@ -8277,10 +8277,10 @@ EOF
 	  # though. Also, the filter scales superlinearly with the number of
 	  # global variables. join(1) would be nice here, but unfortunately
 	  # isn't a blessed tool.
-	  $opt_dry_run || $SED -e '/[ ,]DATA/!d;s,\(.*\)\([ \,].*\),s|^\1$|\1\2|,' < $export_symbols > $output_objdir/$libname.filter
+	  $opt_dry_run || sed -e '/[ ,]DATA/!d;s,\(.*\)\([ \,].*\),s|^\1$|\1\2|,' < $export_symbols > $output_objdir/$libname.filter
 	  func_append delfiles " $export_symbols $output_objdir/$libname.filter"
 	  export_symbols=$output_objdir/$libname.def
-	  $opt_dry_run || $SED -f $output_objdir/$libname.filter < $orig_export_symbols > $export_symbols
+	  $opt_dry_run || sed -f $output_objdir/$libname.filter < $orig_export_symbols > $export_symbols
 	fi
 
 	tmp_deplibs=
@@ -8526,10 +8526,10 @@ EOF
 	      # though. Also, the filter scales superlinearly with the number of
 	      # global variables. join(1) would be nice here, but unfortunately
 	      # isn't a blessed tool.
-	      $opt_dry_run || $SED -e '/[ ,]DATA/!d;s,\(.*\)\([ \,].*\),s|^\1$|\1\2|,' < $export_symbols > $output_objdir/$libname.filter
+	      $opt_dry_run || sed -e '/[ ,]DATA/!d;s,\(.*\)\([ \,].*\),s|^\1$|\1\2|,' < $export_symbols > $output_objdir/$libname.filter
 	      func_append delfiles " $export_symbols $output_objdir/$libname.filter"
 	      export_symbols=$output_objdir/$libname.def
-	      $opt_dry_run || $SED -f $output_objdir/$libname.filter < $orig_export_symbols > $export_symbols
+	      $opt_dry_run || sed -f $output_objdir/$libname.filter < $orig_export_symbols > $export_symbols
 	    fi
 	  fi
 
@@ -8680,7 +8680,7 @@ EOF
       if test -n "$convenience"; then
 	if test -n "$whole_archive_flag_spec"; then
 	  eval tmp_whole_archive_flags=\"$whole_archive_flag_spec\"
-	  reload_conv_objs=$reload_objs\ `$ECHO "$tmp_whole_archive_flags" | $SED 's|,| |g'`
+	  reload_conv_objs=$reload_objs\ `$ECHO "$tmp_whole_archive_flags" | sed 's|,| |g'`
 	else
 	  gentop="$output_objdir/${obj}x"
 	  func_append generated " $gentop"
@@ -8694,7 +8694,7 @@ EOF
       test "$build_libtool_libs" != yes && libobjs="$non_pic_objects"
 
       # Create the old-style object.
-      reload_objs="$objs$old_deplibs "`$ECHO "$libobjs" | $SP2NL | $SED "/\.${libext}$/d; /\.lib$/d; $lo2o" | $NL2SP`" $reload_conv_objs" ### testsuite: skip nested quoting test
+      reload_objs="$objs$old_deplibs "`$ECHO "$libobjs" | $SP2NL | sed "/\.${libext}$/d; /\.lib$/d; $lo2o" | $NL2SP`" $reload_conv_objs" ### testsuite: skip nested quoting test
 
       output="$obj"
       func_execute_cmds "$reload_cmds" 'exit $?'
@@ -8754,8 +8754,8 @@ EOF
       case $host in
       *-*-rhapsody* | *-*-darwin1.[012])
 	# On Rhapsody replace the C library is the System framework
-	compile_deplibs=`$ECHO " $compile_deplibs" | $SED 's/ -lc / System.ltframework /'`
-	finalize_deplibs=`$ECHO " $finalize_deplibs" | $SED 's/ -lc / System.ltframework /'`
+	compile_deplibs=`$ECHO " $compile_deplibs" | sed 's/ -lc / System.ltframework /'`
+	finalize_deplibs=`$ECHO " $finalize_deplibs" | sed 's/ -lc / System.ltframework /'`
 	;;
       esac
 
@@ -8772,8 +8772,8 @@ EOF
 	  esac
 	fi
 	# Time to change all our "foo.ltframework" stuff back to "-framework foo"
-	compile_deplibs=`$ECHO " $compile_deplibs" | $SED 's% \([^ $]*\).ltframework% -framework \1%g'`
-	finalize_deplibs=`$ECHO " $finalize_deplibs" | $SED 's% \([^ $]*\).ltframework% -framework \1%g'`
+	compile_deplibs=`$ECHO " $compile_deplibs" | sed 's% \([^ $]*\).ltframework% -framework \1%g'`
+	finalize_deplibs=`$ECHO " $finalize_deplibs" | sed 's% \([^ $]*\).ltframework% -framework \1%g'`
 	;;
       esac
 
@@ -8910,8 +8910,8 @@ EOF
 
       if test -n "$libobjs" && test "$build_old_libs" = yes; then
 	# Transform all the library objects into standard objects.
-	compile_command=`$ECHO "$compile_command" | $SP2NL | $SED "$lo2o" | $NL2SP`
-	finalize_command=`$ECHO "$finalize_command" | $SP2NL | $SED "$lo2o" | $NL2SP`
+	compile_command=`$ECHO "$compile_command" | $SP2NL | sed "$lo2o" | $NL2SP`
+	finalize_command=`$ECHO "$finalize_command" | $SP2NL | sed "$lo2o" | $NL2SP`
       fi
 
       func_generate_dlsyms "$outputname" "@PROGRAM@" "no"
@@ -8940,7 +8940,7 @@ EOF
       esac
       if test "$wrappers_required" = no; then
 	# Replace the output file specification.
-	compile_command=`$ECHO "$compile_command" | $SED 's%@OUTPUT@%'"$output"'%g'`
+	compile_command=`$ECHO "$compile_command" | sed 's%@OUTPUT@%'"$output"'%g'`
 	link_command="$compile_command$compile_rpath"
 
 	# We have no uninstalled library dependencies, so finalize right now.
@@ -8949,7 +8949,7 @@ EOF
 
 	if test -n "$postlink_cmds"; then
 	  func_to_tool_file "$output"
-	  postlink_cmds=`func_echo_all "$postlink_cmds" | $SED -e 's%@OUTPUT@%'"$output"'%g' -e 's%@TOOL_OUTPUT@%'"$func_to_tool_file_result"'%g'`
+	  postlink_cmds=`func_echo_all "$postlink_cmds" | sed -e 's%@OUTPUT@%'"$output"'%g' -e 's%@TOOL_OUTPUT@%'"$func_to_tool_file_result"'%g'`
 	  func_execute_cmds "$postlink_cmds" 'exit $?'
 	fi
 
@@ -8993,7 +8993,7 @@ EOF
 	# We don't need to create a wrapper script.
 	link_command="$compile_var$compile_command$compile_rpath"
 	# Replace the output file specification.
-	link_command=`$ECHO "$link_command" | $SED 's%@OUTPUT@%'"$output"'%g'`
+	link_command=`$ECHO "$link_command" | sed 's%@OUTPUT@%'"$output"'%g'`
 	# Delete the old output file.
 	$opt_dry_run || $RM $output
 	# Link the executable and exit
@@ -9001,7 +9001,7 @@ EOF
 
 	if test -n "$postlink_cmds"; then
 	  func_to_tool_file "$output"
-	  postlink_cmds=`func_echo_all "$postlink_cmds" | $SED -e 's%@OUTPUT@%'"$output"'%g' -e 's%@TOOL_OUTPUT@%'"$func_to_tool_file_result"'%g'`
+	  postlink_cmds=`func_echo_all "$postlink_cmds" | sed -e 's%@OUTPUT@%'"$output"'%g' -e 's%@TOOL_OUTPUT@%'"$func_to_tool_file_result"'%g'`
 	  func_execute_cmds "$postlink_cmds" 'exit $?'
 	fi
 
@@ -9019,7 +9019,7 @@ EOF
 	if test "$fast_install" != no; then
 	  link_command="$finalize_var$compile_command$finalize_rpath"
 	  if test "$fast_install" = yes; then
-	    relink_command=`$ECHO "$compile_var$compile_command$compile_rpath" | $SED 's%@OUTPUT@%\$progdir/\$file%g'`
+	    relink_command=`$ECHO "$compile_var$compile_command$compile_rpath" | sed 's%@OUTPUT@%\$progdir/\$file%g'`
 	  else
 	    # fast_install is set to needless
 	    relink_command=
@@ -9031,7 +9031,7 @@ EOF
       fi
 
       # Replace the output file specification.
-      link_command=`$ECHO "$link_command" | $SED 's%@OUTPUT@%'"$output_objdir/$outputname"'%g'`
+      link_command=`$ECHO "$link_command" | sed 's%@OUTPUT@%'"$output_objdir/$outputname"'%g'`
 
       # Delete the old output files.
       $opt_dry_run || $RM $output $output_objdir/$outputname $output_objdir/lt-$outputname
@@ -9040,7 +9040,7 @@ EOF
 
       if test -n "$postlink_cmds"; then
 	func_to_tool_file "$output_objdir/$outputname"
-	postlink_cmds=`func_echo_all "$postlink_cmds" | $SED -e 's%@OUTPUT@%'"$output_objdir/$outputname"'%g' -e 's%@TOOL_OUTPUT@%'"$func_to_tool_file_result"'%g'`
+	postlink_cmds=`func_echo_all "$postlink_cmds" | sed -e 's%@OUTPUT@%'"$output_objdir/$outputname"'%g' -e 's%@TOOL_OUTPUT@%'"$func_to_tool_file_result"'%g'`
 	func_execute_cmds "$postlink_cmds" 'exit $?'
       fi
 
@@ -9061,7 +9061,7 @@ EOF
 	  fi
 	done
 	relink_command="(cd `pwd`; $relink_command)"
-	relink_command=`$ECHO "$relink_command" | $SED "$sed_quote_subst"`
+	relink_command=`$ECHO "$relink_command" | sed "$sed_quote_subst"`
       fi
 
       # Only actually do things if not in dry run mode.
@@ -9315,7 +9315,7 @@ EOF
       done
       # Quote the link command for shipping.
       relink_command="(cd `pwd`; $SHELL $progpath $preserve_args --mode=relink $libtool_args @inst_prefix_dir@)"
-      relink_command=`$ECHO "$relink_command" | $SED "$sed_quote_subst"`
+      relink_command=`$ECHO "$relink_command" | sed "$sed_quote_subst"`
       if test "$hardcode_automatic" = yes ; then
 	relink_command=
       fi
