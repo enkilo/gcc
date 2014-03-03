@@ -126,7 +126,7 @@
    even if config.h says that we can.  */
 #  undef REL_ALLOC
 
-#  if defined STDC_HEADERS || defined _LIBC
+#  if 1 //defined STDC_HEADERS || defined _LIBC
 #   include <stdlib.h>
 #  else
 char *malloc ();

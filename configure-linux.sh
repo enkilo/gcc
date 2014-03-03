@@ -31,9 +31,9 @@ builddir=./build/gcc
 target=mapip
 progpref=mapip-
 
-export CFLAGS='-O2 -pipe'
-export CXXFLAGS='-O2 -pipe'
-export LDFLAGS='-s'
+export CFLAGS='-O2 -pipe -m32'
+export CXXFLAGS='-O2 -pipe -m32'
+export LDFLAGS='-s -m32'
 export DEBUG_FLAGS=''
 
 #---------------------------------------------------------------------------------

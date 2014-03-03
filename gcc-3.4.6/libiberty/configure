@@ -10,6 +10,8 @@
 ## M4sh Initialization.  ##
 ## --------------------- ##
 
+c_switch='-S'
+
 # Be Bourne compatible
 if test -n "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then
   emulate sh
@@ -135,7 +137,7 @@ do
   for as_base in sh bash ksh sh5; do
 	 case $as_dir in
 	 /*)
-	   if ("$as_dir/$as_base" -c '
+	   if ("$as_dir/$as_base" ${c_switch--c} '
   as_lineno_1=$LINENO
   as_lineno_2=$LINENO
   as_lineno_3=`(expr $as_lineno_1 + 1) 2>/dev/null`
@@ -1249,7 +1251,7 @@ fi
 
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
-ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_compile='$CC ${c_switch--c} $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
@@ -1696,7 +1698,7 @@ fi
 
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
-ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_compile='$CC ${c_switch--c} $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 if test -n "$ac_tool_prefix"; then
@@ -2593,13 +2595,13 @@ fi
 rm -f conftest.$ac_objext conftest.$ac_ext
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
-ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_compile='$CC ${c_switch--c} $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
-ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_compile='$CC ${c_switch--c} $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 echo "$as_me:$LINENO: checking how to run the C preprocessor" >&5
@@ -2827,7 +2829,7 @@ fi
 
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
-ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_compile='$CC ${c_switch--c} $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
@@ -2840,11 +2842,11 @@ fi
 
 
 if test "x$CC" != xcc; then
-  echo "$as_me:$LINENO: checking whether $CC and cc understand -c and -o together" >&5
-echo $ECHO_N "checking whether $CC and cc understand -c and -o together... $ECHO_C" >&6
+  echo "$as_me:$LINENO: checking whether $CC and cc understand ${c_switch--c} and -o together" >&5
+echo $ECHO_N "checking whether $CC and cc understand ${c_switch--c} and -o together... $ECHO_C" >&6
 else
-  echo "$as_me:$LINENO: checking whether cc understands -c and -o together" >&5
-echo $ECHO_N "checking whether cc understands -c and -o together... $ECHO_C" >&6
+  echo "$as_me:$LINENO: checking whether cc understands ${c_switch--c} and -o together" >&5
+echo $ECHO_N "checking whether cc understands ${c_switch--c} and -o together... $ECHO_C" >&6
 fi
 set dummy $CC; ac_cc=`echo $2 |
 		      sed 's/[^a-zA-Z0-9_]/_/g;s/^[0-9]/_/'`
@@ -2870,7 +2872,7 @@ _ACEOF
 # Make sure it works both with $CC and with simple cc.
 # We do the test twice because some compilers refuse to overwrite an
 # existing .o file with -o, though they will create one.
-ac_try='$CC -c conftest.$ac_ext -o conftest.$ac_objext >&5'
+ac_try='$CC ${c_switch--c} conftest.$ac_ext -o conftest.$ac_objext >&5'
 if { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -2885,13 +2887,13 @@ then
   eval ac_cv_prog_cc_${ac_cc}_c_o=yes
   if test "x$CC" != xcc; then
     # Test first that cc exists at all.
-    if { ac_try='cc -c conftest.$ac_ext >&5'
+    if { ac_try='cc ${c_switch--c} conftest.$ac_ext >&5'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); }; }; then
-      ac_try='cc -c conftest.$ac_ext -o conftest.$ac_objext >&5'
+      ac_try='cc ${c_switch--c} conftest.$ac_ext -o conftest.$ac_objext >&5'
       if { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -3767,7 +3769,7 @@ main ()
     if (XOR (islower (i), ISLOWER (i))
         || toupper (i) != TOUPPER (i))
       exit(2);
-  exit (0);
+  exit 0;
 }
 _ACEOF
 rm -f conftest$ac_exeext
@@ -4997,8 +4999,8 @@ else
       int main ()
       {
         if (fork() < 0)
-          exit (1);
-        exit (0);
+          exit 1;
+        exit 0;
       }
 _ACEOF
 rm -f conftest$ac_exeext
@@ -5936,15 +5938,15 @@ main ()
   /* First, make a file with some known garbage in it. */
   data = (char *) malloc (pagesize);
   if (!data)
-    exit (1);
+    exit 1;
   for (i = 0; i < pagesize; ++i)
     *(data + i) = rand ();
   umask (0);
   fd = creat ("conftest.mmap", 0600);
   if (fd < 0)
-    exit (1);
+    exit 1;
   if (write (fd, data, pagesize) != pagesize)
-    exit (1);
+    exit 1;
   close (fd);
 
   /* Next, try to mmap the file at a fixed address which already has
@@ -5952,17 +5954,17 @@ main ()
      we see the same garbage.  */
   fd = open ("conftest.mmap", O_RDWR);
   if (fd < 0)
-    exit (1);
+    exit 1;
   data2 = (char *) malloc (2 * pagesize);
   if (!data2)
-    exit (1);
+    exit 1;
   data2 += (pagesize - ((int) data2 & (pagesize - 1))) & (pagesize - 1);
   if (data2 != mmap (data2, pagesize, PROT_READ | PROT_WRITE,
                      MAP_PRIVATE | MAP_FIXED, fd, 0L))
-    exit (1);
+    exit 1;
   for (i = 0; i < pagesize; ++i)
     if (*(data + i) != *(data2 + i))
-      exit (1);
+      exit 1;
 
   /* Finally, make sure that changes to the mapped area do not
      percolate back to the file as seen by read().  (This is a bug on
@@ -5971,14 +5973,14 @@ main ()
     *(data2 + i) = *(data2 + i) + 1;
   data3 = (char *) malloc (pagesize);
   if (!data3)
-    exit (1);
+    exit 1;
   if (read (fd, data3, pagesize) != pagesize)
-    exit (1);
+    exit 1;
   for (i = 0; i < pagesize; ++i)
     if (*(data + i) != *(data3 + i))
-      exit (1);
+      exit 1;
   close (fd);
-  exit (0);
+  exit 0;
 }
 _ACEOF
 rm -f conftest$ac_exeext
@@ -6070,7 +6072,7 @@ main ()
 
   dev_zero = open ("/dev/zero", O_RDONLY);
   if (dev_zero < 0)
-    exit (1);
+    exit 1;
 
   p = (char *) mmap (0, MAP_LEN, PROT_READ|PROT_WRITE,
 		     MAP_ANON|MAP_PRIVATE, dev_zero, 0);
@@ -6078,7 +6080,7 @@ main ()
     p = (char *) mmap (0, MAP_LEN, PROT_READ|PROT_WRITE,
 		       MAP_ANON|MAP_PRIVATE, -1, 0);
   if (p == (char *)-1)
-    exit (2);
+    exit 2;
   else
     {
       char *string = "__si_type_info";
@@ -6090,7 +6092,7 @@ main ()
       strncmp (r, q, 14);
     }
 #endif /* HAVE_MMAP || HAVE_MMAP_ANYWHERE */
-  exit (0);
+  exit 0;
 }
 
 _ACEOF
@@ -6378,7 +6380,7 @@ do
   for as_base in sh bash ksh sh5; do
 	 case $as_dir in
 	 /*)
-	   if ("$as_dir/$as_base" -c '
+	   if ("$as_dir/$as_base" ${c_switch--c} '
   as_lineno_1=$LINENO
   as_lineno_2=$LINENO
   as_lineno_3=`(expr $as_lineno_1 + 1) 2>/dev/null`

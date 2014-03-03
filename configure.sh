@@ -50,3 +50,5 @@ $SRCDIR/configure \
         --without-headers \
         --program-prefix=$progpref -v\
         2>&1 | tee gcc_configure.log
+
+echo "Configuration in $prefix. Now type make -C $prefix to build" 1>&2
