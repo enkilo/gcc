@@ -52,11 +52,7 @@ export DEBUG_FLAGS=''
 # build and install just the c compiler
 #---------------------------------------------------------------------------------
 
-if [ -n "$MOSYNCDIR" -a -d "$MOSYNCDIR" ]; then
-  SYSROOT="$MOSYNCDIR"
-else
-  SYSROOT="$prefix/$target"
-fi
+[ -n "$MOSYNCDIR" -a -d "$MOSYNCDIR" ] && SYSROOT="$MOSYNCDIR" || SYSROOT="$prefix/$target"
 
 mkdir -p "$BUILDDIR"
 cd "$BUILDDIR"
@@ -71,9 +67,10 @@ cd "$BUILDDIR"
         --build="$build" \
         --host="$host" \
         --target="$target" \
-        --without-headers \
+        `[ "$SYSROOT" ] || echo --without-headers` \
         --program-prefix="$progpref" -v \
-        ${SYSROOT+--with-sysroot="$SYSROOT"} \
+        --with-gxx-include-dir="/include/c++/3.4.6" \
+        ${SYSROOT:+--with-sysroot="$SYSROOT"} \
         "$@") \
         2>&1 | tee gcc_configure.log
 
