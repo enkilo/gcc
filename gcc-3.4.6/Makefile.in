@@ -2401,7 +2401,7 @@ info-target-libiberty: \
 	(cd $(TARGET_SUBDIR)/libiberty && \
 	  $(MAKE) $(BASE_FLAGS_TO_PASS) "AR=$${AR}" "AS=$${AS}" \
 	          "CC=$${CC}" "CXX=$${CXX}" "LD=$${LD}" "NM=$${NM}" \
-	          "RANLIB=$${RANLIB}" \
+	          "RANLIB=$${RANLIB}" objext=s \
 	          "DLLTOOL=$${DLLTOOL}" "WINDRES=$${WINDRES}" \
 	          info) \
 	  || exit 1
@@ -4277,7 +4277,7 @@ dvi-target-libiberty: \
 	(cd $(TARGET_SUBDIR)/libiberty && \
 	  $(MAKE) $(BASE_FLAGS_TO_PASS) "AR=$${AR}" "AS=$${AS}" \
 	          "CC=$${CC}" "CXX=$${CXX}" "LD=$${LD}" "NM=$${NM}" \
-	          "RANLIB=$${RANLIB}" \
+	          "RANLIB=$${RANLIB}" objext=s \
 	          "DLLTOOL=$${DLLTOOL}" "WINDRES=$${WINDRES}" \
 	          dvi) \
 	  || exit 1
@@ -6153,7 +6153,7 @@ TAGS-target-libiberty: \
 	(cd $(TARGET_SUBDIR)/libiberty && \
 	  $(MAKE) $(BASE_FLAGS_TO_PASS) "AR=$${AR}" "AS=$${AS}" \
 	          "CC=$${CC}" "CXX=$${CXX}" "LD=$${LD}" "NM=$${NM}" \
-	          "RANLIB=$${RANLIB}" \
+	          "RANLIB=$${RANLIB}" objext=s \
 	          "DLLTOOL=$${DLLTOOL}" "WINDRES=$${WINDRES}" \
 	          TAGS) \
 	  || exit 1
@@ -8102,7 +8102,7 @@ install-info-target-libiberty: \
 	(cd $(TARGET_SUBDIR)/libiberty && \
 	  $(MAKE) $(BASE_FLAGS_TO_PASS) "AR=$${AR}" "AS=$${AS}" \
 	          "CC=$${CC}" "CXX=$${CXX}" "LD=$${LD}" "NM=$${NM}" \
-	          "RANLIB=$${RANLIB}" \
+	          "RANLIB=$${RANLIB}" objext=s \
 	          "DLLTOOL=$${DLLTOOL}" "WINDRES=$${WINDRES}" \
 	          install-info) \
 	  || exit 1
@@ -22614,7 +22614,7 @@ all-target-libiberty: configure-target-libiberty
 	s=`cd $(srcdir); ${PWD_COMMAND}`; export s; \
 	$(SET_LIB_PATH) \
 	(cd $(TARGET_SUBDIR)/libiberty && \
-	  $(MAKE) $(TARGET_FLAGS_TO_PASS)  all)
+	  $(MAKE) objext=s $(TARGET_FLAGS_TO_PASS)  all)
 
 .PHONY: check-target-libiberty maybe-check-target-libiberty
 maybe-check-target-libiberty:

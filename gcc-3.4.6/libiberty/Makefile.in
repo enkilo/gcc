@@ -26,6 +26,16 @@
 # Makefile for libiberty directory
 #
 
+ifeq ($(objext),)
+objext = o
+endif
+
+ifeq ($(objext),o)
+cc_flag = -c
+else
+cc_flag = -S
+endif
+
 libiberty_topdir = @libiberty_topdir@
 srcdir = @srcdir@
 VPATH = @srcdir@
@@ -117,8 +127,15 @@ installcheck: installcheck-subdir
 
 INCDIR=$(srcdir)/$(MULTISRCTOP)../include
 
-COMPILE.c = $(CC) -c @DEFS@ $(LIBCFLAGS) -I. -I$(INCDIR) $(HDEFINES) @ac_libiberty_warn_cflags@
+COMPILE.c = $(CC) $(cc_flag) @DEFS@ $(LIBCFLAGS) -I. -I$(INCDIR) $(HDEFINES) @ac_libiberty_warn_cflags@
+COMPILE.s = $(CC) -S @DEFS@ $(LIBCFLAGS) -I. -I$(INCDIR) $(HDEFINES) @ac_libiberty_warn_cflags@
 .c.o:
+	if [ x"$(PICFLAG)" != x ]; then \
+	  $(COMPILE.c) $(PICFLAG) $< -o pic/$@; \
+	else true; fi
+	$(COMPILE.c) $< $(OUTPUT_OPTION)
+
+.c.s:
 	if [ x"$(PICFLAG)" != x ]; then \
 	  $(COMPILE.c) $(PICFLAG) $< -o pic/$@; \
 	else true; fi
@@ -158,45 +175,45 @@ CFILES = alloca.c argv.c asprintf.c atexit.c				\
 
 # These are always included in the library.  The first four are listed
 # first and by compile time to optimize parallel builds.
-REQUIRED_OFILES = regex.o cplus-dem.o cp-demangle.o cp-demint.o md5.o	\
-	alloca.o argv.o							\
-	choose-temp.o concat.o						\
-	dyn-string.o							\
-	fdmatch.o fibheap.o floatformat.o fnmatch.o			\
-	getopt.o getopt1.o getpwd.o getruntime.o			\
-	hashtab.o hex.o							\
-	lbasename.o							\
-	lrealpath.o							\
-	make-relative-prefix.o						\
-	make-temp-file.o						\
-	objalloc.o obstack.o						\
-	partition.o physmem.o @pexecute@						\
-	safe-ctype.o sort.o spaces.o splay-tree.o strerror.o		\
-	 strsignal.o							\
-	ternary.o							\
-	xatexit.o xexit.o xmalloc.o xmemdup.o xstrdup.o xstrerror.o
+REQUIRED_OFILES = regex.$(objext) cplus-dem.$(objext) cp-demangle.$(objext) cp-demint.$(objext) md5.$(objext)	\
+	alloca.$(objext) argv.$(objext)							\
+	choose-temp.$(objext) concat.$(objext)						\
+	dyn-string.$(objext)							\
+	fdmatch.$(objext) fibheap.$(objext) floatformat.$(objext) fnmatch.$(objext)			\
+	getopt.$(objext) getopt1.$(objext) getpwd.$(objext) getruntime.$(objext)			\
+	hashtab.$(objext) hex.$(objext)							\
+	lbasename.$(objext)							\
+	lrealpath.$(objext)							\
+	make-relative-prefix.$(objext)						\
+	make-temp-file.$(objext)						\
+	objalloc.$(objext) obstack.$(objext)						\
+	partition.$(objext) physmem.$(objext) @pexecute@						\
+	safe-ctype.$(objext) sort.$(objext) spaces.$(objext) splay-tree.$(objext) strerror.$(objext)		\
+	 strsignal.$(objext)							\
+	ternary.$(objext)							\
+	xatexit.$(objext) xexit.$(objext) xmalloc.$(objext) xmemdup.$(objext) xstrdup.$(objext) xstrerror.$(objext)
 
 # These are all the objects that configure may add to the library via
 # $funcs or EXTRA_OFILES.  This list exists here only for "make
 # maint-missing" and "make check".
-CONFIGURED_OFILES = asprintf.o atexit.o					\
-	basename.o bcmp.o bcopy.o bsearch.o bzero.o			\
-	calloc.o clock.o copysign.o					\
-	_doprnt.o							\
-	ffs.o								\
-	getcwd.o getpagesize.o						\
-	index.o insque.o						\
-	memchr.o memcmp.o memcpy.o memmove.o mempcpy.o memset.o mkstemps.o \
-	pex-djgpp.o pex-mpw.o pex-msdos.o pex-os2.o			\
-	 pex-unix.o pex-win32.o						\
-	 putenv.o							\
-	random.o rename.o rindex.o					\
-	setenv.o sigsetmask.o snprintf.o stpcpy.o stpncpy.o strcasecmp.o \
-	 strchr.o strdup.o strncasecmp.o strncmp.o strrchr.o strstr.o	\
-	 strtod.o strtol.o strtoul.o					\
-	tmpnam.o							\
-	vasprintf.o vfork.o vfprintf.o vprintf.o vsnprintf.o vsprintf.o	\
-	waitpid.o
+CONFIGURED_OFILES = asprintf.$(objext) atexit.$(objext)					\
+	basename.$(objext) bcmp.$(objext) bcopy.$(objext) bsearch.$(objext) bzero.$(objext)			\
+	calloc.$(objext) clock.$(objext) copysign.$(objext)					\
+	_doprnt.$(objext)							\
+	ffs.$(objext)								\
+	getcwd.$(objext) getpagesize.$(objext)						\
+	index.$(objext) insque.$(objext)						\
+	memchr.$(objext) memcmp.$(objext) memcpy.$(objext) memmove.$(objext) mempcpy.$(objext) memset.$(objext) mkstemps.$(objext) \
+	pex-djgpp.$(objext) pex-mpw.$(objext) pex-msdos.$(objext) pex-os2.$(objext)			\
+	 pex-unix.$(objext) pex-win32.$(objext)						\
+	 putenv.$(objext)							\
+	random.$(objext) rename.$(objext) rindex.$(objext)					\
+	setenv.$(objext) sigsetmask.$(objext) snprintf.$(objext) stpcpy.$(objext) stpncpy.$(objext) strcasecmp.$(objext) \
+	 strchr.$(objext) strdup.$(objext) strncasecmp.$(objext) strncmp.$(objext) strrchr.$(objext) strstr.$(objext)	\
+	 strtod.$(objext) strtol.$(objext) strtoul.$(objext)					\
+	tmpnam.$(objext)							\
+	vasprintf.$(objext) vfork.$(objext) vfprintf.$(objext) vprintf.$(objext) vsnprintf.$(objext) vsprintf.$(objext)	\
+	waitpid.$(objext)
 
 # These files are installed if the library has been configured to do so.
 INSTALLED_HEADERS =                                                     \
@@ -360,7 +377,7 @@ maint-deps :
 # Cleaning has to be done carefully to ensure that we don't clean our SUBDIRS
 # multiple times, hence our explicit recursion with an empty SUBDIRS.
 mostlyclean: mostlyclean-subdir
-	-rm -rf *.o pic core errs \#* *.E a.out
+	-rm -rf *.$(objext) pic core errs \#* *.E a.$(objext)ut
 	-rm -f needed.awk needed2.awk errors dummy needed-list config.h stamp-*
 	-rm -f $(CONFIG_H) $(NEEDED_LIST) stamp-picdir
 	-rm -f libiberty.aux libiberty.cp libiberty.cps libiberty.fn libiberty.ky
@@ -370,13 +387,13 @@ mostlyclean: mostlyclean-subdir
 	@$(MULTICLEAN) multi-clean DO=mostlyclean
 clean: clean-subdir
 	$(MAKE) SUBDIRS="" mostlyclean
-	-rm -f *.a required-list tmpmulti.out
+	-rm -f *.a required-list tmpmulti.$(objext)ut
 	-rm -f libiberty.dvi libiberty.info* libiberty.html
 	@$(MULTICLEAN) multi-clean DO=clean
 distclean: distclean-subdir
 	$(MAKE) SUBDIRS="" clean
 	@$(MULTICLEAN) multi-clean DO=distclean
-	-rm -f *~ Makefile config.cache config.status xhost-mkfrag TAGS multilib.out
+	-rm -f *~ Makefile config.cache config.status xhost-mkfrag TAGS multilib.$(objext)ut
 	-rm -f config.log
 	-rmdir testsuite 2>/dev/null
 maintainer-clean realclean: maintainer-clean-subdir
@@ -415,113 +432,113 @@ $(CONFIGURED_OFILES): stamp-picdir
 # The dependencies in the remainder of this file are automatically
 # generated by "make maint-deps".  Manual edits will be lost.
 
-_doprnt.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/safe-ctype.h
-alloca.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-argv.o: $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-asprintf.o: $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-atexit.o: config.h
-basename.o: $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
+_doprnt.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/safe-ctype.h
+alloca.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+argv.$(objext): $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+asprintf.$(objext): $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+atexit.$(objext): config.h
+basename.$(objext): $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
 	$(INCDIR)/safe-ctype.h
-bsearch.o: config.h $(INCDIR)/ansidecl.h
-calloc.o: $(INCDIR)/ansidecl.h
-choose-temp.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-clock.o: config.h
-concat.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-copysign.o: $(INCDIR)/ansidecl.h
-cp-demangle.o: config.h $(INCDIR)/ansidecl.h $(srcdir)/cp-demangle.h \
+bsearch.$(objext): config.h $(INCDIR)/ansidecl.h
+calloc.$(objext): $(INCDIR)/ansidecl.h
+choose-temp.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+clock.$(objext): config.h
+concat.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+copysign.$(objext): $(INCDIR)/ansidecl.h
+cp-demangle.$(objext): config.h $(INCDIR)/ansidecl.h $(srcdir)/cp-demangle.h \
 	$(INCDIR)/demangle.h $(INCDIR)/dyn-string.h $(INCDIR)/getopt.h \
 	$(INCDIR)/libiberty.h
-cp-demint.o: config.h $(INCDIR)/ansidecl.h $(srcdir)/cp-demangle.h \
+cp-demint.$(objext): config.h $(INCDIR)/ansidecl.h $(srcdir)/cp-demangle.h \
 	$(INCDIR)/demangle.h $(INCDIR)/libiberty.h
-cplus-dem.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/demangle.h \
+cplus-dem.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/demangle.h \
 	$(INCDIR)/libiberty.h $(INCDIR)/safe-ctype.h
-dyn-string.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/dyn-string.h \
+dyn-string.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/dyn-string.h \
 	$(INCDIR)/libiberty.h
-fdmatch.o: $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-fibheap.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/fibheap.h \
+fdmatch.$(objext): $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+fibheap.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/fibheap.h \
 	$(INCDIR)/libiberty.h
-floatformat.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/floatformat.h \
+floatformat.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/floatformat.h \
 	$(INCDIR)/libiberty.h
-fnmatch.o: config.h $(INCDIR)/fnmatch.h $(INCDIR)/safe-ctype.h
-getcwd.o: config.h
-getopt.o: config.h $(INCDIR)/getopt.h
-getopt1.o: config.h $(INCDIR)/getopt.h
-getpagesize.o: config.h
-getpwd.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-getruntime.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-hashtab.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/hashtab.h \
+fnmatch.$(objext): config.h $(INCDIR)/fnmatch.h $(INCDIR)/safe-ctype.h
+getcwd.$(objext): config.h
+getopt.$(objext): config.h $(INCDIR)/getopt.h
+getopt1.$(objext): config.h $(INCDIR)/getopt.h
+getpagesize.$(objext): config.h
+getpwd.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+getruntime.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+hashtab.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/hashtab.h \
 	$(INCDIR)/libiberty.h
-hex.o: $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
+hex.$(objext): $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
 	$(INCDIR)/safe-ctype.h
-lbasename.o: $(INCDIR)/ansidecl.h $(INCDIR)/filenames.h \
+lbasename.$(objext): $(INCDIR)/ansidecl.h $(INCDIR)/filenames.h \
 	$(INCDIR)/libiberty.h $(INCDIR)/safe-ctype.h
-lrealpath.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-make-relative-prefix.o: config.h $(INCDIR)/ansidecl.h \
+lrealpath.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+make-relative-prefix.$(objext): config.h $(INCDIR)/ansidecl.h \
 	$(INCDIR)/libiberty.h
-make-temp-file.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-md5.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/md5.h
-memchr.o: $(INCDIR)/ansidecl.h
-memcmp.o: $(INCDIR)/ansidecl.h
-memcpy.o: $(INCDIR)/ansidecl.h
-memmove.o: $(INCDIR)/ansidecl.h
-mempcpy.o: $(INCDIR)/ansidecl.h
-memset.o: $(INCDIR)/ansidecl.h
-mkstemps.o: config.h $(INCDIR)/ansidecl.h
-objalloc.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/objalloc.h
-obstack.o: config.h $(INCDIR)/obstack.h
-partition.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
+make-temp-file.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+md5.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/md5.h
+memchr.$(objext): $(INCDIR)/ansidecl.h
+memcmp.$(objext): $(INCDIR)/ansidecl.h
+memcpy.$(objext): $(INCDIR)/ansidecl.h
+memmove.$(objext): $(INCDIR)/ansidecl.h
+mempcpy.$(objext): $(INCDIR)/ansidecl.h
+memset.$(objext): $(INCDIR)/ansidecl.h
+mkstemps.$(objext): config.h $(INCDIR)/ansidecl.h
+objalloc.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/objalloc.h
+obstack.$(objext): config.h $(INCDIR)/obstack.h
+partition.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
 	$(INCDIR)/partition.h
-pex-djgpp.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
+pex-djgpp.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
 	$(srcdir)/pex-common.h
-pex-mpw.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
+pex-mpw.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
 	$(srcdir)/pex-common.h
-pex-msdos.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
+pex-msdos.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
 	$(srcdir)/pex-common.h $(INCDIR)/safe-ctype.h
-pex-os2.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
+pex-os2.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
 	$(srcdir)/pex-common.h
-pex-unix.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
+pex-unix.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
 	$(srcdir)/pex-common.h
-pex-win32.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
+pex-win32.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
 	$(srcdir)/pex-common.h
-physmem.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-putenv.o: config.h $(INCDIR)/ansidecl.h
-random.o: $(INCDIR)/ansidecl.h
-regex.o: config.h $(INCDIR)/xregex.h $(INCDIR)/xregex2.h
-rename.o: config.h $(INCDIR)/ansidecl.h
-safe-ctype.o: $(INCDIR)/ansidecl.h $(INCDIR)/safe-ctype.h
-setenv.o: config.h $(INCDIR)/ansidecl.h
-sigsetmask.o: $(INCDIR)/ansidecl.h
-snprintf.o: $(INCDIR)/ansidecl.h
-sort.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
+physmem.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+putenv.$(objext): config.h $(INCDIR)/ansidecl.h
+random.$(objext): $(INCDIR)/ansidecl.h
+regex.$(objext): config.h $(INCDIR)/xregex.h $(INCDIR)/xregex2.h
+rename.$(objext): config.h $(INCDIR)/ansidecl.h
+safe-ctype.$(objext): $(INCDIR)/ansidecl.h $(INCDIR)/safe-ctype.h
+setenv.$(objext): config.h $(INCDIR)/ansidecl.h
+sigsetmask.$(objext): $(INCDIR)/ansidecl.h
+snprintf.$(objext): $(INCDIR)/ansidecl.h
+sort.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
 	$(INCDIR)/sort.h
-spaces.o: $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-splay-tree.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
+spaces.$(objext): $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+splay-tree.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
 	$(INCDIR)/splay-tree.h
-stpcpy.o: $(INCDIR)/ansidecl.h
-stpncpy.o: $(INCDIR)/ansidecl.h
-strcasecmp.o: $(INCDIR)/ansidecl.h
-strchr.o: $(INCDIR)/ansidecl.h
-strdup.o: $(INCDIR)/ansidecl.h
-strerror.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-strncasecmp.o: $(INCDIR)/ansidecl.h
-strncmp.o: $(INCDIR)/ansidecl.h
-strrchr.o: $(INCDIR)/ansidecl.h
-strsignal.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-strtod.o: $(INCDIR)/ansidecl.h $(INCDIR)/safe-ctype.h
-strtol.o: config.h $(INCDIR)/safe-ctype.h
-strtoul.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/safe-ctype.h
-ternary.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
+stpcpy.$(objext): $(INCDIR)/ansidecl.h
+stpncpy.$(objext): $(INCDIR)/ansidecl.h
+strcasecmp.$(objext): $(INCDIR)/ansidecl.h
+strchr.$(objext): $(INCDIR)/ansidecl.h
+strdup.$(objext): $(INCDIR)/ansidecl.h
+strerror.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+strncasecmp.$(objext): $(INCDIR)/ansidecl.h
+strncmp.$(objext): $(INCDIR)/ansidecl.h
+strrchr.$(objext): $(INCDIR)/ansidecl.h
+strsignal.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+strtod.$(objext): $(INCDIR)/ansidecl.h $(INCDIR)/safe-ctype.h
+strtol.$(objext): config.h $(INCDIR)/safe-ctype.h
+strtoul.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/safe-ctype.h
+ternary.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h \
 	$(INCDIR)/ternary.h
-vasprintf.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-vfork.o: $(INCDIR)/ansidecl.h
-vfprintf.o: $(INCDIR)/ansidecl.h
-vprintf.o: $(INCDIR)/ansidecl.h
-vsnprintf.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-vsprintf.o: $(INCDIR)/ansidecl.h
-waitpid.o: config.h
-xatexit.o: $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-xexit.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-xmalloc.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-xmemdup.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-xstrdup.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
-xstrerror.o: config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+vasprintf.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+vfork.$(objext): $(INCDIR)/ansidecl.h
+vfprintf.$(objext): $(INCDIR)/ansidecl.h
+vprintf.$(objext): $(INCDIR)/ansidecl.h
+vsnprintf.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+vsprintf.$(objext): $(INCDIR)/ansidecl.h
+waitpid.$(objext): config.h
+xatexit.$(objext): $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+xexit.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+xmalloc.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+xmemdup.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+xstrdup.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h
+xstrerror.$(objext): config.h $(INCDIR)/ansidecl.h $(INCDIR)/libiberty.h

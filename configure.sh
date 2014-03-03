@@ -2,15 +2,16 @@
 # Source and Install directories
 #---------------------------------------------------------------------------------
 
-MYDIR=`dirname "$0"`
+THISDIR=`dirname "$0"`; cd "$THISDIR"
 
-cd "$MYDIR"
+CC=`which ${CC-gcc}`
 
-build=`${CC-gcc} -dumpmachine`
+prefix=${CC%/bin/*}
+build=`$CC -dumpmachine`
 
-case "$build" in
-  x86_64-*) CFLAGS="-m32" build=i686-${build#*-} ;;
-esac
+#case "$build" in
+#  x86_64-*) CFLAGS="-m32" build=i686-${build#*-} ;;
+#esac
 
 : ${host=$build}
 
@@ -51,10 +52,17 @@ export DEBUG_FLAGS=''
 # build and install just the c compiler
 #---------------------------------------------------------------------------------
 
+if [ -n "$MOSYNCDIR" -a -d "$MOSYNCDIR" ]; then
+  SYSROOT="$MOSYNCDIR"
+else
+  SYSROOT="$prefix/$target"
+fi
+
 mkdir -p "$BUILDDIR"
 cd "$BUILDDIR"
 
 "$SRCDIR"/configure \
+        ${prefix+--prefix="$prefix"} \
         --enable-languages=c,c++ \
         --with-gcc --with-stabs \
         --disable-shared --disable-threads --disable-win32-registry --disable-nls \
@@ -63,7 +71,14 @@ cd "$BUILDDIR"
         --target="$target" \
         --without-headers \
         --program-prefix="$progpref" -v \
+        ${SYSROOT+--with-sysroot="$SYSROOT"} \
         "$@" \
         2>&1 | tee gcc_configure.log
 
-echo "Configuration in $BUILDDIR. Now type make -C $BUILDDIR to build" 1>&2
+echo "Configuration in $BUILDDIR. Now type build using:" 1>&2
+
+echo "
+    make -C $BUILDDIR  \\
+      CFLAGS_FOR_TARGET=\"-g -O2\" NATIVE_SYSTEM_HEADER_DIR=\"/include\"
+"
+

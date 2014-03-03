@@ -123,7 +123,7 @@ done
   fi
   if test ! -f "$as_myself"; then
     { echo "$as_me: error: cannot find myself; rerun with an absolute path" >&2
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
   fi
   case $CONFIG_SHELL in
   '')
@@ -173,7 +173,7 @@ done
     ' >$as_me.lineno &&
   chmod +x $as_me.lineno ||
     { echo "$as_me: error: cannot create $as_me.lineno; rerun with a POSIX shell" >&2
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 
   # Don't try to exec as it changes $[0], causing all sort of problems
   # (the dirname of $[0] is not the place where we might find the
@@ -396,7 +396,7 @@ do
     # Reject names that are not valid shell variable names.
     expr "x$ac_feature" : ".*[^-_$as_cr_alnum]" >/dev/null &&
       { echo "$as_me: error: invalid feature name: $ac_feature" >&2
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
     ac_feature=`echo $ac_feature | sed 's/-/_/g'`
     eval "enable_$ac_feature=no" ;;
 
@@ -405,7 +405,7 @@ do
     # Reject names that are not valid shell variable names.
     expr "x$ac_feature" : ".*[^-_$as_cr_alnum]" >/dev/null &&
       { echo "$as_me: error: invalid feature name: $ac_feature" >&2
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
     ac_feature=`echo $ac_feature | sed 's/-/_/g'`
     case $ac_option in
       *=*) ac_optarg=`echo "$ac_optarg" | sed "s/'/'\\\\\\\\''/g"`;;
@@ -587,7 +587,7 @@ do
     # Reject names that are not valid shell variable names.
     expr "x$ac_package" : ".*[^-_$as_cr_alnum]" >/dev/null &&
       { echo "$as_me: error: invalid package name: $ac_package" >&2
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
     ac_package=`echo $ac_package| sed 's/-/_/g'`
     case $ac_option in
       *=*) ac_optarg=`echo "$ac_optarg" | sed "s/'/'\\\\\\\\''/g"`;;
@@ -600,7 +600,7 @@ do
     # Reject names that are not valid shell variable names.
     expr "x$ac_package" : ".*[^-_$as_cr_alnum]" >/dev/null &&
       { echo "$as_me: error: invalid package name: $ac_package" >&2
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
     ac_package=`echo $ac_package | sed 's/-/_/g'`
     eval "with_$ac_package=no" ;;
 
@@ -624,7 +624,7 @@ do
 
   -*) { echo "$as_me: error: unrecognized option: $ac_option
 Try \`$0 --help' for more information." >&2
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
     ;;
 
   *=*)
@@ -632,7 +632,7 @@ Try \`$0 --help' for more information." >&2
     # Reject names that are not valid shell variable names.
     expr "x$ac_envvar" : ".*[^_$as_cr_alnum]" >/dev/null &&
       { echo "$as_me: error: invalid variable name: $ac_envvar" >&2
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
     ac_optarg=`echo "$ac_optarg" | sed "s/'/'\\\\\\\\''/g"`
     eval "$ac_envvar='$ac_optarg'"
     export $ac_envvar ;;
@@ -651,7 +651,7 @@ done
 if test -n "$ac_prev"; then
   ac_option=--`echo $ac_prev | sed 's/_/-/g'`
   { echo "$as_me: error: missing argument to $ac_option" >&2
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 fi
 
 # Be sure to have absolute paths.
@@ -661,7 +661,7 @@ do
   case $ac_val in
     [\\/$]* | ?:[\\/]* | NONE | '' ) ;;
     *)  { echo "$as_me: error: expected an absolute directory name for --$ac_var: $ac_val" >&2
-   { (exit 1); exit 1; }; };;
+   { (exit 1); : exit 1; }; };;
   esac
 done
 
@@ -673,7 +673,7 @@ do
   case $ac_val in
     [\\/$]* | ?:[\\/]* ) ;;
     *)  { echo "$as_me: error: expected an absolute directory name for --$ac_var: $ac_val" >&2
-   { (exit 1); exit 1; }; };;
+   { (exit 1); : exit 1; }; };;
   esac
 done
 
@@ -727,15 +727,15 @@ fi
 if test ! -r $srcdir/$ac_unique_file; then
   if test "$ac_srcdir_defaulted" = yes; then
     { echo "$as_me: error: cannot find sources ($ac_unique_file) in $ac_confdir or .." >&2
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
   else
     { echo "$as_me: error: cannot find sources ($ac_unique_file) in $srcdir" >&2
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
   fi
 fi
 (cd $srcdir && test -r ./$ac_unique_file) 2>/dev/null ||
   { echo "$as_me: error: sources are in $srcdir, but \`cd $srcdir' does not work" >&2
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 srcdir=`echo "$srcdir" | sed 's%\([^\\/]\)[\\/]*$%\1%'`
 ac_env_build_alias_set=${build_alias+set}
 ac_env_build_alias_value=$build_alias
@@ -1244,7 +1244,7 @@ if $ac_cache_corrupted; then
 echo "$as_me: error: changes in the environment can compromise the build" >&2;}
   { { echo "$as_me:$LINENO: error: run \`make distclean' and/or \`rm $cache_file' and start over" >&5
 echo "$as_me: error: run \`make distclean' and/or \`rm $cache_file' and start over" >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 fi
 
 ac_ext=c
@@ -1339,7 +1339,7 @@ done
 if test -z "$ac_aux_dir"; then
   { { echo "$as_me:$LINENO: error: cannot find install-sh or install.sh in $libiberty_topdir $srcdir/$libiberty_topdir" >&5
 echo "$as_me: error: cannot find install-sh or install.sh in $libiberty_topdir $srcdir/$libiberty_topdir" >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 fi
 ac_config_guess="$SHELL $ac_aux_dir/config.guess"
 ac_config_sub="$SHELL $ac_aux_dir/config.sub"
@@ -1481,7 +1481,7 @@ fi
 $ac_config_sub sun4 >/dev/null 2>&1 ||
   { { echo "$as_me:$LINENO: error: cannot run $ac_config_sub" >&5
 echo "$as_me: error: cannot run $ac_config_sub" >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 
 echo "$as_me:$LINENO: checking build system type" >&5
 echo $ECHO_N "checking build system type... $ECHO_C" >&6
@@ -1494,11 +1494,11 @@ test -z "$ac_cv_build_alias" &&
 test -z "$ac_cv_build_alias" &&
   { { echo "$as_me:$LINENO: error: cannot guess build type; you must specify one" >&5
 echo "$as_me: error: cannot guess build type; you must specify one" >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 ac_cv_build=`$ac_config_sub $ac_cv_build_alias` ||
   { { echo "$as_me:$LINENO: error: $ac_config_sub $ac_cv_build_alias failed" >&5
 echo "$as_me: error: $ac_config_sub $ac_cv_build_alias failed" >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 
 fi
 echo "$as_me:$LINENO: result: $ac_cv_build" >&5
@@ -1520,7 +1520,7 @@ test -z "$ac_cv_host_alias" &&
 ac_cv_host=`$ac_config_sub $ac_cv_host_alias` ||
   { { echo "$as_me:$LINENO: error: $ac_config_sub $ac_cv_host_alias failed" >&5
 echo "$as_me: error: $ac_config_sub $ac_cv_host_alias failed" >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 
 fi
 echo "$as_me:$LINENO: result: $ac_cv_host" >&5
@@ -2007,7 +2007,7 @@ test -z "$CC" && { { echo "$as_me:$LINENO: error: no acceptable C compiler found
 See \`config.log' for more details." >&5
 echo "$as_me: error: no acceptable C compiler found in \$PATH
 See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 
 # Provide some information about the compiler.
 echo "$as_me:$LINENO:" \
@@ -2163,7 +2163,7 @@ See \`config.log' for more details." >&5
 echo "$as_me: error: cannot run C compiled programs.
 If you meant to cross compile, use \`--host'.
 See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
     fi
   fi
 fi
@@ -2205,7 +2205,7 @@ else
 See \`config.log' for more details." >&5
 echo "$as_me: error: cannot compute suffix of executables: cannot compile and link
 See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 fi
 
 rm -f conftest$ac_cv_exeext
@@ -2258,7 +2258,7 @@ sed 's/^/| /' conftest.$ac_ext >&5
 See \`config.log' for more details." >&5
 echo "$as_me: error: cannot compute suffix of object files: cannot compile
 See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 fi
 
 rm -f conftest.$ac_cv_objext conftest.$ac_ext
@@ -2822,7 +2822,7 @@ else
 See \`config.log' for more details." >&5
 echo "$as_me: error: C preprocessor \"$CPP\" fails sanity check
 See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 fi
 
 ac_ext=c
@@ -3286,7 +3286,7 @@ _ACEOF
 if test $ac_cv_c_bigendian = unknown; then
   { { echo "$as_me:$LINENO: error: unknown endianess - sorry" >&5
 echo "$as_me: error: unknown endianess - sorry" >&2;}
-   { (exit please pre-set ac_cv_c_bigendian); exit please pre-set ac_cv_c_bigendian; }; }
+   { (exit please pre-set ac_cv_c_bigendian); : exit please pre-set ac_cv_c_bigendian; }; }
 fi
 
 
@@ -4135,8 +4135,8 @@ if eval "test \"\${$as_ac_var+set}\" = set"; then
 else
   if test x$gcc_no_link = xyes; then
   { { echo "$as_me:$LINENO: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&5
-echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
-   { (exit 1); exit 1; }; }
+: echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
+   { (exit 1); : exit 1; }; }
 fi
 cat >conftest.$ac_ext <<_ACEOF
 #line $LINENO "configure"
@@ -4444,8 +4444,8 @@ else
 ac_cv_search_strerror=no
 if test x$gcc_no_link = xyes; then
   { { echo "$as_me:$LINENO: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&5
-echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
-   { (exit 1); exit 1; }; }
+: echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
+   { (exit 1); : exit 1; }; }
 fi
 cat >conftest.$ac_ext <<_ACEOF
 #line $LINENO "configure"
@@ -4494,8 +4494,8 @@ if test "$ac_cv_search_strerror" = no; then
     LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
     if test x$gcc_no_link = xyes; then
   { { echo "$as_me:$LINENO: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&5
-echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
-   { (exit 1); exit 1; }; }
+: echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
+   { (exit 1); : exit 1; }; }
 fi
 cat >conftest.$ac_ext <<_ACEOF
 #line $LINENO "configure"
@@ -4562,8 +4562,8 @@ if eval "test \"\${$as_ac_var+set}\" = set"; then
 else
   if test x$gcc_no_link = xyes; then
   { { echo "$as_me:$LINENO: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&5
-echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
-   { (exit 1); exit 1; }; }
+: echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
+   { (exit 1); : exit 1; }; }
 fi
 cat >conftest.$ac_ext <<_ACEOF
 #line $LINENO "configure"
@@ -4685,8 +4685,8 @@ if eval "test \"\${$as_ac_var+set}\" = set"; then
 else
   if test x$gcc_no_link = xyes; then
   { { echo "$as_me:$LINENO: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&5
-echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
-   { (exit 1); exit 1; }; }
+: echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
+   { (exit 1); : exit 1; }; }
 fi
 cat >conftest.$ac_ext <<_ACEOF
 #line $LINENO "configure"
@@ -4898,8 +4898,8 @@ if eval "test \"\${$as_ac_var+set}\" = set"; then
 else
   if test x$gcc_no_link = xyes; then
   { { echo "$as_me:$LINENO: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&5
-echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
-   { (exit 1); exit 1; }; }
+: echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
+   { (exit 1); : exit 1; }; }
 fi
 cat >conftest.$ac_ext <<_ACEOF
 #line $LINENO "configure"
@@ -5228,8 +5228,8 @@ if eval "test \"\${$as_ac_var+set}\" = set"; then
 else
   if test x$gcc_no_link = xyes; then
   { { echo "$as_me:$LINENO: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&5
-echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
-   { (exit 1); exit 1; }; }
+: echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
+   { (exit 1); : exit 1; }; }
 fi
 cat >conftest.$ac_ext <<_ACEOF
 #line $LINENO "configure"
@@ -5323,8 +5323,8 @@ if eval "test \"\${$as_ac_var+set}\" = set"; then
 else
   if test x$gcc_no_link = xyes; then
   { { echo "$as_me:$LINENO: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&5
-echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
-   { (exit 1); exit 1; }; }
+: echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
+   { (exit 1); : exit 1; }; }
 fi
 cat >conftest.$ac_ext <<_ACEOF
 #line $LINENO "configure"
@@ -5413,8 +5413,8 @@ echo $ECHO_N "checking for $v... $ECHO_C" >&6
 else
   if test x$gcc_no_link = xyes; then
   { { echo "$as_me:$LINENO: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&5
-echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
-   { (exit 1); exit 1; }; }
+: echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
+   { (exit 1); : exit 1; }; }
 fi
 cat >conftest.$ac_ext <<_ACEOF
 #line $LINENO "configure"
@@ -5527,8 +5527,8 @@ if eval "test \"\${$as_ac_var+set}\" = set"; then
 else
   if test x$gcc_no_link = xyes; then
   { { echo "$as_me:$LINENO: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&5
-echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
-   { (exit 1); exit 1; }; }
+: echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
+   { (exit 1); : exit 1; }; }
 fi
 cat >conftest.$ac_ext <<_ACEOF
 #line $LINENO "configure"
@@ -5759,8 +5759,8 @@ if eval "test \"\${$as_ac_var+set}\" = set"; then
 else
   if test x$gcc_no_link = xyes; then
   { { echo "$as_me:$LINENO: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&5
-echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
-   { (exit 1); exit 1; }; }
+: echo "$as_me: error: Link tests are not allowed after GCC_NO_EXECUTABLES." >&2;}
+   { (exit 1); : exit 1; }; }
 fi
 cat >conftest.$ac_ext <<_ACEOF
 #line $LINENO "configure"
@@ -6366,7 +6366,7 @@ done
   if test ! -f "$as_myself"; then
     { { echo "$as_me:$LINENO: error: cannot find myself; rerun with an absolute path" >&5
 echo "$as_me: error: cannot find myself; rerun with an absolute path" >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
   fi
   case $CONFIG_SHELL in
   '')
@@ -6417,7 +6417,7 @@ done
   chmod +x $as_me.lineno ||
     { { echo "$as_me:$LINENO: error: cannot create $as_me.lineno; rerun with a POSIX shell" >&5
 echo "$as_me: error: cannot create $as_me.lineno; rerun with a POSIX shell" >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
 
   # Don't try to exec as it changes $[0], causing all sort of problems
   # (the dirname of $[0] is not the place where we might find the
@@ -6609,7 +6609,7 @@ cat >>$CONFIG_STATUS <<\_ACEOF
 Try \`$0 --help' for more information." >&5
 echo "$as_me: error: ambiguous option: $1
 Try \`$0 --help' for more information." >&2;}
-   { (exit 1); exit 1; }; };;
+   { (exit 1); : exit 1; }; };;
   --help | --hel | -h )
     echo "$ac_cs_usage"; exit 0 ;;
   --debug | --d* | -d )
@@ -6631,7 +6631,7 @@ Try \`$0 --help' for more information." >&2;}
 Try \`$0 --help' for more information." >&5
 echo "$as_me: error: unrecognized option: $1
 Try \`$0 --help' for more information." >&2;}
-   { (exit 1); exit 1; }; } ;;
+   { (exit 1); : exit 1; }; } ;;
 
   *) ac_config_targets="$ac_config_targets $1" ;;
 
@@ -6687,7 +6687,7 @@ do
   "config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS config.h:config.in" ;;
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
-   { (exit 1); exit 1; }; };;
+   { (exit 1); : exit 1; }; };;
   esac
 done
 
@@ -6905,7 +6905,7 @@ echo X"$as_dir" |
     test ! -n "$as_dirs" || mkdir $as_dirs
   fi || { { echo "$as_me:$LINENO: error: cannot create directory \"$ac_dir\"" >&5
 echo "$as_me: error: cannot create directory \"$ac_dir\"" >&2;}
-   { (exit 1); exit 1; }; }; }
+   { (exit 1); : exit 1; }; }; }
 
   ac_builddir=.
 
@@ -6971,7 +6971,7 @@ echo "$as_me: creating $ac_file" >&6;}
          # Absolute (can't be DOS-style, as IFS=:)
          test -f "$f" || { { echo "$as_me:$LINENO: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
          echo $f;;
       *) # Relative
          if test -f "$f"; then
@@ -6984,7 +6984,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            # /dev/null tree
            { { echo "$as_me:$LINENO: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
          fi;;
       esac
     done` || { (exit 1); exit 1; }
@@ -7062,7 +7062,7 @@ echo "$as_me: creating $ac_file" >&6;}
          # Absolute (can't be DOS-style, as IFS=:)
          test -f "$f" || { { echo "$as_me:$LINENO: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
          echo $f;;
       *) # Relative
          if test -f "$f"; then
@@ -7075,7 +7075,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            # /dev/null tree
            { { echo "$as_me:$LINENO: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
-   { (exit 1); exit 1; }; }
+   { (exit 1); : exit 1; }; }
          fi;;
       esac
     done` || { (exit 1); exit 1; }
@@ -7228,7 +7228,7 @@ echo X"$as_dir" |
     test ! -n "$as_dirs" || mkdir $as_dirs
   fi || { { echo "$as_me:$LINENO: error: cannot create directory \"$ac_dir\"" >&5
 echo "$as_me: error: cannot create directory \"$ac_dir\"" >&2;}
-   { (exit 1); exit 1; }; }; }
+   { (exit 1); : exit 1; }; }; }
 
       rm -f $ac_file
       mv $tmp/config.h $ac_file

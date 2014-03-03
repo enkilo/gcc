@@ -1012,7 +1012,7 @@ esac
   done
 fi
 
-test -n "$ac_init_help" && : exit 0
+test -n "$ac_init_help" && exit 0
 if $ac_init_version; then
   cat <<\_ACEOF
 package-unused configure version-unused
