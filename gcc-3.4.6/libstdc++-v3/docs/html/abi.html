@@ -772,7 +772,7 @@ exceptions, locale, etc.
 
 %$bld/H-x86-gcc-3.4.0/bin/g++ -shared -Wl,-soname -Wl,libone.so.1 -Wl,-O1 -Wl,-z,defs a.o -o libone.so.1.0.0
 
-%ln -s libone.so.1.0.0 libone.so
+%cp -f libone.so.1.0.0 libone.so
 
 %$bld/H-x86-gcc-3.4.0/bin/g++ -c a.cc
 
@@ -786,7 +786,7 @@ exceptions, locale, etc.
 
 %$bld/H-x86-gcc-3.3.3/bin/g++ -shared -Wl,-soname -Wl,libtwo.so.1 -Wl,-O1 -Wl,-z,defs b.o -o libtwo.so.1.0.0
 
-%ln -s libtwo.so.1.0.0 libtwo.so
+%cp -f libtwo.so.1.0.0 libtwo.so
 
 %$bld/H-x86-gcc-3.3.3/bin/g++ -c b.cc
 

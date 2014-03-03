@@ -104,9 +104,9 @@ cp-demangle.c:
 	rm -f $@
 	$(LN_S) $(toplevel_srcdir)/libiberty/cp-demangle.c $@
 cp-demangle.lo: cp-demangle.c
-	$(LTCOMPILE) -DIN_GLIBCPP_V3 -Wno-error -c $<
+	$(LTCOMPILE) -DIN_GLIBCPP_V3 -Wno-error -S $<
 cp-demangle.o: cp-demangle.c
-	$(C_COMPILE) -DIN_GLIBCPP_V3 -Wno-error -c $<
+	$(C_COMPILE) -DIN_GLIBCPP_V3 -Wno-error -S $<
 
 
 # libstdc++ libtool notes

@@ -48,7 +48,7 @@
 
 #include <cstddef>
 
-#include <string.h>
+#include <mastring.h>
 
 // Get rid of those macros defined in <string.h> in lieu of real functions.
 #undef memcpy
@@ -84,14 +84,14 @@ namespace std
   using ::strncat;
   using ::memcmp;
   using ::strcmp;
-  using ::strcoll;
+//  using ::strcoll;
   using ::strncmp;
-  using ::strxfrm;
+//  using ::strxfrm;
   using ::strcspn;
   using ::strspn;
   using ::strtok;
   using ::memset;
-  using ::strerror;
+//  using ::strerror;
   using ::strlen;
 
   using ::memchr;

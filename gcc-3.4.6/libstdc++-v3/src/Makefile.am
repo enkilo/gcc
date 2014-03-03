@@ -155,17 +155,17 @@ libstdc___la_LDFLAGS = \
 # deprecated include files.
 GLIBCXX_INCLUDE_DIR=$(glibcxx_builddir)/include
 strstream.lo: strstream.cc
-	$(LTCXXCOMPILE) -I$(GLIBCXX_INCLUDE_DIR)/backward -Wno-deprecated -c $<
+	$(LTCXXCOMPILE) -I$(GLIBCXX_INCLUDE_DIR)/backward -Wno-deprecated -S $<
 strstream.o: strstream.cc
-	$(CXXCOMPILE) -I$(GLIBCXX_INCLUDE_DIR)/backward -Wno-deprecated -c $<
+	$(CXXCOMPILE) -I$(GLIBCXX_INCLUDE_DIR)/backward -Wno-deprecated -S $<
 
 # Use special rules for the concept-checking instantiations so that all
 # the generated template functions are also instantiated.  Force the checks
 # to be on so that the instantiations are actually seen.
 concept-inst.lo: concept-inst.cc
-	$(LTCXXCOMPILE) -D_GLIBCXX_CONCEPT_CHECKS -fimplicit-templates -c $<
+	$(LTCXXCOMPILE) -D_GLIBCXX_CONCEPT_CHECKS -fimplicit-templates -S $<
 concept-inst.o: concept-inst.cc
-	$(CXXCOMPILE) -D_GLIBCXX_CONCEPT_CHECKS -fimplicit-templates -c $<
+	$(CXXCOMPILE) -D_GLIBCXX_CONCEPT_CHECKS -fimplicit-templates -S $<
 
 # AM_CXXFLAGS needs to be in each subdirectory so that it can be
 # modified in a per-library or per-sub-library way.  Need to manually

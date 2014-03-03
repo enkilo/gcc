@@ -9,7 +9,7 @@ SRCDIR=../../gcc-3.4.6                       # the sourcecode dir for gcc
                                              # the example here assumes that the gcc source directory
                                              # is at the same level as the script
 
-prefix=/src/mapip/gcc                        # installation directory
+prefix=build/$(gcc -dumpmachine)                        # installation directory
                                              # This must be specified in the format shown here
                                              # or gcc won't be able to find it's libraries and includes
                                              # if you move the installation

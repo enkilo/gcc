@@ -159,7 +159,7 @@ AC_DEFUN([GLIBCXX_CONFIGURE], [
   gcc_version=`$CXX -dumpversion`
   AC_MSG_RESULT($gcc_version)
 
-  # Will set LN_S to either 'ln -s', 'ln', or 'cp -p' (if linking isn't
+  # Will set LN_S to either 'cp -f', 'ln', or 'cp -p' (if linking isn't
   # available).  Uncomment the next line to force a particular method.
   AC_PROG_LN_S
   #LN_S='cp -p'
