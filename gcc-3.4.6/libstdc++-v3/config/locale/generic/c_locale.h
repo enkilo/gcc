@@ -59,7 +59,7 @@ namespace std
 		     const char* __fmt,
 		     _Tv __v, const __c_locale&, int __prec)
     {
-      char* __old = std::setlocale(LC_NUMERIC, NULL);
+      const char* __old = std::setlocale(LC_NUMERIC, NULL);
       char* __sav = NULL;
       if (std::strcmp(__old, "C"))
 	{

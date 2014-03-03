@@ -619,8 +619,8 @@ aix3*)
 esac
 
 # Determine commands to create old-style static archives.
-old_archive_cmds='$AR $AR_FLAGS $oldlib$oldobjs$old_deplibs'
-old_postinstall_cmds='chmod 644 $oldlib'
+old_archive_cmds='$AR $AR_FLAGS $alib$old_deplibs; $LIB $alib$old_deplibs'
+old_postinstall_cmds='chmod 644 $alib'
 old_postuninstall_cmds=
 
 if test -n "$RANLIB"; then
@@ -650,7 +650,7 @@ test -z "$NM" && NM=nm
 test -z "$OBJDUMP" && OBJDUMP=objdump
 test -z "$RANLIB" && RANLIB=:
 test -z "$STRIP" && STRIP=:
-test -z "$objext" && objext=o
+test -z "$objext" && objext=s
 
 echo $ac_n "checking for objdir... $ac_c" 1>&6
 rm -f .libs 2>/dev/null
@@ -2289,6 +2289,7 @@ host=$host
 echo=$ltecho
 
 # The archiver.
+LIB=$LIB
 AR=$AR
 AR_FLAGS=$AR_FLAGS
 
@@ -2335,7 +2336,7 @@ reload_cmds=$reload_cmds
 # How to pass a linker flag through the compiler.
 wl=$wl
 
-# Object file suffix (normally "o").
+# Object file suffix (normally "s").
 objext="$objext"
 
 # Old archive suffix (normally "a").

@@ -46,6 +46,7 @@
 echo 'srcdir = @srcdir@'
 echo 'VPATH = @srcdir@'
 echo 'EQ = ='
+echo 'C_FL ?= -c'
 echo
 echo 'force:'
 echo
@@ -101,7 +102,7 @@ for name in $LIB1ASMFUNCS; do
 
     echo ${out}: stmp-dirs '$(srcdir)/config/$(LIB1ASMSRC)'
     echo "	$gcc_compile" $flags -DL$name -xassembler-with-cpp \
-	  -c '$(srcdir)/config/$(LIB1ASMSRC)' -o $out
+	  -S '$(srcdir)/config/$(LIB1ASMSRC)' -o $out
 
     # Remove any objects from lib2funcs and LIB2_DIVMOD_FUNCS that are
     # defined as optimized assembly code in LIB1ASMFUNCS.
@@ -132,7 +133,7 @@ for name in $lib2funcs; do
 
     echo $out: $libgcc2_c_dep
     echo "	$gcc_compile" '$(MAYBE_USE_COLLECT2)' $flags -DL$name \
-      -c '$(srcdir)/libgcc2.c' -o $out
+      -S '$(srcdir)/libgcc2.c' -o $out
   done
   libgcc2_objs="$libgcc2_objs ${name}${objext}"
 done
@@ -145,7 +146,7 @@ for name in $LIB2FUNCS_ST; do
 
     echo $out: $libgcc2_c_dep
     echo "	$gcc_compile" '$(MAYBE_USE_COLLECT2)' $flags -DL$name \
-      -c '$(srcdir)/libgcc2.c' -o $out
+      -S '$(srcdir)/libgcc2.c' -o $out
   done
   libgcc2_st_objs="$libgcc2_st_objs ${name}${objext}"
 done
@@ -158,7 +159,7 @@ for name in $LIB2_DIVMOD_FUNCS; do
 
     echo $out: $libgcc2_c_dep
     echo "	$gcc_compile" '$(MAYBE_USE_COLLECT2)' $flags -DL$name \
-      -c '$(srcdir)/libgcc2.c' -fexceptions -fnon-call-exceptions -o $out
+      -S '$(srcdir)/libgcc2.c' -fexceptions -fnon-call-exceptions -o $out
   done
   libgcc2_objs="$libgcc2_objs ${name}${objext}"
 done
@@ -172,7 +173,7 @@ if [ "$FPBIT" ]; then
 
       echo $out: $FPBIT $fpbit_c_dep
       echo "	$gcc_compile" -DFINE_GRAINED_LIBRARIES $flags -DL$name \
-	-c $FPBIT -o $out
+\${C_FL} $FPBIT -o $out
     done
     libgcc2_objs="$libgcc2_objs ${name}${objext}"
   done
@@ -187,7 +188,7 @@ if [ "$DPBIT" ]; then
 
       echo $out: $DPBIT $fpbit_c_dep
       echo "	$gcc_compile" -DFINE_GRAINED_LIBRARIES $flags -DL$name \
-	-c $DPBIT -o $out
+\${C_FL} $DPBIT -o $out
     done
     libgcc2_objs="$libgcc2_objs ${name}${objext}"
   done
@@ -202,7 +203,7 @@ if [ "$TPBIT" ]; then
 
       echo $out: $TPBIT $fpbit_c_dep
       echo "	$gcc_compile" -DFINE_GRAINED_LIBRARIES $flags -DL$name \
-	-c $TPBIT -o $out
+\${C_FL} $TPBIT -o $out
     done
     libgcc2_objs="$libgcc2_objs ${name}${objext}"
   done
@@ -221,7 +222,7 @@ for file in $LIB2ADD; do
     fi
 
     echo $out: stmp-dirs $file
-    echo "	$gcc_compile" $flags -c $file -o $out
+    echo "	$gcc_compile" $flags -S $file -o $out
   done
   libgcc2_objs="$libgcc2_objs ${oname}${objext}"
 done
@@ -239,7 +240,7 @@ for file in $LIB2ADDEH; do
     fi
 
     echo $out: stmp-dirs $file
-    echo "	$gcc_compile" $flags -fexceptions -c $file -o $out
+    echo "	$gcc_compile" $flags -fexceptions -S $file -o $out
   done
   if [ -z "$SHLIB_LINK" ]; then
     libgcc2_objs="$libgcc2_objs ${oname}${objext}"
@@ -277,7 +278,7 @@ if [ "$SHLIB_LINK" ]; then
         out="libgcc/${dir}/eh_dummy${objext}"
 
         echo $out: stmp-dirs $file
-        echo "	$gcc_compile" $flags -fexceptions -c $file -o $out
+        echo "	$gcc_compile" $flags -fexceptions -S $file -o $out
       done
   fi
 fi
@@ -295,7 +296,7 @@ for file in $LIB2ADD_ST; do
     fi
 
     echo $out: stmp-dirs $file
-    echo "	$gcc_compile" $flags -c $file -o $out
+    echo "	$gcc_compile" $flags -S $file -o $out
   done
   libgcc2_st_objs="$libgcc2_st_objs ${oname}${objext}"
 done
@@ -314,7 +315,7 @@ if [ "$SHLIB_LINK" ]; then
       fi
 
       echo $out: stmp-dirs $file
-      echo "	$gcc_compile" $flags -c $file -o $out
+      echo "	$gcc_compile" $flags -S $file -o $out
     done
     libgcc2_sh_objs="$libgcc2_sh_objs ${oname}${objext}"
   done
@@ -336,9 +337,9 @@ if [ "$LIBUNWIND" ]; then
       fi
 
       echo $out: stmp-dirs $file $LIBUNWINDDEP
-      echo "	$gcc_compile" $flags -fexceptions -c $file -o $out
+      echo "	$gcc_compile" $flags -fexceptions -S $file -o $out
       echo ${out}s: stmp-dirs $file $LIBUNWINDDEP
-      echo "	$gcc_compile" $flags -fexceptions -DSHARED -c $file -o ${out}s
+      echo "	$gcc_compile" $flags -fexceptions -DSHARED -S $file -o ${out}s
     done
     libunwind_static_objs="$libunwind_static_objs ${oname}${objext}"
     libunwind_shared_objs="$libunwind_shared_objs ${oname}${objext}s"
@@ -359,7 +360,7 @@ for name in $LIBGCOV; do
 
     echo $out: $libgcov_c_dep
     echo "	$gcc_compile" '$(MAYBE_USE_COLLECT2)' $flags -DL$name \
-      -c '$(srcdir)/libgcov.c' -o $out
+      -S '$(srcdir)/libgcov.c' -o $out
   done
   libgcov_objs="$libgcov_objs ${name}${objext}"
 done

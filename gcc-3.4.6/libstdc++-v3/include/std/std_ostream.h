@@ -403,7 +403,7 @@ namespace std
       ~sentry()
       {
 	// XXX MT
-	if (_M_os.flags() & ios_base::unitbuf && !uncaught_exception())
+	if (_M_os.flags() & ios_base::unitbuf /*&& !uncaught_exception()*/)
 	  {
 	    // Can't call flush directly or else will get into recursive lock.
 	    if (_M_os.rdbuf() && _M_os.rdbuf()->pubsync() == -1)

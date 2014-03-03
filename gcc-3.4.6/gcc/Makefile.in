@@ -1,3 +1,4 @@
+
 # Makefile for GNU Compiler Collection
 # Run 'configure' to generate Makefile from Makefile.in
 
@@ -160,9 +161,9 @@ coverageexts = .{gcda,gcno}
 # apply to the back end and the C front end, which may be compiled
 # with other compilers.  This is partially controlled by configure in
 # stage1, as not all versions of gcc understand -Wno-long-long.
-LOOSE_WARN = -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes
-STRICT_WARN = @strict1_warn@
-STRICT2_WARN = -pedantic -Wno-long-long -Wold-style-definition @WERROR@
+#LOOSE_WARN = -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes
+#STRICT_WARN = @strict1_warn@
+#STRICT2_WARN = -pedantic -Wno-long-long -Wold-style-definition @WERROR@
 
 # This is set by --enable-checking.  The idea is to catch forgotten
 # "extern" tags in header files.
@@ -194,7 +195,7 @@ SYSCALLS.c.X-warn = -Wno-strict-prototypes -Wno-error
 # All warnings have to be shut off in stage1 if the compiler used then
 # isn't gcc; configure determines that.  WARN_CFLAGS will be either
 # $(GCC_WARN_CFLAGS), or nothing.
-WARN_CFLAGS = @warn_cflags@
+#WARN_CFLAGS = @warn_cflags@
 
 CPPFLAGS = @CPPFLAGS@
 
@@ -757,8 +758,10 @@ BUILD_VARRAY = $(BUILD_PREFIX)varray.o
 INCLUDES = -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
 	   -I$(srcdir)/../include @INCINTL@
 
+C_FL ?= -c
+
 .c.o:
-	$(CC) -c $(ALL_CFLAGS) $(ALL_CPPFLAGS) $(INCLUDES) $< $(OUTPUT_OPTION)
+	$(CC) $(C_FL) $(ALL_CFLAGS) $(ALL_CPPFLAGS) $(INCLUDES) $< $(OUTPUT_OPTION)
 
 #
 # Support for additional languages (other than C).
@@ -1200,8 +1203,10 @@ LIBGCC_DEPS = $(GCC_PASSES) $(LANGUAGES) stmp-int-hdrs $(STMP_FIXPROTO) \
 
 libgcov.a: libgcc.a; @true
 
+libgcc.a: C_FL = -S
 libgcc.a: $(LIBGCC_DEPS)
-	$(MAKE) \
+	$(MAKE) -i \
+	  C_FL="$(C_FL)" \
 	  CFLAGS="$(CFLAGS) $(WARN_CFLAGS)" \
 	  CONFIG_H="$(TCONFIG_H)" TM_H="$(TM_H)" \
 	  INCLUDES="$(INCLUDES)" \
@@ -1297,7 +1302,7 @@ s-crt0:	$(CRT0_S) $(MCRT0_S) $(GCC_PASSES) $(CONFIG_H)
 
 c-errors.o: c-errors.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(TREE_H) \
     $(C_TREE_H) flags.h $(DIAGNOSTIC_H) $(TM_P_H)
-c-parse.o : c-parse.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(TREE_H) \
+c-parse.o : $(srcdir)/c-parse.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(TREE_H) \
     $(GGC_H) intl.h $(C_TREE_H) input.h flags.h toplev.h output.h $(CPPLIB_H) \
     varray.h gt-c-parse.h
 

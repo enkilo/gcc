@@ -27,3 +27,7 @@ fp-bit.c: $(srcdir)/config/fp-bit.c
 
 LIBGCC2_DEBUG_CFLAGS =
 TARGET_LIBGCC2_CFLAGS = -Dinhibit_libc -g0 -O2 -save-temps
+RANLIB_FOR_TARGET = true
+AR_FOR_TARGET = pipe-tool
+AR_FLAGS_FOR_TARGET = -L
+AR_CREATE_FOR_TARGET = $(AR_FOR_TARGET) $(AR_FLAGS_FOR_TARGET)

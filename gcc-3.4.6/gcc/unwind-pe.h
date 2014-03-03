@@ -34,11 +34,13 @@
 #ifndef GCC_UNWIND_PE_H
 #define GCC_UNWIND_PE_H
 
+#include <maapi.h>
+
 /* If using C++, references to abort have to be qualified with std::.  */
 #if __cplusplus
-#define __gxx_abort std::abort
+#define __gxx_abort() maPanic(0, "std::abort");
 #else
-#define __gxx_abort abort
+#define __gxx_abort() maPanic(0, "abort");
 #endif
 
 /* Pointer encodings, from dwarf2.h.  */
