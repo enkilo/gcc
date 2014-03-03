@@ -123,7 +123,7 @@ LC_ALL=C
 LANGUAGE=C
 export LANGUAGE LC_ALL
 
-$lt_unset CDPATH
+unset CDPATH
 
 
 # Work around backward compatibility issue on IRIX 6.5. On IRIX 6.4+, sh
@@ -2626,7 +2626,7 @@ func_mode_execute ()
 	eval "if test \"\${save_$lt_var+set}\" = set; then
                 $lt_var=\$save_$lt_var; export $lt_var
 	      else
-		$lt_unset $lt_var
+		unset $lt_var
 	      fi"
       done
 
@@ -9052,7 +9052,7 @@ EOF
 	# Preserve any variables that may affect compiler behavior
 	for var in $variables_saved_for_relink; do
 	  if eval test -z \"\${$var+set}\"; then
-	    relink_command="{ test -z \"\${$var+set}\" || $lt_unset $var || { $var=; export $var; }; }; $relink_command"
+	    relink_command="{ test -z \"\${$var+set}\" || unset $var || { $var=; export $var; }; }; $relink_command"
 	  elif eval var_value=\$$var; test -z "$var_value"; then
 	    relink_command="$var=; export $var; $relink_command"
 	  else
@@ -9305,7 +9305,7 @@ EOF
       # Preserve any variables that may affect compiler behavior
       for var in $variables_saved_for_relink; do
 	if eval test -z \"\${$var+set}\"; then
-	  relink_command="{ test -z \"\${$var+set}\" || $lt_unset $var || { $var=; export $var; }; }; $relink_command"
+	  relink_command="{ test -z \"\${$var+set}\" || unset $var || { $var=; export $var; }; }; $relink_command"
 	elif eval var_value=\$$var; test -z "$var_value"; then
 	  relink_command="$var=; export $var; $relink_command"
 	else
