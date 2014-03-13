@@ -11,7 +11,7 @@ SRCDIR=$PWD/gcc-3.4.6                        # the sourcecode dir for gcc
                                              # the example here assumes that the gcc source directory
                                              # is at the same level as the script
 
-prefix=/usr/mosync                           # installation directory
+: ${prefix=/opt/mosync}                         # installation directory
                                              # This must be specified in the format shown here
                                              # or gcc won't be able to find it's libraries and includes
                                              # if you move the installation
@@ -31,9 +31,12 @@ builddir=./build/gcc
 target=mapip
 progpref=mapip-
 
-export CFLAGS='-O2 -pipe -m32'
-export CXXFLAGS='-O2 -pipe -m32'
-export LDFLAGS='-s -m32'
+
+
+export CC=gcc
+export CFLAGS='-O2 -pipe'
+export CXXFLAGS='-O2 -pipe'
+export {HOST_,}LDFLAGS='-static'
 export DEBUG_FLAGS=''
 
 #---------------------------------------------------------------------------------
@@ -48,9 +51,12 @@ $SRCDIR/configure \
         --with-gcc --with-stabs \
         --disable-shared --disable-threads --disable-win32-registry --disable-nls \
 	--prefix=$prefix \
+	--libexecdir=$prefix/lib \
         --target=$target \
         --without-headers \
         --program-prefix=$progpref -v \
 	--build=i686-linux-gnu \
 	--host=i686-linux-gnu \
         2>&1 | tee gcc_configure.log
+
+echo {HOST_,}LDFLAGS="-static" make -C build/gcc

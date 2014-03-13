@@ -48,7 +48,7 @@ static void hoist_update_store (rtx, rtx *, rtx, rtx);
    Bits are tested using macros TARGET_... defined in the tm.h file
    and set by `-m...' switches.  Must be defined in rtlanal.c.  */
 
-int target_flags;
+//int target_flags;
 
 /* Return 1 if the value of X is unstable
    (would be different at a different point in the program).
