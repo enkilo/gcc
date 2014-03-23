@@ -9,7 +9,7 @@ SRCDIR=../../gcc-3.4.6                       # the sourcecode dir for gcc
                                              # the example here assumes that the gcc source directory
                                              # is at the same level as the script
 
-prefix=/src/mapip/gcc                        # installation directory
+prefix=build/gcc                        # installation directory
                                              # This must be specified in the format shown here
                                              # or gcc won't be able to find it's libraries and includes
                                              # if you move the installation
@@ -26,23 +26,23 @@ prefix=/src/mapip/gcc                        # installation directory
 #---------------------------------------------------------------------------------
 
 target=mapip
-host=mingw32
+host=i686-redhat-linux
 progpref=mapip-
 
-export CFLAGS='-O2 -pipe'
-export CXXFLAGS='-O2 -pipe'
+export CFLAGS='-m32 -O2 -pipe'
+export CXXFLAGS='-m32 -O2 -pipe'
 export LDFLAGS='-s'
 export DEBUG_FLAGS=''
 
 #---------------------------------------------------------------------------------
 # build and install just the c compiler
-#---------------------------------------------------------------------------------
+#--------------------------------"-------------------------------------------------
 
 mkdir -p $prefix
 cd $prefix
 
 $SRCDIR/configure \
-        --enable-languages=c,c++ \
+        --enable-languages="c,c++" \
         --with-gcc --with-stabs \
         --disable-shared --disable-threads --disable-win32-registry --disable-nls\
         --target=$target \

@@ -3,6 +3,7 @@
 #---------------------------------------------------------------------------------
 # Source and Install directories
 #---------------------------------------------------------------------------------
+: ${MOSYNCDIR=/opt/MoSync-3.3.1}
 
 SRCDIR=$PWD/gcc-3.4.6                        # the sourcecode dir for gcc
                                              # This must be specified in the format shown here
@@ -11,12 +12,13 @@ SRCDIR=$PWD/gcc-3.4.6                        # the sourcecode dir for gcc
                                              # the example here assumes that the gcc source directory
                                              # is at the same level as the script
 
-prefix=/usr/mosync                           # installation directory
+prefix=$MOSYNCDIR                            # installation directory
                                              # This must be specified in the format shown here
                                              # or gcc won't be able to find it's libraries and includes
                                              # if you move the installation
 
-builddir=./build/gcc
+build=`gcc -m32 -dumpmachine |sed 's,x86_64,i686,'`
+builddir=./build/$build
 
 #---------------------------------------------------------------------------------
 # set the path for the installed binutils
@@ -33,7 +35,7 @@ progpref=mapip-
 
 export CFLAGS='-O2 -pipe -m32'
 export CXXFLAGS='-O2 -pipe -m32'
-export LDFLAGS='-s -m32'
+export LDFLAGS='-static -s -m32'
 export DEBUG_FLAGS=''
 
 #---------------------------------------------------------------------------------
