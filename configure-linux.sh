@@ -1,9 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
 #---------------------------------------------------------------------------------
 # Source and Install directories
 #---------------------------------------------------------------------------------
-: ${MOSYNCDIR=/opt/MoSync-3.3.1}
+
+while :; do
+  ARG=$1
+  case "$ARG" in
+    --) shift; break ;;
+    *=*) ARG=${ARG#--}; eval "${ARG%%=*}='${ARG#*=}'"; shift ;;
+    *) break ;;
+  esac
+done
 
 SRCDIR=$PWD/gcc-3.4.6                        # the sourcecode dir for gcc
                                              # This must be specified in the format shown here
@@ -12,13 +20,16 @@ SRCDIR=$PWD/gcc-3.4.6                        # the sourcecode dir for gcc
                                              # the example here assumes that the gcc source directory
                                              # is at the same level as the script
 
-prefix=$MOSYNCDIR                            # installation directory
+: ${prefix=${MOSYNCDIR:-/opt/mosync}}                         # installation directory
                                              # This must be specified in the format shown here
                                              # or gcc won't be able to find it's libraries and includes
                                              # if you move the installation
 
-build=`gcc -m32 -dumpmachine |sed 's,x86_64,i686,'`
-builddir=./build/$build
+: ${CC=gcc}
+: ${build=`$CC -dumpmachine`}
+: ${host=`echo "$build" | sed s/x86_64/i686/`}
+
+builddir=./build/$host
 
 #---------------------------------------------------------------------------------
 # set the path for the installed binutils
@@ -33,16 +44,20 @@ builddir=./build/$build
 target=mapip
 progpref=mapip-
 
-export CFLAGS='-O2 -pipe -m32'
-export CXXFLAGS='-O2 -pipe -m32'
-export LDFLAGS='-static -s -m32'
+if type "$host-gcc"; then
+  CC=$host-gcc
+fi
+
+export CC
+export CFLAGS='-O2 -pipe'
+export CXXFLAGS='-O2 -pipe'
+export {HOST_,}LDFLAGS='-static'
 export DEBUG_FLAGS=''
 
 #---------------------------------------------------------------------------------
 # build and install just the c compiler
 #---------------------------------------------------------------------------------
-
-mkdir -p $builddir
+(mkdir -p $builddir
 cd $builddir
 
 $SRCDIR/configure \
@@ -50,9 +65,18 @@ $SRCDIR/configure \
         --with-gcc --with-stabs \
         --disable-shared --disable-threads --disable-win32-registry --disable-nls \
 	--prefix=$prefix \
+	--libexecdir=$prefix/lib \
         --target=$target \
         --without-headers \
         --program-prefix=$progpref -v \
-	--build=i686-linux-gnu \
-	--host=i686-linux-gnu \
-        2>&1 | tee gcc_configure.log
+	--build=$build \
+	--host=$host \
+  ) 2>&1 | tee gcc_configure.log
+
+cat <<EOF| tee build.sh|sed "s/^/build.sh: /"
+mkdir -p $builddir/gcc && cp -vf $SRCDIR/gcc/{gengtype-yacc.c,c-parse.c,gengtype-lex.c} $builddir/gcc
+make -C $builddir {HOST_,}LDFLAGS="-static" all-gcc
+strip -v --strip-all $builddir/gcc/{xgcc,cpp,cc1,cc1plus}
+mkdir -p \${MOSYNCDIR:-$prefix}/{mapip/bin,bin} && cp -vf $builddir/gcc/{xgcc,cpp} \${MOSYNCDIR:-$prefix}/bin && cp -vf $builddir/gcc/{cc1,cc1plus} \${MOSYNCDIR:-$prefix}/mapip/bin
+#ln -sf xgcc \${MOSYNCDIR:-$prefix}/bin/gcc
+EOF

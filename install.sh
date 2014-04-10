@@ -1,7 +1,7 @@
 #!/bin/bash
 
-BIN=$MOSYNCDIR/bin
-LIB=$MOSYNCDIR/libexec/gcc
+BIN=${MOSYNCDIR:-/opt/mosync}/bin
+LIB=${MOSYNCDIR:-/opt/mosync}/libexec/gcc
 
 echo $BIN
 
