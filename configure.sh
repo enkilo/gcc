@@ -29,8 +29,8 @@ for host in $HOSTS; do
   (
   unset prefix
   case "$host" in
-    *linux*) sysroot=/usr/mapip/sys-root prefix=/usr ;;
-    *ygwin*) sysroot=/usr/mapip/sys-root prefix=/usr ;;
+    *linux*) : sysroot=/usr/mapip/sys-root; : ${prefix=/usr} ;;
+    *ygwin*) : sysroot=/usr/mapip/sys-root; : ${prefix=/usr} ;;
     *mingw*) prefix=/MoSync-4.0-Alpha progpref=; export LDFLAGS="-static" ;;
   esac
 
