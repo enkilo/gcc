@@ -33,7 +33,6 @@
 
 #include <bits/basic_file.h>
 #include <maapi.h>
-//#include <errno.h>
 
 #ifdef _GLIBCXX_HAVE_POLL
 #include <poll.h>
@@ -74,7 +73,7 @@ namespace __gnu_internal
 {
   // Map ios_base::openmode flags to a string for use in fopen().
   // Table of valid combinations as given in [lib.filebuf.members]/2.
-  static int 
+  static int
   fopen_mode(std::ios_base::openmode mode)
   {
     enum 
@@ -99,8 +98,8 @@ namespace __gnu_internal
       case (   out      |app|binary): return MA_ACCESS_READ_WRITE; 
       case (   out|trunc    |binary): return MA_ACCESS_READ_WRITE; 
       case (in              |binary): return MA_ACCESS_READ; 
-      case (in|out          |binary): return MA_ACCESS_READ_WRITE; 
-      case (in|out|trunc    |binary): return  MA_ACCESS_READ_WRITE; 
+      case (in|out          |binary): return MA_ACCESS_READ_WRITE;
+      case (in|out|trunc    |binary): return MA_ACCESS_READ_WRITE;
 	
       default: return 0; // invalid
       }
@@ -114,11 +113,11 @@ namespace __gnu_internal
 
     for (;;)
       {
-	std::streamsize __ret = -1L;
-  if(maFileWrite(__fd, __s, __nleft) >= 0)
-      __ret = __nleft;
-	//if (__ret == -1L && errno == EINTR)
-	//  continue;
+	 std::streamsize __ret = -1L;
+      if(maFileWrite(__fd, __s, __nleft) >= 0)
+          __ret = __nleft;
+//	if (__ret == -1L && errno == EINTR)
+//	  continue;
 	if (__ret == -1L)
 	  break;
 
@@ -205,14 +204,10 @@ namespace std
       }
     return __ret;
   }
-
-#ifndef MAPIP
+#ifndef MAPIP  
   __basic_file<char>*
   __basic_file<char>::sys_open(int __fd, ios_base::openmode __mode)
   {
-      _M_cfile = __fd;
-	_M_cfile_created = true;
-      /*
     __basic_file* __ret = NULL;
     const char* __c_mode = __gnu_internal::fopen_mode(__mode);
     if (__c_mode && !this->is_open() && (_M_cfile = fdopen(__fd, __c_mode)))
@@ -223,7 +218,7 @@ namespace std
 	  setvbuf(_M_cfile, __buf, _IONBF, 0);
 	__ret = this;
       }
-    return __ret;*/
+    return __ret;
   }
 #endif
   __basic_file<char>* 
@@ -281,7 +276,7 @@ namespace std
   __basic_file<char>::fd() 
   { return _M_cfile; }
   
-  MAHandle
+  MAHandle 
   __basic_file<char>::file() 
   { return _M_cfile; }
   
@@ -298,7 +293,7 @@ namespace std
 	    // for error first. However, C89/C99 (at variance with IEEE
 	    // 1003.1, f.i.) do not mandate that fclose must set errno
 	    // upon error.
-	    //errno = 0;
+//	    errno = 0;
 	    do
 	      __err = maFileClose(_M_cfile);
 	    while (0); //__err && errno == EINTR);
@@ -313,13 +308,11 @@ namespace std
   streamsize 
   __basic_file<char>::xsgetn(char* __s, streamsize __n)
   {
-    streamsize __ret;
-    do {
-      __ret = EOF;
+    streamsize __ret = -1;
+    //do
     if(maFileRead(this->fd(), __s, __n) >= 0)
         __ret = __n;
-   
-    } while (0); //__ret == -1L && errno == EINTR);
+    //while (__ret == -1L && errno == EINTR);
     return __ret;
   }
 
