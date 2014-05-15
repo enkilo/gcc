@@ -164,7 +164,7 @@ glibcxx_MOFILES = @glibcxx_MOFILES@
 glibcxx_PCHFLAGS = @glibcxx_PCHFLAGS@
 glibcxx_POFILES = @glibcxx_POFILES@
 glibcxx_builddir = @glibcxx_builddir@
-glibcxx_localedir = @glibcxx_localedir@
+glibcxx_locale.ccdir = @glibcxx_locale.ccdir@
 glibcxx_prefixdir = @glibcxx_prefixdir@
 glibcxx_srcdir = @glibcxx_srcdir@
 glibcxx_thread_h = @glibcxx_thread_h@
@@ -233,9 +233,9 @@ toolexeclib_LTLIBRARIES = libstdc++.la
 # particular host.
 host_sources = \
 	atomicity.cc \
-	codecvt_members.cc \
+	codecvt.cc_members.cc \
 	collate_members.cc \
-	ctype_members.cc \
+	ctype.cc_members.cc \
 	messages_members.cc \
 	monetary_members.cc \
 	numeric_members.cc \
@@ -248,49 +248,49 @@ atomicity_file = ${glibcxx_srcdir}/$(ATOMICITY_SRCDIR)/atomicity.h
 # particular host, but with ad hoc naming rules.
 host_sources_extra = \
 	basic_file.cc \
-	c++locale.cpp
+	c++locale.cc.cpp
 
 
 # Sources present in the src directory.
 sources = \
-	allocator.cpp \
-	codecvt.cpp \
-	complex_io.cpp \
-	ctype.cpp \
-	debug.cpp \
-	debug_list.cpp \
-	functexcept.cpp \
-	globals_locale.cpp \
-	globals_io.cpp \
-	ios.cpp \
-	ios_failure.cpp \
-	ios_init.cpp \
-	ios_locale.cpp \
-	limits.cpp \
-	list.cpp \
-	locale.cpp \
-	locale_init.cpp \
-	locale_facets.cpp \
-	localename.cpp \
-	stdexcept.cpp \
-	strstream.cpp \
-	tree.cpp \
-	allocator-inst.cpp \
-	concept-inst.cpp \
-	fstream-inst.cpp \
-	ext-inst.cpp \
-	io-inst.cpp \
-	istream-inst.cpp \
-	locale-inst.cpp \
-	locale-misc-inst.cpp \
-	misc-inst.cpp \
-	ostream-inst.cpp \
-	sstream-inst.cpp \
-	streambuf-inst.cpp \
-	string-inst.cpp \
-	valarray-inst.cpp \
-	wlocale-inst.cpp \
-	wstring-inst.cpp \
+	allocator.cc.cpp \
+	codecvt.cc.cpp \
+	complex_io.cc.cpp \
+	ctype.cc.cpp \
+	debug.cc.cpp \
+	debug.cc_list.cc.cc.cpp \
+	functexcept.cc.cpp \
+	globals_locale.cc.cc.cpp \
+	globals_io.cc.cpp \
+	ios.cc.cpp \
+	ios.cc_failure.cpp \
+	ios.cc_init.cc.cpp \
+	ios.cc_locale.cc.cc.cpp \
+	limits.cc.cpp \
+	list.cc.cpp \
+	locale.cc.cpp \
+	locale.cc_init.cpp \
+	locale.cc_facets.cc.cpp \
+	locale.ccname.cpp \
+	stdexcept.cc.cpp \
+	strstream.cc.cpp \
+	tree.cc.cpp \
+	allocator.cc-inst.cpp \
+	concept-inst.cc.cpp \
+	fstream-inst.cc.cpp \
+	ext-inst.cc.cpp \
+	io-inst.cc.cpp \
+	istream-inst.cc.cpp \
+	locale.cc-inst.cc.cpp \
+	locale.cc-misc-inst.cc.cpp \
+	misc-inst.cc.cpp \
+	ostream-inst.cc.cpp \
+	sstream-inst.cc.cpp \
+	streambuf-inst.cc.cpp \
+	string-inst.cc.cpp \
+	valarray-inst.cc.cpp \
+	wlocale.cc-inst.cc.cpp \
+	wstring-inst.cc.cc.cpp \
 	${host_sources} \
 	${host_sources_extra}
 
@@ -328,7 +328,7 @@ AM_CXXFLAGS = \
 
 # 1) Need to explicitly set LTCXXCOMPILE so that AM_CXXFLAGS is
 # last. (That way, things like -O2 passed down from the toplevel can
-# be overridden by --enable-debug.)
+# be overridden by --enable-debug.cc.)
 
 # 2) In general, libtool expects an argument such as `--tag=CXX' when
 # using the C++ compiler, because that will enable the settings
@@ -356,26 +356,26 @@ CXXLINK = $(LIBTOOL) --mode=link $(CXX) \
 	  $(OPT_LDFLAGS) $(SECTION_LDFLAGS) $(AM_CXXFLAGS) $(LDFLAGS) -o $@
 
 
-debugdir = debug
+debug.ccdir = debug.cc
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 LTLIBRARIES = $(toolexeclib_LTLIBRARIES)
 
-am__objects_1 = atomicity.lo codecvt_members.lo collate_members.lo \
-	ctype_members.lo messages_members.lo monetary_members.lo \
+am__objects_1 = atomicity.lo codecvt.cc_members.lo collate_members.lo \
+	ctype.cc_members.lo messages_members.lo monetary_members.lo \
 	numeric_members.lo time_members.lo
-am__objects_2 = basic_file.lo c++locale.lo
-am__objects_3 = allocator.lo codecvt.lo complex_io.lo ctype.lo debug.lo \
-	debug_list.lo functexcept.lo globals_locale.lo globals_io.lo \
-	ios.lo ios_failure.lo ios_init.lo ios_locale.lo limits.lo \
-	list.lo locale.lo locale_init.lo locale_facets.lo localename.lo \
-	stdexcept.lo strstream.lo tree.lo allocator-inst.lo \
-	concept-inst.lo fstream-inst.lo ext-inst.lo io-inst.lo \
-	istream-inst.lo locale-inst.lo locale-misc-inst.lo misc-inst.lo \
-	ostream-inst.lo sstream-inst.lo streambuf-inst.lo \
-	string-inst.lo valarray-inst.lo wlocale-inst.lo wstring-inst.lo \
+am__objects_2 = basic_file.lo c++locale.cc.lo
+am__objects_3 = allocator.cc.lo codecvt.cc.lo complex_io.cc.lo ctype.cc.lo debug.cc.lo \
+	debug.cc_list.cc.cc.lo functexcept.cc.lo globals_locale.cc.cc.lo globals_io.cc.lo \
+	ios.cc.lo ios.cc_failure.lo ios.cc_init.cc.lo ios.cc_locale.cc.cc.lo limits.cc.lo \
+	list.cc.lo locale.cc.lo locale.cc_init.lo locale.cc_facets.cc.lo locale.ccname.lo \
+	stdexcept.cc.lo strstream.cc.lo tree.cc.lo allocator.cc-inst.lo \
+	concept-inst.cc.lo fstream-inst.cc.lo ext-inst.cc.lo io-inst.cc.lo \
+	istream-inst.cc.lo locale.cc-inst.cc.lo locale.cc-misc-inst.cc.lo misc-inst.cc.lo \
+	ostream-inst.cc.lo sstream-inst.cc.lo streambuf-inst.cc.lo \
+	string-inst.cc.lo valarray-inst.cc.lo wlocale.cc-inst.cc.lo wstring-inst.cc.cc.lo \
 	$(am__objects_1) $(am__objects_2)
 am_libstdc___la_OBJECTS = $(am__objects_3)
 libstdc___la_OBJECTS = $(am_libstdc___la_OBJECTS)
@@ -404,7 +404,7 @@ toolexeclibLTLIBRARIES_INSTALL = $(INSTALL)
 install-toolexeclibLTLIBRARIES: $(toolexeclib_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
 	$(mkinstalldirs) $(DESTDIR)$(toolexeclibdir)
-	@list='$(toolexeclib_LTLIBRARIES)'; for p in $$list; do \
+	@list.cc='$(toolexeclib_LTLIBRARIES)'; for p in $$list.cc; do \
 	  if test -f $$p; then \
 	    f="`echo $$p | sed -e 's|^.*/||'`"; \
 	    echo " $(LIBTOOL) --mode=install $(toolexeclibLTLIBRARIES_INSTALL) $(INSTALL_STRIP_FLAG) $$p $(DESTDIR)$(toolexeclibdir)/$$f"; \
@@ -414,7 +414,7 @@ install-toolexeclibLTLIBRARIES: $(toolexeclib_LTLIBRARIES)
 
 uninstall-toolexeclibLTLIBRARIES:
 	@$(NORMAL_UNINSTALL)
-	@list='$(toolexeclib_LTLIBRARIES)'; for p in $$list; do \
+	@list.cc='$(toolexeclib_LTLIBRARIES)'; for p in $$list.cc; do \
 	    p="`echo $$p | sed -e 's|^.*/||'`"; \
 	  echo " $(LIBTOOL) --mode=uninstall rm -f $(DESTDIR)$(toolexeclibdir)/$$p"; \
 	  $(LIBTOOL) --mode=uninstall rm -f $(DESTDIR)$(toolexeclibdir)/$$p; \
@@ -422,7 +422,7 @@ uninstall-toolexeclibLTLIBRARIES:
 
 clean-toolexeclibLTLIBRARIES:
 	-test -z "$(toolexeclib_LTLIBRARIES)" || rm -f $(toolexeclib_LTLIBRARIES)
-	@list='$(toolexeclib_LTLIBRARIES)'; for p in $$list; do \
+	@list.cc='$(toolexeclib_LTLIBRARIES)'; for p in $$list.cc; do \
 	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
 	  test "$$dir" = "$$p" && dir=.; \
 	  echo "rm -f \"$${dir}/so_locations\""; \
@@ -465,8 +465,8 @@ CTAGSFLAGS =
 tags: TAGS
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
-	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
+	list.cc='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
+	unique=`for i in $$list.cc; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
 	  done | \
 	  $(AWK) '    { files[$$0] = 1; } \
@@ -477,8 +477,8 @@ TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	tags=; \
 	here=`pwd`; \
-	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
+	list.cc='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
+	unique=`for i in $$list.cc; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
 	  done | \
 	  $(AWK) '    { files[$$0] = 1; } \
@@ -492,8 +492,8 @@ CTAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	tags=; \
 	here=`pwd`; \
-	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
+	list.cc='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
+	unique=`for i in $$list.cc; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
 	  done | \
 	  $(AWK) '    { files[$$0] = 1; } \
@@ -518,7 +518,7 @@ distdir: $(DISTFILES)
 	$(mkinstalldirs) $(distdir)/..
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
-	list='$(DISTFILES)'; for file in $$list; do \
+	list.cc='$(DISTFILES)'; for file in $$list.cc; do \
 	  case $$file in \
 	    $(srcdir)/*) file=`echo "$$file" | sed "s|^$$srcdirstrip/||"`;; \
 	    $(top_srcdir)/*) file=`echo "$$file" | sed "s|^$$topsrcdirstrip/|$(top_builddir)/|"`;; \
@@ -641,13 +641,13 @@ uninstall-am: uninstall-info-am uninstall-toolexeclibLTLIBRARIES
 @GLIBCXX_BUILD_VERSIONED_SHLIB_TRUE@	  rm tmp.top tmp.bottom; \
 @GLIBCXX_BUILD_VERSIONED_SHLIB_TRUE@	fi
 
-codecvt_members.cc: ${glibcxx_srcdir}/$(CCODECVT_CC)
+codecvt.cc_members.cc: ${glibcxx_srcdir}/$(CCODECVT_CC)
 	$(LN_S) ${glibcxx_srcdir}/$(CCODECVT_CC) . || true
 
 collate_members.cc: ${glibcxx_srcdir}/$(CCOLLATE_CC)
 	$(LN_S) ${glibcxx_srcdir}/$(CCOLLATE_CC) . || true
 
-ctype_members.cc: ${glibcxx_srcdir}/$(CCTYPE_CC)
+ctype.cc_members.cc: ${glibcxx_srcdir}/$(CCTYPE_CC)
 	$(LN_S) ${glibcxx_srcdir}/$(CCTYPE_CC) . || true
 
 messages_members.cc: ${glibcxx_srcdir}/$(CMESSAGES_CC)
@@ -664,51 +664,51 @@ time_members.cc: ${glibcxx_srcdir}/$(CTIME_CC)
 atomicity.cc: ${atomicity_file}
 	$(LN_S) ${atomicity_file} ./atomicity.cc || true
 
-c++locale.cpp: ${glibcxx_srcdir}/$(CLOCALE_CC)
+c++locale.cc.cpp: ${glibcxx_srcdir}/$(CLOCALE_CC)
 	$(LN_S) ${glibcxx_srcdir}/$(CLOCALE_CC) ./$@ || true
 
 basic_file.cc: ${glibcxx_srcdir}/$(BASIC_FILE_CC)
 	$(LN_S) ${glibcxx_srcdir}/$(BASIC_FILE_CC) ./$@ || true
-strstream.lo: strstream.cpp
+strstream.cc.lo: strstream.cc.cpp
 	$(LTCXXCOMPILE) -I$(GLIBCXX_INCLUDE_DIR)/backward -Wno-deprecated -S $<
-strstream.o: strstream.cpp
+strstream.cc.o: strstream.cc.cpp
 	$(CXXCOMPILE) -I$(GLIBCXX_INCLUDE_DIR)/backward -Wno-deprecated -S $<
 
 # Use special rules for the concept-checking instantiations so that all
 # the generated template functions are also instantiated.  Force the checks
 # to be on so that the instantiations are actually seen.
-concept-inst.lo: concept-inst.cpp
+concept-inst.cc.lo: concept-inst.cc.cpp
 	$(LTCXXCOMPILE) -D_GLIBCXX_CONCEPT_CHECKS -fimplicit-templates -S $<
-concept-inst.o: concept-inst.cpp
+concept-inst.cc.o: concept-inst.cc.cpp
 	$(CXXCOMPILE) -D_GLIBCXX_CONCEPT_CHECKS -fimplicit-templates -S $<
 
-# Added bits to build debug library.
-@GLIBCXX_BUILD_DEBUG_TRUE@all-local: build_debug
-@GLIBCXX_BUILD_DEBUG_TRUE@install-data-local: install_debug
+# Added bits to build debug.cc library.
+@GLIBCXX_BUILD_DEBUG_TRUE@all-local: build_debug.cc
+@GLIBCXX_BUILD_DEBUG_TRUE@install-data-local: install_debug.cc
 @GLIBCXX_BUILD_DEBUG_FALSE@all-local:
 @GLIBCXX_BUILD_DEBUG_FALSE@install-data-local:
 
-# Build parallel set of debug objects here.
-stamp-debug:
-	if test ! -d ${debugdir}; then \
-	  mkdir -p ${debugdir}; \
-	  (cd ${debugdir}; \
+# Build parallel set of debug.cc objects here.
+stamp-debug.cc:
+	if test ! -d ${debug.ccdir}; then \
+	  mkdir -p ${debug.ccdir}; \
+	  (cd ${debug.ccdir}; \
 	  sed -e 's/top_builddir = \.\./top_builddir = ..\/../' \
 	      -e 's/srcdir = \.\./srcdir = ..\/../' \
 	      -e 's/glibcxx_basedir = \.\./glibcxx_basedir = ..\/../' \
-	      -e 's/all-local: build_debug/all-local:/' \
-	      -e 's/install-data-local: install_debug/install-data-local:/' \
+	      -e 's/all-local: build_debug.cc/all-local:/' \
+	      -e 's/install-data-local: install_debug.cc/install-data-local:/' \
 	  < ../Makefile > Makefile) ; \
 	fi; \
-	echo `date` > stamp-debug;
+	echo `date` > stamp-debug.cc;
 
-build_debug: stamp-debug
-	(cd ${debugdir} && $(MAKE) CXXFLAGS='$(DEBUG_FLAGS)' all)
+build_debug.cc: stamp-debug.cc
+	(cd ${debug.ccdir} && $(MAKE) CXXFLAGS='$(DEBUG_FLAGS)' all)
 
-# Install debug library here.
-install_debug:
-	(cd ${debugdir} && $(MAKE) \
-	toolexeclibdir=$(glibcxx_toolexeclibdir)/debug install)
+# Install debug.cc library here.
+install_debug.cc:
+	(cd ${debug.ccdir} && $(MAKE) \
+	toolexeclibdir=$(glibcxx_toolexeclibdir)/debug.cc install)
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

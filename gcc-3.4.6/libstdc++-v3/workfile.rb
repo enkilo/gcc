@@ -2,8 +2,8 @@
 
 require File.expand_path(ENV['MOSYNCDIR']+'/rules/mosync_lib.rb')
 
-mod = Module.new
-mod.class_eval do
+mod = PipeLibWork.new
+mod.instance_eval do
 	def setup_native
 		@LOCAL_DLLS = ["mosync", "mastd"]
 		if(@GCC_IS_V4 && @GCC_V4_SUB >= 4)
@@ -30,4 +30,4 @@ mod.class_eval do
 	end
 end
 
-MoSyncLib.invoke(mod)
+mod.invoke

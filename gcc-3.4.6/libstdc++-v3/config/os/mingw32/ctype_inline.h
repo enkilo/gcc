@@ -31,12 +31,12 @@
 // ISO C++ 14882: 22.1  Locales
 //
   
-// ctype bits to be inlined go here. Non-inlinable (ie virtual do_*)
-// functions go in ctype.cpp
+// ctype.cc bits to be inlined go here. Non-inlinable (ie virtual do_*)
+// functions go in ctype.cc.cpp
 
 
   bool
-  ctype<char>::
+  ctype.cc<char>::
   is(mask __m, char __c) const
   {
 	return (_M_table[static_cast<unsigned char>(__c) ] & __m); 
@@ -44,16 +44,16 @@
    
  
   const char*
-  ctype<char>::
-  is(const char* __low, const char* __high, mask* __vec) const 
+  ctype.cc<char>::
+  is(const char* __low, const char* __high, mask* __vec.cc) const 
   {
     while (__low < __high)
-      *__vec++ = _M_table[static_cast<unsigned char>(*__low++)];
+      *__vec.cc++ = _M_table[static_cast<unsigned char>(*__low++)];
     return __high;
   }
 
   const char*
-  ctype<char>::
+  ctype.cc<char>::
   scan_is(mask __m, const char* __low, const char* __high) const
   {
     while (__low < __high && !this->is(__m, *__low))
@@ -62,7 +62,7 @@
   }
 
   const char*
-  ctype<char>::
+  ctype.cc<char>::
   scan_not(mask __m, const char* __low, const char* __high) const
   {
     while (__low < __high && this->is(__m, *__low) != 0)

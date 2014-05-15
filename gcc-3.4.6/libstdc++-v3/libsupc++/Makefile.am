@@ -38,32 +38,32 @@ c_sources = \
 	cp-demangle.c 
 
 sources = \
-	del_op.cpp \
-	del_opnt.cpp \
-	del_opv.cpp \
-	del_opvnt.cpp \
-	eh_alloc.cpp \
-	eh_aux_runtime.cpp \
-	eh_catch.cpp \
-	eh_exception.cpp \
-	eh_globals.cpp \
-	eh_personality.cpp \
-	eh_term_handler.cpp \
-	eh_terminate.cpp \
-	eh_throw.cpp \
-	eh_type.cpp \
-	eh_unex_handler.cpp \
-	guard.cpp \
-	new_handler.cpp \
-	new_op.cpp \
-	new_opnt.cpp \
-	new_opv.cpp \
-	new_opvnt.cpp \
-	pure.cpp \
-	tinfo.cpp \
-	tinfo2.cpp \
-	vec.cc \
-	vterminate.cpp
+	del_op.cc.cpp \
+	del_op.ccnt.cpp \
+	del_op.ccv.cc.cpp \
+	del_op.ccv.ccnt.cpp \
+	eh_alloc.cc.cpp \
+	eh_aux_runtime.cc.cpp \
+	eh_catch.cc.cpp \
+	eh_exception.cc.cpp \
+	eh_globals.cc.cpp \
+	eh_personality.cc.cpp \
+	eh_term_handler.cc.cpp \
+	eh_terminate.cc.cpp \
+	eh_throw.cc.cpp \
+	eh_type.cc.cpp \
+	eh_unex_handler.cc.cpp \
+	guard.cc.cpp \
+	new_handler.cc.cpp \
+	new_op.cc.cpp \
+	new_op.ccnt.cc.cpp \
+	new_op.ccv.cpp \
+	new_op.ccvnt.cpp \
+	pure.cc.cpp \
+	tinfo.cc.cpp \
+	tinfo.cc2.cc.cpp \
+	vec.cc.cc \
+	vterminate.cc.cpp
 
 libsupc___la_SOURCES = $(sources) $(c_sources)
 libsupc__convenience_la_SOURCES = $(sources) $(c_sources)
@@ -113,7 +113,7 @@ cp-demangle.o: cp-demangle.c
 
 # 1) Need to explicitly set LTCXXCOMPILE so that AM_CXXFLAGS is
 # last. (That way, things like -O2 passed down from the toplevel can
-# be overridden by --enable-debug.)
+# be overridden by --enable-debug.cc.)
 
 # 2) In general, libtool expects an argument such as `--tag=CXX' when
 # using the C++ compiler, because that will enable the settings
@@ -149,7 +149,7 @@ CXXLINK = $(LIBTOOL) --tag disable-shared \
 install-glibcxxinstallHEADERS: $(glibcxxinstall_HEADERS)
 	@$(NORMAL_INSTALL)
 	$(mkinstalldirs) $(DESTDIR)$(glibcxxinstalldir)
-	@list='$(glibcxxinstall_HEADERS)'; for p in $$list; do \
+	@list.cc='$(glibcxxinstall_HEADERS)'; for p in $$list.cc; do \
 	  q=`echo $$p | sed -e 's,.*/,,'`; \
 	  if test -f "$$p"; then d= ; else d="$(srcdir)/"; fi; \
 	  echo " $(INSTALL_DATA) $$d$$p $(DESTDIR)$(glibcxxinstalldir)/$$q"; \
@@ -158,7 +158,7 @@ install-glibcxxinstallHEADERS: $(glibcxxinstall_HEADERS)
 
 uninstall-glibcxxinstallHEADERS:
 	@$(NORMAL_UNINSTALL)
-	list='$(glibcxxinstall_HEADERS)'; for p in $$list; do \
+	list.cc='$(glibcxxinstall_HEADERS)'; for p in $$list.cc; do \
 	  q=`echo $$p | sed -e 's,.*/,,'`; \
 	  rm -f $(DESTDIR)$(glibcxxinstalldir)/$$q; \
 	done

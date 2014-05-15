@@ -1,4 +1,4 @@
-// std::ctype implementation details, generic version -*- C++ -*-
+// std::ctype.cc implementation details, generic version -*- C++ -*-
 
 // Copyright (C) 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
 //
@@ -28,67 +28,67 @@
 // the GNU General Public License.
 
 //
-// ISO C++ 14882: 22.2.1.1.2  ctype virtual functions.
+// ISO C++ 14882: 22.2.1.1.2  ctype.cc virtual functions.
 //
 
 // Written by Benjamin Kosnik <bkoz@redhat.com>
 
-#include <locale>
+#include <locale.cc>
 
 namespace std
 {
-  // NB: The other ctype<char> specializations are in src/locale.cpp and
+  // NB: The other ctype.cc<char> specializations are in src/locale.cc.cpp and
   // various /config/os/* files.
   template<>
-    ctype_byname<char>::ctype_byname(const char* __s, size_t __refs)
-    : ctype<char>(0, false, __refs) 
+    ctype.cc_byname<char>::ctype.cc_byname(const char* __s, size_t __refs)
+    : ctype.cc<char>(0, false, __refs) 
     { 	
       if (std::strcmp(__s, "C") != 0 && std::strcmp(__s, "POSIX") != 0)
 	{
-	  this->_S_destroy_c_locale(this->_M_c_locale_ctype);
-	  this->_S_create_c_locale(this->_M_c_locale_ctype, __s); 
+	  this->_S_destroy_c_locale.cc(this->_M_c_locale.cc_ctype.cc);
+	  this->_S_create_c_locale.cc(this->_M_c_locale.cc_ctype.cc, __s); 
 	}
     }
 
 #ifdef _GLIBCXX_USE_WCHAR_T  
-  ctype<wchar_t>::__wmask_type
-  ctype<wchar_t>::_M_convert_to_wmask(const mask __m) const
+  ctype.cc<wchar_t>::__wmask_type
+  ctype.cc<wchar_t>::_M_convert_to_wmask(const mask __m) const
   {
     __wmask_type __ret;
     switch (__m)
       {
       case space:
-	__ret = wctype("space");
+	__ret = wctype.cc("space");
 	break;
       case print:
-	__ret = wctype("print");
+	__ret = wctype.cc("print");
 	break;
       case cntrl:
-	__ret = wctype("cntrl");
+	__ret = wctype.cc("cntrl");
 	break;
       case upper:
-	__ret = wctype("upper");
+	__ret = wctype.cc("upper");
 	break;
       case lower:
-	__ret = wctype("lower");
+	__ret = wctype.cc("lower");
 	break;
       case alpha:
-	__ret = wctype("alpha");
+	__ret = wctype.cc("alpha");
 	break;
       case digit:
-	__ret = wctype("digit");
+	__ret = wctype.cc("digit");
 	break;
       case punct:
-	__ret = wctype("punct");
+	__ret = wctype.cc("punct");
 	break;
       case xdigit:
-	__ret = wctype("xdigit");
+	__ret = wctype.cc("xdigit");
 	break;
       case alnum:
-	__ret = wctype("alnum");
+	__ret = wctype.cc("alnum");
 	break;
       case graph:
-	__ret = wctype("graph");
+	__ret = wctype.cc("graph");
 	break;
       default:
 	__ret = 0;
@@ -97,11 +97,11 @@ namespace std
   };
   
   wchar_t
-  ctype<wchar_t>::do_toupper(wchar_t __c) const
+  ctype.cc<wchar_t>::do_toupper(wchar_t __c) const
   { return towupper(__c); }
 
   const wchar_t*
-  ctype<wchar_t>::do_toupper(wchar_t* __lo, const wchar_t* __hi) const
+  ctype.cc<wchar_t>::do_toupper(wchar_t* __lo, const wchar_t* __hi) const
   {
     while (__lo < __hi)
       {
@@ -112,11 +112,11 @@ namespace std
   }
   
   wchar_t
-  ctype<wchar_t>::do_tolower(wchar_t __c) const
+  ctype.cc<wchar_t>::do_tolower(wchar_t __c) const
   { return towlower(__c); }
   
   const wchar_t*
-  ctype<wchar_t>::do_tolower(wchar_t* __lo, const wchar_t* __hi) const
+  ctype.cc<wchar_t>::do_tolower(wchar_t* __lo, const wchar_t* __hi) const
   {
     while (__lo < __hi)
       {
@@ -127,16 +127,16 @@ namespace std
   }
 
   bool
-  ctype<wchar_t>::
+  ctype.cc<wchar_t>::
   do_is(mask __m, char_type __c) const
   { 
     bool __ret = false;
     // Generically, 15 (instead of 10) since we don't know the numerical
-    // encoding of the various categories in /usr/include/ctype.h.
+    // encoding of the various categories in /usr/include/ctype.cc.h.
     const size_t __bitmasksize = 15; 
     for (size_t __bitcur = 0; __bitcur <= __bitmasksize; ++__bitcur)
       if (__m & _M_bit[__bitcur]
-	  && iswctype(__c, _M_wmask[__bitcur]))
+	  && iswctype.cc(__c, _M_wmask[__bitcur]))
 	{
 	  __ret = true;
 	  break;
@@ -145,25 +145,25 @@ namespace std
   }
   
   const wchar_t* 
-  ctype<wchar_t>::
-  do_is(const wchar_t* __lo, const wchar_t* __hi, mask* __vec) const
+  ctype.cc<wchar_t>::
+  do_is(const wchar_t* __lo, const wchar_t* __hi, mask* __vec.cc) const
   {
-    for (;__lo < __hi; ++__vec, ++__lo)
+    for (;__lo < __hi; ++__vec.cc, ++__lo)
       {
 	// Generically, 15 (instead of 10) since we don't know the numerical
-	// encoding of the various categories in /usr/include/ctype.h.
+	// encoding of the various categories in /usr/include/ctype.cc.h.
 	const size_t __bitmasksize = 15; 
 	mask __m = 0;
 	for (size_t __bitcur = 0; __bitcur <= __bitmasksize; ++__bitcur)
-	  if (iswctype(*__lo, _M_wmask[__bitcur]))
+	  if (iswctype.cc(*__lo, _M_wmask[__bitcur]))
 	    __m |= _M_bit[__bitcur];
-	*__vec = __m;
+	*__vec.cc = __m;
       }
     return __hi;
   }
   
   const wchar_t* 
-  ctype<wchar_t>::
+  ctype.cc<wchar_t>::
   do_scan_is(mask __m, const wchar_t* __lo, const wchar_t* __hi) const
   {
     while (__lo < __hi && !this->do_is(__m, *__lo))
@@ -172,7 +172,7 @@ namespace std
   }
 
   const wchar_t*
-  ctype<wchar_t>::
+  ctype.cc<wchar_t>::
   do_scan_not(mask __m, const char_type* __lo, const char_type* __hi) const
   {
     while (__lo < __hi && this->do_is(__m, *__lo) != 0)
@@ -181,12 +181,12 @@ namespace std
   }
 
   wchar_t
-  ctype<wchar_t>::
+  ctype.cc<wchar_t>::
   do_widen(char __c) const
   { return _M_widen[static_cast<unsigned char>(__c)]; }
   
   const char* 
-  ctype<wchar_t>::
+  ctype.cc<wchar_t>::
   do_widen(const char* __lo, const char* __hi, wchar_t* __dest) const
   {
     while (__lo < __hi)
@@ -199,7 +199,7 @@ namespace std
   }
 
   char
-  ctype<wchar_t>::
+  ctype.cc<wchar_t>::
   do_narrow(wchar_t __wc, char __dfault) const
   { 
     if (__wc >= 0 && __wc < 128 && _M_narrow_ok)
@@ -209,7 +209,7 @@ namespace std
   }
 
   const wchar_t*
-  ctype<wchar_t>::
+  ctype.cc<wchar_t>::
   do_narrow(const wchar_t* __lo, const wchar_t* __hi, char __dfault, 
 	    char* __dest) const
   {
@@ -238,7 +238,7 @@ namespace std
   }
 
   void
-  ctype<wchar_t>::_M_initialize_ctype()
+  ctype.cc<wchar_t>::_M_initialize_ctype.cc()
   {
     wint_t __i;
     for (__i = 0; __i < 128; ++__i)

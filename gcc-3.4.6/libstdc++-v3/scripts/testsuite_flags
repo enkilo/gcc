@@ -33,7 +33,7 @@ case ${query} in
       echo ${INCLUDES}
       ;;
     --build-includes)
-      INCLUDES="-nostdinc++ -I/home/roman/Sources/MoSync-gcc3/gcc-3.4.6/libstdc++-v3/include/mapip -I/home/roman/Sources/MoSync-gcc3/gcc-3.4.6/libstdc++-v3/include -I/home/roman/Sources/MoSync-gcc3/gcc-3.4.6/libstdc++-v3/libsupc++ -I${SRC_DIR}/libsupc++ 
+      INCLUDES="-nostdinc++ -Iinclude/mapip -Iinclude -Ilibsupc++ -I${SRC_DIR}/libsupc++ 
                 -I${SRC_DIR}/include/backward -I${SRC_DIR}/testsuite"
       echo ${INCLUDES}
       ;;
@@ -49,7 +49,7 @@ case ${query} in
     --cxxflags)
       CXXFLAGS_save="-g -O2 -D_GLIBCXX_ASSERT"
       CXXFLAGS_config='  -fmessage-length=0 
- 		       -DLOCALEDIR="/home/roman/Sources/MoSync-gcc3/gcc-3.4.6/libstdc++-v3/po/share/locale" '
+ 		       -DLOCALEDIR="@glibcxx_localedir@" '
       echo ${CXXFLAGS_save} ${CXXFLAGS_config}
       ;;
     --cxxpchflags)

@@ -163,7 +163,7 @@ glibcxx_MOFILES = @glibcxx_MOFILES@
 glibcxx_PCHFLAGS = @glibcxx_PCHFLAGS@
 glibcxx_POFILES = @glibcxx_POFILES@
 glibcxx_builddir = @glibcxx_builddir@
-glibcxx_localedir = @glibcxx_localedir@
+glibcxx_locale.ccdir = @glibcxx_locale.ccdir@
 glibcxx_prefixdir = @glibcxx_prefixdir@
 glibcxx_srcdir = @glibcxx_srcdir@
 glibcxx_thread_h = @glibcxx_thread_h@
@@ -235,32 +235,32 @@ c_sources = \
 
 
 sources = \
-	del_op.cpp \
-	del_opnt.cpp \
-	del_opv.cpp \
-	del_opvnt.cpp \
-	eh_alloc.cpp \
-	eh_aux_runtime.cpp \
-	eh_catch.cpp \
-	eh_exception.cpp \
-	eh_globals.cpp \
-	eh_personality.cpp \
-	eh_term_handler.cpp \
-	eh_terminate.cpp \
-	eh_throw.cpp \
-	eh_type.cpp \
-	eh_unex_handler.cpp \
-	guard.cpp \
-	new_handler.cpp \
-	new_op.cpp \
-	new_opnt.cpp \
-	new_opv.cpp \
-	new_opvnt.cpp \
-	pure.cpp \
-	tinfo.cpp \
-	tinfo2.cpp \
-	vec.cc \
-	vterminate.cpp
+	del_op.cc.cpp \
+	del_op.ccnt.cpp \
+	del_op.ccv.cc.cpp \
+	del_op.ccv.ccnt.cpp \
+	eh_alloc.cc.cpp \
+	eh_aux_runtime.cc.cpp \
+	eh_catch.cc.cpp \
+	eh_exception.cc.cpp \
+	eh_globals.cc.cpp \
+	eh_personality.cc.cpp \
+	eh_term_handler.cc.cpp \
+	eh_terminate.cc.cpp \
+	eh_throw.cc.cpp \
+	eh_type.cc.cpp \
+	eh_unex_handler.cc.cpp \
+	guard.cc.cpp \
+	new_handler.cc.cpp \
+	new_op.cc.cpp \
+	new_op.ccnt.cc.cpp \
+	new_op.ccv.cpp \
+	new_op.ccvnt.cpp \
+	pure.cc.cpp \
+	tinfo.cc.cpp \
+	tinfo.cc2.cc.cpp \
+	vec.cc.cc \
+	vterminate.cc.cpp
 
 
 libsupc___la_SOURCES = $(sources) $(c_sources)
@@ -305,7 +305,7 @@ LTCOMPILE = $(LIBTOOL) --tag CC --tag disable-shared --mode=compile $(CC) \
 
 # 1) Need to explicitly set LTCXXCOMPILE so that AM_CXXFLAGS is
 # last. (That way, things like -O2 passed down from the toplevel can
-# be overridden by --enable-debug.)
+# be overridden by --enable-debug.cc.)
 
 # 2) In general, libtool expects an argument such as `--tag=CXX' when
 # using the C++ compiler, because that will enable the settings
@@ -346,14 +346,14 @@ LTLIBRARIES = $(noinst_LTLIBRARIES) $(toolexeclib_LTLIBRARIES)
 libsupc___la_LDFLAGS =
 libsupc___la_LIBADD =
 
-eh_exception.lo: CFLAGS += -frtti
+eh_exception.cc.lo: CFLAGS += -frtti
 
-am__objects_1 = del_op.lo del_opnt.lo del_opv.lo del_opvnt.lo \
-	eh_alloc.lo eh_aux_runtime.lo eh_catch.lo eh_exception.lo \
-	eh_globals.lo eh_personality.lo eh_term_handler.lo \
-	eh_terminate.lo eh_throw.lo eh_type.lo eh_unex_handler.lo \
-	guard.lo new_handler.lo new_op.lo new_opnt.lo new_opv.lo \
-	new_opvnt.lo pure.lo tinfo.lo tinfo2.lo vec.lo vterminate.lo
+am__objects_1 = del_op.cc.lo del_op.ccnt.lo del_op.ccv.cc.lo del_op.ccv.ccnt.lo \
+	eh_alloc.cc.lo eh_aux_runtime.cc.lo eh_catch.cc.lo eh_exception.cc.lo \
+	eh_globals.cc.lo eh_personality.cc.lo eh_term_handler.cc.lo \
+	eh_terminate.cc.lo eh_throw.cc.lo eh_type.cc.lo eh_unex_handler.cc.lo \
+	guard.cc.lo new_handler.cc.lo new_op.cc.lo new_op.ccnt.cc.lo new_op.ccv.lo \
+	new_op.ccvnt.lo pure.cc.lo tinfo.cc.lo tinfo.cc2.cc.lo vec.cc.lo vterminate.cc.lo
 am__objects_2 = cp-demangle.lo
 am_libsupc___la_OBJECTS = $(am__objects_1) $(am__objects_2)
 libsupc___la_OBJECTS = $(am_libsupc___la_OBJECTS)
@@ -393,7 +393,7 @@ Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.s
 
 clean-noinstLTLIBRARIES:
 	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
-	@list='$(noinst_LTLIBRARIES)'; for p in $$list; do \
+	@list.cc='$(noinst_LTLIBRARIES)'; for p in $$list.cc; do \
 	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
 	  test "$$dir" = "$$p" && dir=.; \
 	  echo "rm -f \"$${dir}/so_locations\""; \
@@ -403,7 +403,7 @@ toolexeclibLTLIBRARIES_INSTALL = $(INSTALL)
 install-toolexeclibLTLIBRARIES: $(toolexeclib_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
 	$(mkinstalldirs) $(DESTDIR)$(toolexeclibdir)
-	@list='$(toolexeclib_LTLIBRARIES)'; for p in $$list; do \
+	@list.cc='$(toolexeclib_LTLIBRARIES)'; for p in $$list.cc; do \
 	  if test -f $$p; then \
 	    f="`echo $$p | sed -e 's|^.*/||'`"; \
 	    echo " $(LIBTOOL) --mode=install $(toolexeclibLTLIBRARIES_INSTALL) $(INSTALL_STRIP_FLAG) $$p $(DESTDIR)$(toolexeclibdir)/$$f"; \
@@ -413,7 +413,7 @@ install-toolexeclibLTLIBRARIES: $(toolexeclib_LTLIBRARIES)
 
 uninstall-toolexeclibLTLIBRARIES:
 	@$(NORMAL_UNINSTALL)
-	@list='$(toolexeclib_LTLIBRARIES)'; for p in $$list; do \
+	@list.cc='$(toolexeclib_LTLIBRARIES)'; for p in $$list.cc; do \
 	    p="`echo $$p | sed -e 's|^.*/||'`"; \
 	  echo " $(LIBTOOL) --mode=uninstall rm -f $(DESTDIR)$(toolexeclibdir)/$$p"; \
 	  $(LIBTOOL) --mode=uninstall rm -f $(DESTDIR)$(toolexeclibdir)/$$p; \
@@ -421,7 +421,7 @@ uninstall-toolexeclibLTLIBRARIES:
 
 clean-toolexeclibLTLIBRARIES:
 	-test -z "$(toolexeclib_LTLIBRARIES)" || rm -f $(toolexeclib_LTLIBRARIES)
-	@list='$(toolexeclib_LTLIBRARIES)'; for p in $$list; do \
+	@list.cc='$(toolexeclib_LTLIBRARIES)'; for p in $$list.cc; do \
 	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
 	  test "$$dir" = "$$p" && dir=.; \
 	  echo "rm -f \"$${dir}/so_locations\""; \
@@ -476,8 +476,8 @@ CTAGSFLAGS =
 tags: TAGS
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
-	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
+	list.cc='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
+	unique=`for i in $$list.cc; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
 	  done | \
 	  $(AWK) '    { files[$$0] = 1; } \
@@ -488,8 +488,8 @@ TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	tags=; \
 	here=`pwd`; \
-	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
+	list.cc='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
+	unique=`for i in $$list.cc; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
 	  done | \
 	  $(AWK) '    { files[$$0] = 1; } \
@@ -503,8 +503,8 @@ CTAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	tags=; \
 	here=`pwd`; \
-	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
+	list.cc='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
+	unique=`for i in $$list.cc; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
 	  done | \
 	  $(AWK) '    { files[$$0] = 1; } \
@@ -529,7 +529,7 @@ distdir: $(DISTFILES)
 	$(mkinstalldirs) $(distdir)/..
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
-	list='$(DISTFILES)'; for file in $$list; do \
+	list.cc='$(DISTFILES)'; for file in $$list.cc; do \
 	  case $$file in \
 	    $(srcdir)/*) file=`echo "$$file" | sed "s|^$$srcdirstrip/||"`;; \
 	    $(top_srcdir)/*) file=`echo "$$file" | sed "s|^$$topsrcdirstrip/|$(top_builddir)/|"`;; \
@@ -659,7 +659,7 @@ cp-demangle.o: cp-demangle.c
 install-glibcxxinstallHEADERS: $(glibcxxinstall_HEADERS)
 	@$(NORMAL_INSTALL)
 	$(mkinstalldirs) $(DESTDIR)$(glibcxxinstalldir)
-	@list='$(glibcxxinstall_HEADERS)'; for p in $$list; do \
+	@list.cc='$(glibcxxinstall_HEADERS)'; for p in $$list.cc; do \
 	  q=`echo $$p | sed -e 's,.*/,,'`; \
 	  if test -f "$$p"; then d= ; else d="$(srcdir)/"; fi; \
 	  echo " $(INSTALL_DATA) $$d$$p $(DESTDIR)$(glibcxxinstalldir)/$$q"; \
@@ -668,7 +668,7 @@ install-glibcxxinstallHEADERS: $(glibcxxinstall_HEADERS)
 
 uninstall-glibcxxinstallHEADERS:
 	@$(NORMAL_UNINSTALL)
-	list='$(glibcxxinstall_HEADERS)'; for p in $$list; do \
+	list.cc='$(glibcxxinstall_HEADERS)'; for p in $$list.cc; do \
 	  q=`echo $$p | sed -e 's,.*/,,'`; \
 	  rm -f $(DESTDIR)$(glibcxxinstalldir)/$$q; \
 	done

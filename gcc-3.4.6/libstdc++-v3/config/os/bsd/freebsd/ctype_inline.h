@@ -31,11 +31,11 @@
 // ISO C++ 14882: 22.1  Locales
 //
   
-// ctype bits to be inlined go here. Non-inlinable (ie virtual do_*)
-// functions go in ctype.cpp
+// ctype.cc bits to be inlined go here. Non-inlinable (ie virtual do_*)
+// functions go in ctype.cc.cpp
   
   bool
-  ctype<char>::
+  ctype.cc<char>::
   is(mask __m, char __c) const
   { 
     if (_M_table)
@@ -45,17 +45,17 @@
   }
 
   const char*
-  ctype<char>::
-  is(const char* __low, const char* __high, mask* __vec) const
+  ctype.cc<char>::
+  is(const char* __low, const char* __high, mask* __vec.cc) const
   {
     if (_M_table)
       while (__low < __high)
-	*__vec++ = _M_table[static_cast<unsigned char>(*__low++)];
+	*__vec.cc++ = _M_table[static_cast<unsigned char>(*__low++)];
     else
-      for (;__low < __high; ++__vec, ++__low)
+      for (;__low < __high; ++__vec.cc, ++__low)
 	{
 #if defined (_CTYPE_S) || defined (__istype)
-	  *__vec = __maskrune (*__low, upper | lower | alpha | digit | xdigit
+	  *__vec.cc = __maskrune (*__low, upper | lower | alpha | digit | xdigit
 			       | space | print | graph | cntrl | punct | alnum);
 #else
 	  mask __m = 0;
@@ -70,15 +70,15 @@
 	  if (this->is(cntrl, *__low)) __m |= cntrl;
 	  if (this->is(punct, *__low)) __m |= punct;
 	  // Do not include explicit line for alnum mask since it is a
-	  // pure composite of masks on FreeBSD.
-	  *__vec = __m;
+	  // pure.cc composite of masks on FreeBSD.
+	  *__vec.cc = __m;
 #endif
 	}
     return __high;
   }
 
   const char*
-  ctype<char>::
+  ctype.cc<char>::
   scan_is(mask __m, const char* __low, const char* __high) const
   {
     if (_M_table)
@@ -92,7 +92,7 @@
   }
 
   const char*
-  ctype<char>::
+  ctype.cc<char>::
   scan_not(mask __m, const char* __low, const char* __high) const
   {
     if (_M_table)

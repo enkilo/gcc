@@ -31,18 +31,18 @@
 // ISO C++ 14882: 22.1  Locales
 //
   
-// ctype bits to be inlined go here. Non-inlinable (ie virtual do_*)
-// functions go in ctype.cpp
+// ctype.cc bits to be inlined go here. Non-inlinable (ie virtual do_*)
+// functions go in ctype.cc.cpp
   
 // The following definitions are portable, but insanely slow. If one
-// cares at all about performance, then specialized ctype
+// cares at all about performance, then specialized ctype.cc
 // functionality should be added for the native os in question: see
-// the config/os/bits/ctype_*.h files.
+// the config/os/bits/ctype.cc_*.h files.
 
 // Constructing a synthetic "C" table should be seriously considered...
 
   bool
-  ctype<char>::
+  ctype.cc<char>::
   is(mask __m, char __c) const
   { 
     if (_M_table)
@@ -51,7 +51,7 @@
       {
 	bool __ret = false;
 	const size_t __bitmasksize = 15; 
-	size_t __bitcur = 0; // Lowest bitmask in ctype_base == 0
+	size_t __bitcur = 0; // Lowest bitmask in ctype.cc_base == 0
 	for (; __bitcur <= __bitmasksize; ++__bitcur)
 	  {
 	    const mask __bit = static_cast<mask>(1 << __bitcur);
@@ -105,20 +105,20 @@
   }
    
   const char*
-  ctype<char>::
-  is(const char* __low, const char* __high, mask* __vec) const
+  ctype.cc<char>::
+  is(const char* __low, const char* __high, mask* __vec.cc) const
   {
     if (_M_table)
       while (__low < __high)
-	*__vec++ = _M_table[static_cast<unsigned char>(*__low++)];
+	*__vec.cc++ = _M_table[static_cast<unsigned char>(*__low++)];
     else
       {
-	// Highest bitmask in ctype_base == 10.
+	// Highest bitmask in ctype.cc_base == 10.
 	const size_t __bitmasksize = 15; 
-	for (;__low < __high; ++__vec, ++__low)
+	for (;__low < __high; ++__vec.cc, ++__low)
 	  {
 	    mask __m = 0;
-	    // Lowest bitmask in ctype_base == 0
+	    // Lowest bitmask in ctype.cc_base == 0
 	    size_t __i = 0; 
 	    for (;__i <= __bitmasksize; ++__i)
 	      {
@@ -126,14 +126,14 @@
 		if (this->is(__bit, *__low))
 		  __m |= __bit;
 	      }
-	    *__vec = __m;
+	    *__vec.cc = __m;
 	  }
       }
     return __high;
   }
 
   const char*
-  ctype<char>::
+  ctype.cc<char>::
   scan_is(mask __m, const char* __low, const char* __high) const
   {
     if (_M_table)
@@ -147,7 +147,7 @@
   }
 
   const char*
-  ctype<char>::
+  ctype.cc<char>::
   scan_not(mask __m, const char* __low, const char* __high) const
   {
     if (_M_table)
