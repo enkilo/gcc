@@ -67,7 +67,7 @@ CMESSAGES_H = config/locale/generic/messages_members.h
 CMONEY_CC = config/locale/generic/monetary_members.cc
 CNUMERIC_CC = config/locale/generic/numeric_members.cc
 CPP = /opt/MoSync-4.0-Alpha/bin/xgcc -E
-CPPFLAGS = -I/opt/MoSync-4.0-Alpha/include
+CPPFLAGS = -I"$(MOSYNCDIR)/include"
 CSTDIO_H = config/io/c_io_mavsprintf.h
 CTIME_CC = config/locale/generic/time_members.cc
 CTIME_H = config/locale/generic/time_members.h
@@ -98,7 +98,7 @@ GLIBCXX_C_HEADERS_C_STD_TRUE =
 GLIBCXX_C_HEADERS_C_TRUE = #
 GLIBCXX_HOSTED_FALSE = #
 GLIBCXX_HOSTED_TRUE = 
-GLIBCXX_INCLUDES = -I/home/roman/Sources/MoSync-gcc3/gcc-3.4.6/libstdc++-v3/include/mapip -I/home/roman/Sources/MoSync-gcc3/gcc-3.4.6/libstdc++-v3/include -I/home/roman/Sources/MoSync-gcc3/gcc-3.4.6/libstdc++-v3/libsupc++
+GLIBCXX_INCLUDES = -I../include/mapip -I../include -I../include/backward -I../libsupc++
 GLIBCXX_TEST_ABI_FALSE = 
 GLIBCXX_TEST_ABI_TRUE = #
 GLIBCXX_TEST_WCHAR_T_FALSE = 
@@ -129,7 +129,7 @@ PACKAGE_STRING = package-unused version-unused
 PACKAGE_TARNAME = libstdc++
 PACKAGE_VERSION = version-unused
 PATH_SEPARATOR = :
-RANLIB = mapip-ranlib
+RANLIB = true
 SECTION_FLAGS = 
 SECTION_LDFLAGS = 
 SET_MAKE = 
@@ -342,7 +342,7 @@ AM_CXXFLAGS = \
 # correct solution is to add `--tag CXX' to LTCXXCOMPILE and maybe
 # CXXLINK, just after $(LIBTOOL), so that libtool doesn't have to
 # attempt to infer which configuration to use
-LTCXXCOMPILE = $(LIBTOOL) --tag CXX --mode=compile $(CXX) $(INCLUDES) \
+LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(INCLUDES) \
 	       $(AM_CPPFLAGS) $(CPPFLAGS) $(CXXFLAGS) $(AM_CXXFLAGS)
 
 
@@ -352,7 +352,7 @@ LTCXXCOMPILE = $(LIBTOOL) --tag CXX --mode=compile $(CXX) $(INCLUDES) \
 # course is problematic at this point.  So, we get the top-level
 # directory to configure libstdc++-v3 to use gcc as the C++
 # compilation driver.
-CXXLINK = $(LIBTOOL) --tag CXX --mode=link $(CXX) \
+CXXLINK = $(LIBTOOL) --mode=link $(CXX) \
 	  $(OPT_LDFLAGS) $(SECTION_LDFLAGS) $(AM_CXXFLAGS) $(LDFLAGS) -o $@
 
 

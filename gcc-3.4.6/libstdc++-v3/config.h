@@ -90,7 +90,7 @@
 /* #undef HAVE_MODFL */
 
 // Define if you have the expf function.
-/* #undef HAVE_EXPF */
+#define HAVE_EXPF
 
 // Define if you have the expl function.
 /* #undef HAVE_EXPL */
@@ -99,10 +99,10 @@
 /* #undef HAVE_HYPOT */
 
 // Define if you have the hypotf function.
-/* #undef HAVE_HYPOTF */
+#define HAVE_HYPOTF
 
 // Define if you have the hypotl function.
-/* #undef HAVE_HYPOTL */
+#define HAVE_HYPOTL
 
 // Define if the compiler/host combination has __builtin_abs
 /* #undef HAVE___BUILTIN_ABS */
@@ -217,7 +217,7 @@
 /* #undef HAVE_COSF */
 
 /* Define to 1 if you have the `coshf' function. */
-/* #undef HAVE_COSHF */
+#define HAVE_COSHF
 
 /* Define to 1 if you have the `coshl' function. */
 /* #undef HAVE_COSHL */
@@ -229,7 +229,7 @@
 /* #undef HAVE_ENDIAN_H */
 
 /* Define to 1 if you have the `expf' function. */
-/* #undef HAVE_EXPF */
+#define HAVE_EXPF
 
 /* Define to 1 if you have the `expl' function. */
 /* #undef HAVE_EXPL */
@@ -313,10 +313,10 @@
 /* #undef HAVE_HYPOT */
 
 /* Define to 1 if you have the `hypotf' function. */
-/* #undef HAVE_HYPOTF */
+#define HAVE_HYPOTF
 
 /* Define to 1 if you have the `hypotl' function. */
-/* #undef HAVE_HYPOTL */
+#define HAVE_HYPOTL
 
 /* Define to 1 if you have the `iconv' function. */
 /* #undef HAVE_ICONV */
@@ -355,10 +355,10 @@
 /* #undef HAVE_ISWBLANK */
 
 /* Define to 1 if you have the `ldexpf' function. */
-/* #undef HAVE_LDEXPF */
+#define HAVE_LDEXPF
 
 /* Define to 1 if you have the `ldexpl' function. */
-/* #undef HAVE_LDEXPL */
+#define HAVE_LDEXPL
 
 /* Define to 1 if you have the <libintl.h> header file. */
 /* #undef HAVE_LIBINTL_H */
@@ -385,7 +385,7 @@
 /* #undef HAVE_LOCALE_H */
 
 /* Define to 1 if you have the `log10f' function. */
-/* #undef HAVE_LOG10F */
+#define HAVE_LOG10F
 
 /* Define to 1 if you have the `log10l' function. */
 /* #undef HAVE_LOG10L */
@@ -466,10 +466,10 @@
 /* #undef HAVE_SINF */
 
 /* Define to 1 if you have the `sinhf' function. */
-/* #undef HAVE_SINHF */
+#define HAVE_SINHF
 
 /* Define to 1 if you have the `sinhl' function. */
-/* #undef HAVE_SINHL */
+#define HAVE_SINHL
 
 /* Define to 1 if you have the `sinl' function. */
 /* #undef HAVE_SINL */
@@ -538,10 +538,10 @@
 /* #undef HAVE_TANF */
 
 /* Define to 1 if you have the `tanhf' function. */
-/* #undef HAVE_TANHF */
+#define HAVE_TANHF
 
 /* Define to 1 if you have the `tanhl' function. */
-/* #undef HAVE_TANHL */
+#define HAVE_TANHL
 
 /* Define to 1 if you have the `tanl' function. */
 /* #undef HAVE_TANL */

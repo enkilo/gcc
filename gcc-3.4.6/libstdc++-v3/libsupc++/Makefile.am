@@ -128,9 +128,9 @@ cp-demangle.o: cp-demangle.c
 # CXXLINK, just after $(LIBTOOL), so that libtool doesn't have to
 # attempt to infer which configuration to use.
 #
-# We have to put --tag disable-shared after --tag CXX lest things
+# We have to put --tag disable-shared after lest things
 # CXX undo the affect of disable-shared.
-LTCXXCOMPILE = $(LIBTOOL) --tag CXX --tag disable-shared \
+LTCXXCOMPILE = $(LIBTOOL) --tag disable-shared \
 	       --mode=compile $(CXX) $(TOPLEVEL_INCLUDES) \
 	       $(AM_CPPFLAGS) $(CPPFLAGS) $(CXXFLAGS) $(AM_CXXFLAGS)
 
@@ -140,7 +140,7 @@ LTCXXCOMPILE = $(LIBTOOL) --tag CXX --tag disable-shared \
 # course is problematic at this point.  So, we get the top-level
 # directory to configure libstdc++-v3 to use gcc as the C++
 # compilation driver.
-CXXLINK = $(LIBTOOL) --tag CXX --tag disable-shared \
+CXXLINK = $(LIBTOOL) --tag disable-shared \
 	  --mode=link $(CXX) \
 	  $(OPT_LDFLAGS) $(SECTION_LDFLAGS) $(AM_CXXFLAGS) $(LDFLAGS) -o $@
 

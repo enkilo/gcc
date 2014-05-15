@@ -87,9 +87,9 @@
 #endif
 
 #include <ma.h>
-
 #include <mastdlib.h>
 #include <maheap.h>
+#include <mastring.h>
 
 #include "ansidecl.h"
 #include "libiberty.h"
