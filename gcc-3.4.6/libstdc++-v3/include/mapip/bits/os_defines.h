@@ -1,0 +1,1 @@
+/home/roman/Sources/MoSync-gcc3/gcc-3.4.6/libstdc++-v3/config/os/generic/os_defines.h
