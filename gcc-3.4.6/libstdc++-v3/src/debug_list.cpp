@@ -31,4 +31,4 @@
 
 #include <bits/c++config.h>
 
-#include "list.cc"
+#include "list.cpp"

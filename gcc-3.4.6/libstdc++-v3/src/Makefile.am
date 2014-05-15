@@ -86,9 +86,9 @@ atomicity.cc: ${atomicity_file}
 # particular host, but with ad hoc naming rules.
 host_sources_extra = \
 	basic_file.cc \
-	c++locale.cc
+	c++locale.cpp
 
-c++locale.cc: ${glibcxx_srcdir}/$(CLOCALE_CC)
+c++locale.cpp: ${glibcxx_srcdir}/$(CLOCALE_CC)
 	$(LN_S) ${glibcxx_srcdir}/$(CLOCALE_CC) ./$@ || true
 
 basic_file.cc: ${glibcxx_srcdir}/$(BASIC_FILE_CC)
@@ -96,44 +96,44 @@ basic_file.cc: ${glibcxx_srcdir}/$(BASIC_FILE_CC)
 
 # Sources present in the src directory.
 sources = \
-	allocator.cc \
-	codecvt.cc \
-	complex_io.cc \
-	ctype.cc \
-	debug.cc \
-	debug_list.cc \
-	functexcept.cc \
-	globals_locale.cc \
-	globals_io.cc \
-	ios.cc \
-	ios_failure.cc \
-	ios_init.cc \
-	ios_locale.cc \
-	limits.cc \
-	list.cc \
-	locale.cc \
-	locale_init.cc \
-	locale_facets.cc \
-	localename.cc \
-	stdexcept.cc \
-	strstream.cc \
-	tree.cc \
-	allocator-inst.cc \
-	concept-inst.cc \
-	fstream-inst.cc \
-	ext-inst.cc \
-	io-inst.cc \
-	istream-inst.cc \
-	locale-inst.cc \
-	locale-misc-inst.cc \
-	misc-inst.cc \
-	ostream-inst.cc \
-	sstream-inst.cc \
-	streambuf-inst.cc \
-	string-inst.cc \
-	valarray-inst.cc \
-	wlocale-inst.cc \
-	wstring-inst.cc \
+	allocator.cpp \
+	codecvt.cpp \
+	complex_io.cpp \
+	ctype.cpp \
+	debug.cpp \
+	debug_list.cpp \
+	functexcept.cpp \
+	globals_locale.cpp \
+	globals_io.cpp \
+	ios.cpp \
+	ios_failure.cpp \
+	ios_init.cpp \
+	ios_locale.cpp \
+	limits.cpp \
+	list.cpp \
+	locale.cpp \
+	locale_init.cpp \
+	locale_facets.cpp \
+	localename.cpp \
+	stdexcept.cpp \
+	strstream.cpp \
+	tree.cpp \
+	allocator-inst.cpp \
+	concept-inst.cpp \
+	fstream-inst.cpp \
+	ext-inst.cpp \
+	io-inst.cpp \
+	istream-inst.cpp \
+	locale-inst.cpp \
+	locale-misc-inst.cpp \
+	misc-inst.cpp \
+	ostream-inst.cpp \
+	sstream-inst.cpp \
+	streambuf-inst.cpp \
+	string-inst.cpp \
+	valarray-inst.cpp \
+	wlocale-inst.cpp \
+	wstring-inst.cpp \
 	${host_sources} \
 	${host_sources_extra}
 
@@ -154,17 +154,17 @@ libstdc___la_LDFLAGS = \
 # Use special rules for the deprecated source files so that they find
 # deprecated include files.
 GLIBCXX_INCLUDE_DIR=$(glibcxx_builddir)/include
-strstream.lo: strstream.cc
+strstream.lo: strstream.cpp
 	$(LTCXXCOMPILE) -I$(GLIBCXX_INCLUDE_DIR)/backward -Wno-deprecated -S $<
-strstream.o: strstream.cc
+strstream.o: strstream.cpp
 	$(CXXCOMPILE) -I$(GLIBCXX_INCLUDE_DIR)/backward -Wno-deprecated -S $<
 
 # Use special rules for the concept-checking instantiations so that all
 # the generated template functions are also instantiated.  Force the checks
 # to be on so that the instantiations are actually seen.
-concept-inst.lo: concept-inst.cc
+concept-inst.lo: concept-inst.cpp
 	$(LTCXXCOMPILE) -D_GLIBCXX_CONCEPT_CHECKS -fimplicit-templates -S $<
-concept-inst.o: concept-inst.cc
+concept-inst.o: concept-inst.cpp
 	$(CXXCOMPILE) -D_GLIBCXX_CONCEPT_CHECKS -fimplicit-templates -S $<
 
 # AM_CXXFLAGS needs to be in each subdirectory so that it can be

@@ -271,7 +271,7 @@ PACKAGE_VERSION='version-unused'
 PACKAGE_STRING='package-unused version-unused'
 PACKAGE_BUGREPORT=''
 
-ac_unique_file="src/ios.cc"
+ac_unique_file="src/ios.cpp"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <mavsprintf.h>
@@ -5815,7 +5815,7 @@ fi;
 echo "${ECHO_T}generic" >&6
 
       CLOCALE_H=config/locale/generic/c_locale.h
-      CLOCALE_CC=config/locale/generic/c_locale.cc
+      CLOCALE_CC=config/locale/generic/c_locale.cpp
       CCODECVT_H=config/locale/generic/codecvt_specializations.h
       CCODECVT_CC=config/locale/generic/codecvt_members.cc
       CCOLLATE_CC=config/locale/generic/collate_members.cc
@@ -5886,7 +5886,7 @@ fi
 
 
       CLOCALE_H=config/locale/gnu/c_locale.h
-      CLOCALE_CC=config/locale/gnu/c_locale.cc
+      CLOCALE_CC=config/locale/gnu/c_locale.cpp
       CCODECVT_H=config/locale/ieee_1003.1-2001/codecvt_specializations.h
       CCODECVT_CC=config/locale/gnu/codecvt_members.cc
       CCOLLATE_CC=config/locale/gnu/collate_members.cc
@@ -5904,7 +5904,7 @@ fi
 echo "${ECHO_T}IEEE 1003.1" >&6
 
       CLOCALE_H=config/locale/ieee_1003.1-2001/c_locale.h
-      CLOCALE_CC=config/locale/ieee_1003.1-2001/c_locale.cc
+      CLOCALE_CC=config/locale/ieee_1003.1-2001/c_locale.cpp
       CCODECVT_H=config/locale/ieee_1003.1-2001/codecvt_specializations.h
       CCODECVT_CC=config/locale/generic/codecvt_members.cc
       CCOLLATE_CC=config/locale/generic/collate_members.cc

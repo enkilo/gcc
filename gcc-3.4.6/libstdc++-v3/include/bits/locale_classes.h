@@ -99,7 +99,7 @@ namespace std
      *  intersection.  The category all is the union of these values.
      *
      *  @if maint
-     *  NB: Order must match _S_facet_categories definition in locale.cc
+     *  NB: Order must match _S_facet_categories definition in locale.cpp
      *  @endif
     */
     static const category none		= 0;

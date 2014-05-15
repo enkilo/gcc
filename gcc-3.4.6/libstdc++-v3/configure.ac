@@ -3,7 +3,7 @@
 
 AC_PREREQ(2.57)
 AC_INIT(package-unused, version-unused,, libstdc++)
-AC_CONFIG_SRCDIR(src/ios.cc)
+AC_CONFIG_SRCDIR(src/ios.cpp)
 AC_CONFIG_HEADER(config.h)
 
 # This works around the fact that libtool configuration may change LD

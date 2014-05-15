@@ -88,7 +88,7 @@ namespace std
 
 // This marks string literals in header files to be extracted for eventual
 // translation.  It is primarily used for messages in thrown exceptions; see
-// src/functexcept.cc.  We use __N because the more traditional _N is used
+// src/functexcept.cpp.  We use __N because the more traditional _N is used
 // for something else under certain OSes (see BADNAMES).
 #define __N(msgid)     (msgid)
 

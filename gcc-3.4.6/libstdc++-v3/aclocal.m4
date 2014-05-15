@@ -1105,7 +1105,7 @@ AC_DEFUN([GLIBCXX_ENABLE_CLOCALE], [
       AC_MSG_RESULT(generic)
 
       CLOCALE_H=config/locale/generic/c_locale.h
-      CLOCALE_CC=config/locale/generic/c_locale.cc
+      CLOCALE_CC=config/locale/generic/c_locale.cpp
       CCODECVT_H=config/locale/generic/codecvt_specializations.h
       CCODECVT_CC=config/locale/generic/codecvt_members.cc
       CCOLLATE_CC=config/locale/generic/collate_members.cc
@@ -1140,7 +1140,7 @@ AC_DEFUN([GLIBCXX_ENABLE_CLOCALE], [
       AC_SUBST(glibcxx_POFILES)
 
       CLOCALE_H=config/locale/gnu/c_locale.h
-      CLOCALE_CC=config/locale/gnu/c_locale.cc
+      CLOCALE_CC=config/locale/gnu/c_locale.cpp
       CCODECVT_H=config/locale/ieee_1003.1-2001/codecvt_specializations.h
       CCODECVT_CC=config/locale/gnu/codecvt_members.cc
       CCOLLATE_CC=config/locale/gnu/collate_members.cc
@@ -1157,7 +1157,7 @@ AC_DEFUN([GLIBCXX_ENABLE_CLOCALE], [
       AC_MSG_RESULT(IEEE 1003.1)
 
       CLOCALE_H=config/locale/ieee_1003.1-2001/c_locale.h
-      CLOCALE_CC=config/locale/ieee_1003.1-2001/c_locale.cc
+      CLOCALE_CC=config/locale/ieee_1003.1-2001/c_locale.cpp
       CCODECVT_H=config/locale/ieee_1003.1-2001/codecvt_specializations.h
       CCODECVT_CC=config/locale/generic/codecvt_members.cc
       CCOLLATE_CC=config/locale/generic/collate_members.cc

@@ -38,32 +38,32 @@ c_sources = \
 	cp-demangle.c 
 
 sources = \
-	del_op.cc \
-	del_opnt.cc \
-	del_opv.cc \
-	del_opvnt.cc \
-	eh_alloc.cc \
-	eh_aux_runtime.cc \
-	eh_catch.cc \
-	eh_exception.cc \
-	eh_globals.cc \
-	eh_personality.cc \
-	eh_term_handler.cc \
-	eh_terminate.cc \
-	eh_throw.cc \
-	eh_type.cc \
-	eh_unex_handler.cc \
-	guard.cc \
-	new_handler.cc \
-	new_op.cc \
-	new_opnt.cc \
-	new_opv.cc \
-	new_opvnt.cc \
-	pure.cc \
-	tinfo.cc \
-	tinfo2.cc \
+	del_op.cpp \
+	del_opnt.cpp \
+	del_opv.cpp \
+	del_opvnt.cpp \
+	eh_alloc.cpp \
+	eh_aux_runtime.cpp \
+	eh_catch.cpp \
+	eh_exception.cpp \
+	eh_globals.cpp \
+	eh_personality.cpp \
+	eh_term_handler.cpp \
+	eh_terminate.cpp \
+	eh_throw.cpp \
+	eh_type.cpp \
+	eh_unex_handler.cpp \
+	guard.cpp \
+	new_handler.cpp \
+	new_op.cpp \
+	new_opnt.cpp \
+	new_opv.cpp \
+	new_opvnt.cpp \
+	pure.cpp \
+	tinfo.cpp \
+	tinfo2.cpp \
 	vec.cc \
-	vterminate.cc
+	vterminate.cpp
 
 libsupc___la_SOURCES = $(sources) $(c_sources)
 libsupc__convenience_la_SOURCES = $(sources) $(c_sources)
