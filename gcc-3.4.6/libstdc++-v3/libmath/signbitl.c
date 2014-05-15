@@ -27,7 +27,6 @@
    invalidate any other reasons why the executable file might be covered by
    the GNU General Public License.  */
 
-#include <float.h>
 #include <madmath.h>
 #include "mathconf.h"
 

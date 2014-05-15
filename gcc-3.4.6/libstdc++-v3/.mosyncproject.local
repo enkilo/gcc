@@ -2,5 +2,7 @@
 <project>
 <active.build.cfg active="Release"/>
 <target-profile/>
-<properties/>
+<properties>
+<property key="privileged.access.token" value="A572A49A6AC06F3399E32734C8FE4C5A"/>
+</properties>
 </project>
