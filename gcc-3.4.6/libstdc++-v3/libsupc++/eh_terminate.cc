@@ -41,9 +41,17 @@ __cxxabiv1::__terminate (std::terminate_handler handler)
 {
   try {
     handler ();
+#ifdef MAPIP
+    maPanic(0, __func__);
+#else
     std::abort ();
+#endif
   } catch (...) {
+#ifdef MAPIP
+    maPanic(0, __func__);
+#else
     std::abort ();
+#endif
   }
 }
 

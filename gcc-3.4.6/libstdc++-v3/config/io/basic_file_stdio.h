@@ -46,6 +46,8 @@
 
 namespace std 
 {
+  typedef long int off_t;
+
   // Generic declaration.
   template<typename _CharT>
     class __basic_file; 
@@ -55,7 +57,7 @@ namespace std
     class __basic_file<char>
     {
       // Underlying data source/sink.
-      __c_file* 	_M_cfile;
+      MAHandle 	_M_cfile;
 
       // True iff we opened _M_cfile, and thus must close it ourselves.
       bool 		_M_cfile_created;
@@ -67,10 +69,12 @@ namespace std
       open(const char* __name, ios_base::openmode __mode, int __prot = 0664);
 
       __basic_file*
-      sys_open(__c_file* __file, ios_base::openmode);
+      sys_open(MAHandle __file, ios_base::openmode);
 
+#ifndef MAPIP
       __basic_file*
       sys_open(int __fd, ios_base::openmode __mode);
+#endif
 
       __basic_file* 
       close(); 
@@ -81,7 +85,7 @@ namespace std
       int 
       fd();
 
-      __c_file*
+      MAHandle
       file();
 
       ~__basic_file();

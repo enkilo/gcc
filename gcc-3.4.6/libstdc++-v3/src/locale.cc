@@ -125,6 +125,7 @@ namespace std
 	// NB: May be a C-style "LC_ALL" category; convert.
 	switch (__cat)
 	  {
+#ifndef MAPIP
 	  case LC_COLLATE:  
 	    __ret = collate; 
 	    break;
@@ -148,6 +149,7 @@ namespace std
 	  case LC_ALL:      
 	    __ret = all;
 	    break;
+#endif
 	  default:
 	    __throw_runtime_error(__N("locale::_S_normalize_category "
 				  "category not found"));

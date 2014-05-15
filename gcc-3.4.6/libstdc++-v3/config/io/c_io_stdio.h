@@ -41,7 +41,7 @@ namespace std
   typedef __gthread_mutex_t __c_lock;
 
   // for basic_file.h
-  typedef FILE __c_file;
+  typedef MAHandle __c_file;
 
   // XXX GLIBCXX_ABI Deprecated
   // for ios_base.h

@@ -59,13 +59,13 @@ namespace std
 		     const char* __fmt,
 		     _Tv __v, const __c_locale&, int __prec)
     {
-      const char* __old = std::setlocale(LC_NUMERIC, NULL);
+      const char* __old = "C"; //std::setlocale(LC_NUMERIC, NULL);
       char* __sav = NULL;
       if (std::strcmp(__old, "C"))
 	{
 	  __sav = new char[std::strlen(__old) + 1];
 	  std::strcpy(__sav, __old);
-	  std::setlocale(LC_NUMERIC, "C");
+	  //std::setlocale(LC_NUMERIC, "C");
 	}
 
 #ifdef _GLIBCXX_USE_C99
@@ -76,7 +76,7 @@ namespace std
       
       if (__sav)
 	{
-	  std::setlocale(LC_NUMERIC, __sav);
+	  //std::setlocale(LC_NUMERIC, __sav);
 	  delete [] __sav;
 	}
       return __ret;

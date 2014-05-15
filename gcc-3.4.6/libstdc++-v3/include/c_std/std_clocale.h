@@ -46,7 +46,7 @@
 
 #pragma GCC system_header
 
-#include <locale.h>
+//#include <locale.h>
 
 // Get rid of those macros defined in <locale.h> in lieu of real functions.
 #undef setlocale
@@ -54,9 +54,9 @@
 
 namespace std
 {
-  using ::lconv;
-  using ::setlocale;
-  using ::localeconv;
+//  using ::lconv;
+//  using ::setlocale;
+//  using ::localeconv;
 }
 
 #endif

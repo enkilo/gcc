@@ -39,6 +39,8 @@ __cxa_bad_cast ()
 {
 #ifdef __EXCEPTIONS  
   throw std::bad_cast();
+#elif defined(MAPIP)
+  maPanic(0, __func__);
 #else
   std::abort();
 #endif
@@ -49,6 +51,8 @@ __cxa_bad_typeid ()
 {
 #ifdef __EXCEPTIONS  
   throw std::bad_typeid();
+#elif defined(MAPIP)
+  maPanic(0, __func__);
 #else
   std::abort();
 #endif

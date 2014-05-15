@@ -115,8 +115,10 @@ namespace std
       __old = _S_global;
       __other._M_impl->_M_add_reference();
       _S_global = __other._M_impl; 
+#ifndef MAPIP
       if (__other.name() != "*")
 	setlocale(LC_ALL, __other.name().c_str());
+#endif
     }
 
     // Reference count sanity check: one reference removed for the

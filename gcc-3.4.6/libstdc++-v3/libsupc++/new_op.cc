@@ -53,7 +53,11 @@ operator new (std::size_t sz) throw (std::bad_alloc)
 #ifdef __EXCEPTIONS
 	throw bad_alloc();
 #else
-        std::abort();
+#ifdef MAPIP
+    maPanic(0, __func__);
+#else
+    std::abort ();
+#endif
 #endif
       handler ();
       p = (void *) malloc (sz);

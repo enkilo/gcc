@@ -159,7 +159,7 @@ namespace __gnu_cxx
 	: _M_align(8), _M_max_bytes(128), _M_min_bin(8),
 	  _M_chunk_size(4096 - 4 * sizeof(void*)), 
 	  _M_max_threads(4096), _M_freelist_headroom(10), 
-	  _M_force_new(getenv("GLIBCXX_FORCE_NEW") ? true : false)
+	  _M_force_new(false) //getenv("GLIBCXX_FORCE_NEW") ? true : false)
 	{ }
 
 	explicit

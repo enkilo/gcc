@@ -45,7 +45,8 @@
 
 #pragma GCC system_header
 
-#include <stddef.h>
+#include <ma.h>
+#include <stdint.h>
 
 namespace std
 {

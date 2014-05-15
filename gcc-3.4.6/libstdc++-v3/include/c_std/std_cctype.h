@@ -46,7 +46,7 @@
 #pragma GCC system_header
 
 #include <bits/c++config.h>
-#include <ctype.h>
+#include <mactype.h>
 
 // Get rid of those macros defined in <ctype.h> in lieu of real functions.
 #undef isalnum

@@ -45,7 +45,7 @@
 
 #pragma GCC system_header
 
-#include <errno.h>
+//#include <errno.h>
 
 // Adhere to section 17.4.1.2 clause 5 of ISO 14882:1998
 #ifndef errno
