@@ -185,7 +185,7 @@ namespace std
 /* #undef _GLIBCXX_HAVE_MODFL */
 
 // Define if you have the expf function.
-#define _GLIBCXX_HAVE_EXPF
+/* #undef _GLIBCXX_HAVE_EXPF */
 
 // Define if you have the expl function.
 /* #undef _GLIBCXX_HAVE_EXPL */
@@ -194,10 +194,10 @@ namespace std
 /* #undef _GLIBCXX_HAVE_HYPOT */
 
 // Define if you have the hypotf function.
-#define _GLIBCXX_HAVE_HYPOTF
+/* #undef _GLIBCXX_HAVE_HYPOTF */
 
 // Define if you have the hypotl function.
-#define _GLIBCXX_HAVE_HYPOTL
+/* #undef _GLIBCXX_HAVE_HYPOTL */
 
 // Define if the compiler/host combination has __builtin_abs
 /* #undef _GLIBCXX_HAVE___BUILTIN_ABS */
@@ -312,7 +312,7 @@ namespace std
 /* #undef _GLIBCXX_HAVE_COSF */
 
 /* Define to 1 if you have the `coshf' function. */
-#define _GLIBCXX_HAVE_COSHF
+/* #undef _GLIBCXX_HAVE_COSHF */
 
 /* Define to 1 if you have the `coshl' function. */
 /* #undef _GLIBCXX_HAVE_COSHL */
@@ -324,7 +324,7 @@ namespace std
 /* #undef _GLIBCXX_HAVE_ENDIAN_H */
 
 /* Define to 1 if you have the `expf' function. */
-#define _GLIBCXX_HAVE_EXPF
+/* #undef _GLIBCXX_HAVE_EXPF */
 
 /* Define to 1 if you have the `expl' function. */
 /* #undef _GLIBCXX_HAVE_EXPL */
@@ -408,10 +408,10 @@ namespace std
 /* #undef _GLIBCXX_HAVE_HYPOT */
 
 /* Define to 1 if you have the `hypotf' function. */
-#define _GLIBCXX_HAVE_HYPOTF
+/* #undef _GLIBCXX_HAVE_HYPOTF */
 
 /* Define to 1 if you have the `hypotl' function. */
-#define _GLIBCXX_HAVE_HYPOTL
+/* #undef _GLIBCXX_HAVE_HYPOTL */
 
 /* Define to 1 if you have the `iconv' function. */
 /* #undef _GLIBCXX_HAVE_ICONV */
@@ -450,10 +450,10 @@ namespace std
 /* #undef _GLIBCXX_HAVE_ISWBLANK */
 
 /* Define to 1 if you have the `ldexpf' function. */
-#define _GLIBCXX_HAVE_LDEXPF
+/* #undef _GLIBCXX_HAVE_LDEXPF */
 
 /* Define to 1 if you have the `ldexpl' function. */
-#define _GLIBCXX_HAVE_LDEXPL
+/* #undef _GLIBCXX_HAVE_LDEXPL */
 
 /* Define to 1 if you have the <libintl.h> header file. */
 /* #undef _GLIBCXX_HAVE_LIBINTL_H */
@@ -480,7 +480,7 @@ namespace std
 /* #undef _GLIBCXX_HAVE_LOCALE_H */
 
 /* Define to 1 if you have the `log10f' function. */
-#define _GLIBCXX_HAVE_LOG10F
+/* #undef _GLIBCXX_HAVE_LOG10F */
 
 /* Define to 1 if you have the `log10l' function. */
 /* #undef _GLIBCXX_HAVE_LOG10L */
@@ -561,10 +561,10 @@ namespace std
 /* #undef _GLIBCXX_HAVE_SINF */
 
 /* Define to 1 if you have the `sinhf' function. */
-#define _GLIBCXX_HAVE_SINHF
+/* #undef _GLIBCXX_HAVE_SINHF */
 
 /* Define to 1 if you have the `sinhl' function. */
-#define _GLIBCXX_HAVE_SINHL
+/* #undef _GLIBCXX_HAVE_SINHL */
 
 /* Define to 1 if you have the `sinl' function. */
 /* #undef _GLIBCXX_HAVE_SINL */
@@ -633,10 +633,10 @@ namespace std
 /* #undef _GLIBCXX_HAVE_TANF */
 
 /* Define to 1 if you have the `tanhf' function. */
-#define _GLIBCXX_HAVE_TANHF
+/* #undef _GLIBCXX_HAVE_TANHF */
 
 /* Define to 1 if you have the `tanhl' function. */
-#define _GLIBCXX_HAVE_TANHL
+/* #undef _GLIBCXX_HAVE_TANHL */
 
 /* Define to 1 if you have the `tanl' function. */
 /* #undef _GLIBCXX_HAVE_TANL */
