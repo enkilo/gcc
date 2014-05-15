@@ -47,8 +47,8 @@ progpref=mapip-
 
 
 export CC
-export CFLAGS='-O2 -pipe'
-export CXXFLAGS='-O2 -pipe'
+export CFLAGS='-O2 -pipe -m32'
+export CXXFLAGS='-O2 -pipe -m32'
 export {HOST_,}LDFLAGS='-static'
 export DEBUG_FLAGS=''
 
