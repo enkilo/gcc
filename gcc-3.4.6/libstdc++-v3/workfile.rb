@@ -23,7 +23,8 @@ mod.instance_eval do
 		else
 			@SPECIFIC_CFLAGS = {}
 		end
-		@SOURCES = ["libsupc++","src"]
+		#@SOURCES = ["libsupc++","src"]
+		@SOURCES = ["src"]
 		@EXTRA_INCLUDES = [".", "include/mapip", "include", "include/backward", "libsupc++"]
 		@INSTALL_INCDIR = "libstdc++"
 		@NAME = "stdc++"

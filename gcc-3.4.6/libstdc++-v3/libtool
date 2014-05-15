@@ -79,7 +79,7 @@ echo="echo"
 
 # The archiver.
 AR="ar"
-AR_FLAGS="cru"
+AR_FLAGS="scru"
 
 # A C compiler.
 LTCC="/opt/MoSync-4.0-Alpha/bin/xgcc"
@@ -194,7 +194,7 @@ soname_spec=""
 
 # Commands used to build and install an old-style archive.
 RANLIB="true"
-old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs\$old_deplibs~\$RANLIB \$oldlib"
+old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs\$old_deplibs~\$MOSYNCDIR/bin/pipe-tool -L \`echo \"\${oldlib}\" | sed \"s|\.libs/lib||;s|\.a\$|.lib|\"\` \$oldobjs"
 old_postinstall_cmds="\$RANLIB \$oldlib~chmod 644 \$oldlib"
 old_postuninstall_cmds=""
 
