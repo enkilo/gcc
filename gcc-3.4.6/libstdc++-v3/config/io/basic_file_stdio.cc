@@ -32,8 +32,7 @@
 //
 
 #include <bits/basic_file.h>
-#include <fcntl.h>
-#include <errno.h>
+#include <maapi.h>
 
 #ifdef _GLIBCXX_HAVE_POLL
 #include <poll.h>
@@ -74,7 +73,7 @@ namespace __gnu_internal
 {
   // Map ios_base::openmode flags to a string for use in fopen().
   // Table of valid combinations as given in [lib.filebuf.members]/2.
-  static const char*
+  static int
   fopen_mode(std::ios_base::openmode mode)
   {
     enum 
@@ -88,19 +87,19 @@ namespace __gnu_internal
     
     switch (mode & (in|out|trunc|app|binary))
       {
-      case (   out                 ): return "w";  
-      case (   out      |app       ): return "a";  
-      case (   out|trunc           ): return "w";  
-      case (in                     ): return "r";  
-      case (in|out                 ): return "r+"; 
-      case (in|out|trunc           ): return "w+"; 
+      case (   out                 ): return MA_ACCESS_READ_WRITE;  
+      case (   out      |app       ): return MA_ACCESS_READ_WRITE;  
+      case (   out|trunc           ): return MA_ACCESS_READ_WRITE;  
+      case (in                     ): return MA_ACCESS_READ;  
+      case (in|out                 ): return MA_ACCESS_READ_WRITE; 
+      case (in|out|trunc           ): return MA_ACCESS_READ_WRITE; 
 	
-      case (   out          |binary): return "wb"; 
-      case (   out      |app|binary): return "ab"; 
-      case (   out|trunc    |binary): return "wb"; 
-      case (in              |binary): return "rb"; 
-      case (in|out          |binary): return "r+b";
-      case (in|out|trunc    |binary): return "w+b";
+      case (   out          |binary): return MA_ACCESS_READ_WRITE; 
+      case (   out      |app|binary): return MA_ACCESS_READ_WRITE; 
+      case (   out|trunc    |binary): return MA_ACCESS_READ_WRITE; 
+      case (in              |binary): return MA_ACCESS_READ; 
+      case (in|out          |binary): return MA_ACCESS_READ_WRITE;
+      case (in|out|trunc    |binary): return MA_ACCESS_READ_WRITE;
 	
       default: return 0; // invalid
       }
@@ -114,9 +113,11 @@ namespace __gnu_internal
 
     for (;;)
       {
-	const std::streamsize __ret = write(__fd, __s, __nleft);
-	if (__ret == -1L && errno == EINTR)
-	  continue;
+	 std::streamsize __ret = -1L;
+      if(maFileWrite(__fd, __s, __nleft) >= 0)
+          __ret = __nleft;
+//	if (__ret == -1L && errno == EINTR)
+//	  continue;
 	if (__ret == -1L)
 	  break;
 
@@ -184,16 +185,16 @@ namespace std
   { this->close(); }
       
   __basic_file<char>*
-  __basic_file<char>::sys_open(__c_file* __file, ios_base::openmode) 
+  __basic_file<char>::sys_open(MAHandle __file, ios_base::openmode) 
   {
     __basic_file* __ret = NULL;
     if (!this->is_open() && __file)
       {
 	int __err;
-	errno = 0;	
+//	errno = 0;	
 	do
 	  __err = this->sync();
-	while (__err && errno == EINTR);
+	while (0); //__err && errno == EINTR);
 	if (!__err)
 	  {
 	    _M_cfile = __file;
@@ -203,7 +204,7 @@ namespace std
       }
     return __ret;
   }
-  
+#ifndef MAPIP  
   __basic_file<char>*
   __basic_file<char>::sys_open(int __fd, ios_base::openmode __mode)
   {
@@ -219,16 +220,42 @@ namespace std
       }
     return __ret;
   }
-  
+#endif
   __basic_file<char>* 
   __basic_file<char>::open(const char* __name, ios_base::openmode __mode, 
 			   int /*__prot*/)
   {
     __basic_file* __ret = NULL;
-    const char* __c_mode = __gnu_internal::fopen_mode(__mode);
-    if (__c_mode && !this->is_open())
+    int __c_mode = __gnu_internal::fopen_mode(__mode);
+    if (!this->is_open())
       {
-#ifdef _GLIBCXX_USE_LFS
+#ifdef MAPIP
+  _M_cfile = maFileOpen(__name, __c_mode);
+
+  if(__mode & std::ios_base::trunc) {
+      if(maFileExists(_M_cfile)) {
+          if(maFileTruncate(_M_cfile,0) < 0)
+              _M_cfile = -1;
+      } else {
+          if(maFileCreate(_M_cfile) < 0)
+              _M_cfile = -1;
+              }
+  } else if(__mode & std::ios_base::app) {
+      if(maFileExists(_M_cfile)) {
+          if(maFileSeek(_M_cfile,0,MA_SEEK_END) < 0)
+              _M_cfile = -1;
+      } else {
+          if(maFileCreate(_M_cfile) < 0)
+              _M_cfile = -1;
+      }
+  } else if(__mode & std::ios_base::out) {
+      if(!maFileExists(_M_cfile)) {
+          if(maFileCreate(_M_cfile) < 0)
+              _M_cfile = -1;
+      }
+  }
+  if(_M_cfile >= 0)
+#elif defined(_GLIBCXX_USE_LFS)
 	if ((_M_cfile = fopen64(__name, __c_mode)))
 #else
 	if ((_M_cfile = fopen(__name, __c_mode)))
@@ -247,9 +274,9 @@ namespace std
   
   int 
   __basic_file<char>::fd() 
-  { return fileno(_M_cfile); }
+  { return _M_cfile; }
   
-  __c_file*
+  MAHandle 
   __basic_file<char>::file() 
   { return _M_cfile; }
   
@@ -266,10 +293,10 @@ namespace std
 	    // for error first. However, C89/C99 (at variance with IEEE
 	    // 1003.1, f.i.) do not mandate that fclose must set errno
 	    // upon error.
-	    errno = 0;
+//	    errno = 0;
 	    do
-	      __err = fclose(_M_cfile);
-	    while (__err && errno == EINTR);
+	      __err = maFileClose(_M_cfile);
+	    while (0); //__err && errno == EINTR);
 	  }
 	_M_cfile = 0;
 	if (!__err)
@@ -281,10 +308,11 @@ namespace std
   streamsize 
   __basic_file<char>::xsgetn(char* __s, streamsize __n)
   {
-    streamsize __ret;
-    do
-      __ret = read(this->fd(), __s, __n);
-    while (__ret == -1L && errno == EINTR);
+    streamsize __ret = -1;
+    //do
+    if(maFileRead(this->fd(), __s, __n) >= 0)
+        __ret = __n;
+    //while (__ret == -1L && errno == EINTR);
     return __ret;
   }
 
@@ -318,13 +346,13 @@ namespace std
     if (__off > std::numeric_limits<off_t>::max()
 	|| __off < std::numeric_limits<off_t>::min())
       return -1L;
-    return lseek(this->fd(), __off, __way);
+    return maFileSeek(this->fd(), __off, __way);
 #endif
   }
 
   int 
   __basic_file<char>::sync() 
-  { return fflush(_M_cfile); }
+  { return 0; } //fflush(_M_cfile); }
 
   streamsize
   __basic_file<char>::showmanyc()

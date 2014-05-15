@@ -204,7 +204,7 @@ namespace std
 
     // 27.4.2.1.1  Class ios_base::failure
     /// These are thrown to indicate problems.  Doc me.
-    class failure : public exception
+    class failure //: public exception
     {
     public:
       // _GLIBCXX_RESOLVE_LIB_DEFECTS

@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+environment/project/org.eclipse.linuxtools.cdt.autotools.core.configuration.build.1594274845.962485625/CFLAGS/delimiter=\:
+environment/project/org.eclipse.linuxtools.cdt.autotools.core.configuration.build.1594274845.962485625/CFLAGS/operation=append
+environment/project/org.eclipse.linuxtools.cdt.autotools.core.configuration.build.1594274845.962485625/CFLAGS/value=-g -ggdb -O0
+environment/project/org.eclipse.linuxtools.cdt.autotools.core.configuration.build.1594274845.962485625/append=true
+environment/project/org.eclipse.linuxtools.cdt.autotools.core.configuration.build.1594274845.962485625/appendContributed=true
+environment/project/org.eclipse.linuxtools.cdt.autotools.core.configuration.build.1594274845/CFLAGS/delimiter=\:
+environment/project/org.eclipse.linuxtools.cdt.autotools.core.configuration.build.1594274845/CFLAGS/operation=append
+environment/project/org.eclipse.linuxtools.cdt.autotools.core.configuration.build.1594274845/CFLAGS/value=-g -O2 -Wall
+environment/project/org.eclipse.linuxtools.cdt.autotools.core.configuration.build.1594274845/append=true
+environment/project/org.eclipse.linuxtools.cdt.autotools.core.configuration.build.1594274845/appendContributed=true
