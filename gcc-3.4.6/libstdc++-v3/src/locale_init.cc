@@ -35,6 +35,8 @@
 #include <bits/atomicity.h>
 #include <bits/concurrence.h>
 
+#ifdef LOCALES
+
 namespace __gnu_internal
 {
   // Defined in globals.cc.
@@ -347,3 +349,5 @@ namespace std
 #endif
   }
 } // namespace std
+
+#endif

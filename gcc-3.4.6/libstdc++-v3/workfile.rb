@@ -27,6 +27,7 @@ mod.instance_eval do
 		@SOURCES = ["src"]
 		@EXTRA_INCLUDES = [".", "include/mapip", "include", "include/backward", "libsupc++"]
 		@INSTALL_INCDIR = "libstdc++"
+    @EXTRA_CFLAGS += " -fno-exceptions -fno-rtti -DLOCALES=1 "
 		@NAME = "stdc++"
 	end
 end

@@ -30,6 +30,8 @@
 #include <cstring>
 #include <locale>
 
+#ifdef LOCALES
+
 namespace std
 {
   using namespace __gnu_cxx;
@@ -292,3 +294,4 @@ namespace std
       }
   }
 } // namespace std
+#endif
