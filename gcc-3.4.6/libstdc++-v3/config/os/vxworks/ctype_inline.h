@@ -31,41 +31,41 @@
 // ISO C++ 14882: 22.1  Locales
 //
   
-// Information as gleaned from target/h/ctype.cc.h
+// Information as gleaned from target/h/ctype.h
 
-// ctype.cc bits to be inlined go here. Non-inlinable (ie virtual do_*)
-// functions go in ctype.cc.cpp
+// ctype bits to be inlined go here. Non-inlinable (ie virtual do_*)
+// functions go in ctype.cpp
 
   bool
-  ctype.cc<char>::
+  ctype<char>::
   is(mask __m, char __c) const
-  { return __ctype.cc[static_cast<unsigned char>(__c)] & __m; }
+  { return __ctype[static_cast<unsigned char>(__c)] & __m; }
 
   const char*
-  ctype.cc<char>::
-  is(const char* __low, const char* __high, mask* __vec.cc) const
+  ctype<char>::
+  is(const char* __low, const char* __high, mask* __vec) const
   {
     while (__low < __high)
-      *__vec.cc++ = __ctype.cc[static_cast<unsigned char>(*__low++)];
+      *__vec++ = __ctype[static_cast<unsigned char>(*__low++)];
     return __high;
   }
 
   const char*
-  ctype.cc<char>::
+  ctype<char>::
   scan_is(mask __m, const char* __low, const char* __high) const
   {
     while (__low < __high 
-	   && !(__ctype.cc[static_cast<unsigned char>(*__low)] & __m))
+	   && !(__ctype[static_cast<unsigned char>(*__low)] & __m))
       ++__low;
     return __low;
   }
 
   const char*
-  ctype.cc<char>::
+  ctype<char>::
   scan_not(mask __m, const char* __low, const char* __high) const
   {
     while (__low < __high
-	   && (__ctype.cc[static_cast<unsigned char>(*__low)] & __m))
+	   && (__ctype[static_cast<unsigned char>(*__low)] & __m))
       ++__low;
     return __low;
   }

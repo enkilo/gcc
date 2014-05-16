@@ -1,4 +1,4 @@
-// std::ctype.cc implementation details, GNU version -*- C++ -*-
+// std::ctype implementation details, GNU version -*- C++ -*-
 
 // Copyright (C) 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
 //
@@ -28,71 +28,71 @@
 // the GNU General Public License.
 
 //
-// ISO C++ 14882: 22.2.1.1.2  ctype.cc virtual functions.
+// ISO C++ 14882: 22.2.1.1.2  ctype virtual functions.
 //
 
 // Written by Benjamin Kosnik <bkoz@redhat.com>
 
-#include <locale.cc>
-#include <bits/c++locale.cc_internal.h>
+#include <locale>
+#include <bits/c++locale_internal.h>
 
 namespace std
 {
-  // NB: The other ctype.cc<char> specializations are in src/locale.cc.cpp and
+  // NB: The other ctype<char> specializations are in src/locale.cpp and
   // various /config/os/* files.
   template<>
-    ctype.cc_byname<char>::ctype.cc_byname(const char* __s, size_t __refs)
-    : ctype.cc<char>(0, false, __refs) 
+    ctype_byname<char>::ctype_byname(const char* __s, size_t __refs)
+    : ctype<char>(0, false, __refs) 
     { 		
       if (std::strcmp(__s, "C") != 0 && std::strcmp(__s, "POSIX") != 0)
 	{
-	  this->_S_destroy_c_locale.cc(this->_M_c_locale.cc_ctype.cc);
-	  this->_S_create_c_locale.cc(this->_M_c_locale.cc_ctype.cc, __s); 
-	  this->_M_toupper = this->_M_c_locale.cc_ctype.cc->__ctype.cc_toupper;
-	  this->_M_tolower = this->_M_c_locale.cc_ctype.cc->__ctype.cc_tolower;
-	  this->_M_table = this->_M_c_locale.cc_ctype.cc->__ctype.cc_b;
+	  this->_S_destroy_c_locale(this->_M_c_locale_ctype);
+	  this->_S_create_c_locale(this->_M_c_locale_ctype, __s); 
+	  this->_M_toupper = this->_M_c_locale_ctype->__ctype_toupper;
+	  this->_M_tolower = this->_M_c_locale_ctype->__ctype_tolower;
+	  this->_M_table = this->_M_c_locale_ctype->__ctype_b;
 	}
     }
 
 #ifdef _GLIBCXX_USE_WCHAR_T  
-  ctype.cc<wchar_t>::__wmask_type
-  ctype.cc<wchar_t>::_M_convert_to_wmask(const mask __m) const
+  ctype<wchar_t>::__wmask_type
+  ctype<wchar_t>::_M_convert_to_wmask(const mask __m) const
   {
     __wmask_type __ret;
     switch (__m)
       {
       case space:
-	__ret = __wctype.cc_l("space", _M_c_locale.cc_ctype.cc);
+	__ret = __wctype_l("space", _M_c_locale_ctype);
 	break;
       case print:
-	__ret = __wctype.cc_l("print", _M_c_locale.cc_ctype.cc);
+	__ret = __wctype_l("print", _M_c_locale_ctype);
 	break;
       case cntrl:
-	__ret = __wctype.cc_l("cntrl", _M_c_locale.cc_ctype.cc);
+	__ret = __wctype_l("cntrl", _M_c_locale_ctype);
 	break;
       case upper:
-	__ret = __wctype.cc_l("upper", _M_c_locale.cc_ctype.cc);
+	__ret = __wctype_l("upper", _M_c_locale_ctype);
 	break;
       case lower:
-	__ret = __wctype.cc_l("lower", _M_c_locale.cc_ctype.cc);
+	__ret = __wctype_l("lower", _M_c_locale_ctype);
 	break;
       case alpha:
-	__ret = __wctype.cc_l("alpha", _M_c_locale.cc_ctype.cc);
+	__ret = __wctype_l("alpha", _M_c_locale_ctype);
 	break;
       case digit:
-	__ret = __wctype.cc_l("digit", _M_c_locale.cc_ctype.cc);
+	__ret = __wctype_l("digit", _M_c_locale_ctype);
 	break;
       case punct:
-	__ret = __wctype.cc_l("punct", _M_c_locale.cc_ctype.cc);
+	__ret = __wctype_l("punct", _M_c_locale_ctype);
 	break;
       case xdigit:
-	__ret = __wctype.cc_l("xdigit", _M_c_locale.cc_ctype.cc);
+	__ret = __wctype_l("xdigit", _M_c_locale_ctype);
 	break;
       case alnum:
-	__ret = __wctype.cc_l("alnum", _M_c_locale.cc_ctype.cc);
+	__ret = __wctype_l("alnum", _M_c_locale_ctype);
 	break;
       case graph:
-	__ret = __wctype.cc_l("graph", _M_c_locale.cc_ctype.cc);
+	__ret = __wctype_l("graph", _M_c_locale_ctype);
 	break;
       default:
 	__ret = 0;
@@ -101,46 +101,46 @@ namespace std
   }
   
   wchar_t
-  ctype.cc<wchar_t>::do_toupper(wchar_t __c) const
-  { return __towupper_l(__c, _M_c_locale.cc_ctype.cc); }
+  ctype<wchar_t>::do_toupper(wchar_t __c) const
+  { return __towupper_l(__c, _M_c_locale_ctype); }
 
   const wchar_t*
-  ctype.cc<wchar_t>::do_toupper(wchar_t* __lo, const wchar_t* __hi) const
+  ctype<wchar_t>::do_toupper(wchar_t* __lo, const wchar_t* __hi) const
   {
     while (__lo < __hi)
       {
-        *__lo = __towupper_l(*__lo, _M_c_locale.cc_ctype.cc);
+        *__lo = __towupper_l(*__lo, _M_c_locale_ctype);
         ++__lo;
       }
     return __hi;
   }
   
   wchar_t
-  ctype.cc<wchar_t>::do_tolower(wchar_t __c) const
-  { return __towlower_l(__c, _M_c_locale.cc_ctype.cc); }
+  ctype<wchar_t>::do_tolower(wchar_t __c) const
+  { return __towlower_l(__c, _M_c_locale_ctype); }
   
   const wchar_t*
-  ctype.cc<wchar_t>::do_tolower(wchar_t* __lo, const wchar_t* __hi) const
+  ctype<wchar_t>::do_tolower(wchar_t* __lo, const wchar_t* __hi) const
   {
     while (__lo < __hi)
       {
-        *__lo = __towlower_l(*__lo, _M_c_locale.cc_ctype.cc);
+        *__lo = __towlower_l(*__lo, _M_c_locale_ctype);
         ++__lo;
       }
     return __hi;
   }
 
   bool
-  ctype.cc<wchar_t>::
+  ctype<wchar_t>::
   do_is(mask __m, wchar_t __c) const
   { 
-    // Highest bitmask in ctype.cc_base == 10, but extra in "C"
+    // Highest bitmask in ctype_base == 10, but extra in "C"
     // library for blank.
     bool __ret = false;
     const size_t __bitmasksize = 11; 
     for (size_t __bitcur = 0; __bitcur <= __bitmasksize; ++__bitcur)
       if (__m & _M_bit[__bitcur]
-	  && __iswctype.cc_l(__c, _M_wmask[__bitcur], _M_c_locale.cc_ctype.cc))
+	  && __iswctype_l(__c, _M_wmask[__bitcur], _M_c_locale_ctype))
 	{
 	  __ret = true;
 	  break;
@@ -149,25 +149,25 @@ namespace std
   }
   
   const wchar_t* 
-  ctype.cc<wchar_t>::
-  do_is(const wchar_t* __lo, const wchar_t* __hi, mask* __vec.cc) const
+  ctype<wchar_t>::
+  do_is(const wchar_t* __lo, const wchar_t* __hi, mask* __vec) const
   {
-    for (; __lo < __hi; ++__vec.cc, ++__lo)
+    for (; __lo < __hi; ++__vec, ++__lo)
       {
-	// Highest bitmask in ctype.cc_base == 10, but extra in "C"
+	// Highest bitmask in ctype_base == 10, but extra in "C"
 	// library for blank.
 	const size_t __bitmasksize = 11; 
 	mask __m = 0;
 	for (size_t __bitcur = 0; __bitcur <= __bitmasksize; ++__bitcur)
-	  if (__iswctype.cc_l(*__lo, _M_wmask[__bitcur], _M_c_locale.cc_ctype.cc))
+	  if (__iswctype_l(*__lo, _M_wmask[__bitcur], _M_c_locale_ctype))
 	    __m |= _M_bit[__bitcur];
-	*__vec.cc = __m;
+	*__vec = __m;
       }
     return __hi;
   }
   
   const wchar_t* 
-  ctype.cc<wchar_t>::
+  ctype<wchar_t>::
   do_scan_is(mask __m, const wchar_t* __lo, const wchar_t* __hi) const
   {
     while (__lo < __hi && !this->do_is(__m, *__lo))
@@ -176,7 +176,7 @@ namespace std
   }
 
   const wchar_t*
-  ctype.cc<wchar_t>::
+  ctype<wchar_t>::
   do_scan_not(mask __m, const char_type* __lo, const char_type* __hi) const
   {
     while (__lo < __hi && this->do_is(__m, *__lo) != 0)
@@ -185,12 +185,12 @@ namespace std
   }
 
   wchar_t
-  ctype.cc<wchar_t>::
+  ctype<wchar_t>::
   do_widen(char __c) const
   { return _M_widen[static_cast<unsigned char>(__c)]; }
 
   const char* 
-  ctype.cc<wchar_t>::
+  ctype<wchar_t>::
   do_widen(const char* __lo, const char* __hi, wchar_t* __dest) const
   {
     while (__lo < __hi)
@@ -203,28 +203,28 @@ namespace std
   }
 
   char
-  ctype.cc<wchar_t>::
+  ctype<wchar_t>::
   do_narrow(wchar_t __wc, char __dfault) const
   {
     if (__wc >= 0 && __wc < 128 && _M_narrow_ok)
       return _M_narrow[__wc];
 #if __GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ > 2)
-    __c_locale.cc __old = __uselocale.cc(_M_c_locale.cc_ctype.cc);
+    __c_locale __old = __uselocale(_M_c_locale_ctype);
 #endif
     const int __c = wctob(__wc);
 #if __GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ > 2)
-    __uselocale.cc(__old);
+    __uselocale(__old);
 #endif
     return (__c == EOF ? __dfault : static_cast<char>(__c)); 
   }
 
   const wchar_t*
-  ctype.cc<wchar_t>::
+  ctype<wchar_t>::
   do_narrow(const wchar_t* __lo, const wchar_t* __hi, char __dfault, 
 	    char* __dest) const
   {
 #if __GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ > 2)
-    __c_locale.cc __old = __uselocale.cc(_M_c_locale.cc_ctype.cc);
+    __c_locale __old = __uselocale(_M_c_locale_ctype);
 #endif
     if (_M_narrow_ok)
       while (__lo < __hi)
@@ -248,16 +248,16 @@ namespace std
 	  ++__dest;
 	}
 #if __GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ > 2)
-    __uselocale.cc(__old);
+    __uselocale(__old);
 #endif
     return __hi;
   }
 
   void
-  ctype.cc<wchar_t>::_M_initialize_ctype.cc()
+  ctype<wchar_t>::_M_initialize_ctype()
   {
 #if __GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ > 2)
-    __c_locale.cc __old = __uselocale.cc(_M_c_locale.cc_ctype.cc);
+    __c_locale __old = __uselocale(_M_c_locale_ctype);
 #endif
     wint_t __i;
     for (__i = 0; __i < 128; ++__i)
@@ -282,7 +282,7 @@ namespace std
 	_M_wmask[__k] = _M_convert_to_wmask(_M_bit[__k]);
       }
 #if __GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ > 2)
-    __uselocale.cc(__old);
+    __uselocale(__old);
 #endif
   }
 #endif //  _GLIBCXX_USE_WCHAR_T

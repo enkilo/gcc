@@ -1,4 +1,4 @@
-// Locale support (codecvt.cc) -*- C++ -*-
+// Locale support (codecvt) -*- C++ -*-
 
 // Copyright (C) 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
 //
@@ -28,21 +28,21 @@
 // the GNU General Public License.
 
 //
-// ISO C++ 14882: 22.2.1.5 Template class codecvt.cc
+// ISO C++ 14882: 22.2.1.5 Template class codecvt
 //
 
-// Warning: this file is not meant for user inclusion.  Use <locale.cc>.
+// Warning: this file is not meant for user inclusion.  Use <locale>.
 
 // Written by Benjamin Kosnik <bkoz@cygnus.com>
 
   // XXX
-  // Define this here so codecvt.cc.cpp can have _S_max_size definition.
+  // Define this here so codecvt.cpp can have _S_max_size definition.
 #define _GLIBCXX_USE___ENC_TRAITS 1
 
   // Extension to use icov for dealing with character encodings,
   // including conversions and comparisons between various character
   // sets.  This object encapsulates data that may need to be shared between
-  // char_traits, codecvt.cc and ctype.cc.
+  // char_traits, codecvt and ctype.
   class __enc_traits
   {
   public:
@@ -196,12 +196,12 @@
   // This specialization takes advantage of iconv to provide code
   // conversions between a large number of character encodings.
   template<typename _InternT, typename _ExternT>
-    class codecvt.cc<_InternT, _ExternT, __enc_traits>
-    : public __codecvt.cc_abstract_base<_InternT, _ExternT, __enc_traits>
+    class codecvt<_InternT, _ExternT, __enc_traits>
+    : public __codecvt_abstract_base<_InternT, _ExternT, __enc_traits>
     {
     public:      
       // Types:
-      typedef codecvt.cc_base::result			result;
+      typedef codecvt_base::result			result;
       typedef _InternT 					intern_type;
       typedef _ExternT 					extern_type;
       typedef __enc_traits 				state_type;
@@ -209,21 +209,21 @@
       typedef __enc_traits				__enc_type;
 
       // Data Members:
-      static locale.cc::id 		id;
+      static locale::id 		id;
 
       explicit 
-      codecvt.cc(size_t __refs = 0)
-      : __codecvt.cc_abstract_base<intern_type, extern_type, state_type>(__refs)
+      codecvt(size_t __refs = 0)
+      : __codecvt_abstract_base<intern_type, extern_type, state_type>(__refs)
       { }
 
       explicit 
-      codecvt.cc(__enc_type* __enc, size_t __refs = 0)
-      : __codecvt.cc_abstract_base<intern_type, extern_type, state_type>(__refs)
+      codecvt(__enc_type* __enc, size_t __refs = 0)
+      : __codecvt_abstract_base<intern_type, extern_type, state_type>(__refs)
       { }
 
     protected:
       virtual 
-      ~codecvt.cc() { }
+      ~codecvt() { }
 
       virtual result
       do_out(state_type& __state, const intern_type* __from, 
@@ -256,8 +256,8 @@
     };
 
   template<typename _InternT, typename _ExternT>
-    locale.cc::id 
-    codecvt.cc<_InternT, _ExternT, __enc_traits>::id;
+    locale::id 
+    codecvt<_InternT, _ExternT, __enc_traits>::id;
 
   // This adaptor works around the signature problems of the second
   // argument to iconv():  SUSv2 and others use 'const char**', but glibc 2.2
@@ -271,14 +271,14 @@
     { return __func(__cd, (_T)__inbuf, __inbytes, __outbuf, __outbytes); }
 
   template<typename _InternT, typename _ExternT>
-    codecvt.cc_base::result
-    codecvt.cc<_InternT, _ExternT, __enc_traits>::
+    codecvt_base::result
+    codecvt<_InternT, _ExternT, __enc_traits>::
     do_out(state_type& __state, const intern_type* __from, 
 	   const intern_type* __from_end, const intern_type*& __from_next,
 	   extern_type* __to, extern_type* __to_end,
 	   extern_type*& __to_next) const
     {
-      result __ret = codecvt.cc_base::error;
+      result __ret = codecvt_base::error;
       if (__state._M_good())
 	{
 	  const __desc_type* __desc = __state._M_get_out_descriptor();
@@ -287,7 +287,7 @@
 	  const size_t __tmultiple = sizeof(extern_type);
 	  size_t __tbytes = __tmultiple * (__to_end - __to); 
 	  
-	  // Argument list.cc for iconv specifies a byte sequence. Thus,
+	  // Argument list for iconv specifies a byte sequence. Thus,
 	  // all to/from arrays must be brutally casted to char*.
 	  char* __cto = reinterpret_cast<char*>(__to);
 	  char* __cfrom;
@@ -322,7 +322,7 @@
 	    {
 	      __from_next = reinterpret_cast<const intern_type*>(__cfrom);
 	      __to_next = reinterpret_cast<extern_type*>(__cto);
-	      __ret = codecvt.cc_base::ok;
+	      __ret = codecvt_base::ok;
 	    }
 	  else 
 	    {
@@ -330,29 +330,29 @@
 		{
 		  __from_next = reinterpret_cast<const intern_type*>(__cfrom);
 		  __to_next = reinterpret_cast<extern_type*>(__cto);
-		  __ret = codecvt.cc_base::partial;
+		  __ret = codecvt_base::partial;
 		}
 	      else
-		__ret = codecvt.cc_base::error;
+		__ret = codecvt_base::error;
 	    }
 	}
       return __ret; 
     }
 
   template<typename _InternT, typename _ExternT>
-    codecvt.cc_base::result
-    codecvt.cc<_InternT, _ExternT, __enc_traits>::
+    codecvt_base::result
+    codecvt<_InternT, _ExternT, __enc_traits>::
     do_unshift(state_type& __state, extern_type* __to, 
 	       extern_type* __to_end, extern_type*& __to_next) const
     {
-      result __ret = codecvt.cc_base::error;
+      result __ret = codecvt_base::error;
       if (__state._M_good())
 	{
 	  const __desc_type* __desc = __state._M_get_in_descriptor();
 	  const size_t __tmultiple = sizeof(intern_type);
 	  size_t __tlen = __tmultiple * (__to_end - __to); 
 	  
-	  // Argument list.cc for iconv specifies a byte sequence. Thus,
+	  // Argument list for iconv specifies a byte sequence. Thus,
 	  // all to/from arrays must be brutally casted to char*.
 	  char* __cto = reinterpret_cast<char*>(__to);
 	  size_t __conv = __iconv_adaptor(iconv,*__desc, NULL, NULL,
@@ -362,27 +362,27 @@
 	    {
 	      __to_next = reinterpret_cast<extern_type*>(__cto);
 	      if (__tlen == __tmultiple * (__to_end - __to))
-		__ret = codecvt.cc_base::noconv;
+		__ret = codecvt_base::noconv;
 	      else if (__tlen == 0)
-		__ret = codecvt.cc_base::ok;
+		__ret = codecvt_base::ok;
 	      else
-		__ret = codecvt.cc_base::partial;
+		__ret = codecvt_base::partial;
 	    }
 	  else 
-	    __ret = codecvt.cc_base::error;
+	    __ret = codecvt_base::error;
 	}
       return __ret; 
     }
    
   template<typename _InternT, typename _ExternT>
-    codecvt.cc_base::result
-    codecvt.cc<_InternT, _ExternT, __enc_traits>::
+    codecvt_base::result
+    codecvt<_InternT, _ExternT, __enc_traits>::
     do_in(state_type& __state, const extern_type* __from, 
 	  const extern_type* __from_end, const extern_type*& __from_next,
 	  intern_type* __to, intern_type* __to_end, 
 	  intern_type*& __to_next) const
     { 
-      result __ret = codecvt.cc_base::error;
+      result __ret = codecvt_base::error;
       if (__state._M_good())
 	{
 	  const __desc_type* __desc = __state._M_get_in_descriptor();
@@ -391,7 +391,7 @@
 	  const size_t __tmultiple = sizeof(intern_type);
 	  size_t __tlen = __tmultiple * (__to_end - __to); 
 	  
-	  // Argument list.cc for iconv specifies a byte sequence. Thus,
+	  // Argument list for iconv specifies a byte sequence. Thus,
 	  // all to/from arrays must be brutally casted to char*.
 	  char* __cto = reinterpret_cast<char*>(__to);
 	  char* __cfrom;
@@ -427,7 +427,7 @@
 	    {
 	      __from_next = reinterpret_cast<const extern_type*>(__cfrom);
 	      __to_next = reinterpret_cast<intern_type*>(__cto);
-	      __ret = codecvt.cc_base::ok;
+	      __ret = codecvt_base::ok;
 	    }
 	  else 
 	    {
@@ -435,10 +435,10 @@
 		{
 		  __from_next = reinterpret_cast<const extern_type*>(__cfrom);
 		  __to_next = reinterpret_cast<intern_type*>(__cto);
-		  __ret = codecvt.cc_base::partial;
+		  __ret = codecvt_base::partial;
 		}
 	      else
-		__ret = codecvt.cc_base::error;
+		__ret = codecvt_base::error;
 	    }
 	}
       return __ret; 
@@ -446,7 +446,7 @@
   
   template<typename _InternT, typename _ExternT>
     int 
-    codecvt.cc<_InternT, _ExternT, __enc_traits>::
+    codecvt<_InternT, _ExternT, __enc_traits>::
     do_encoding() const throw()
     {
       int __ret = 0;
@@ -457,22 +457,22 @@
   
   template<typename _InternT, typename _ExternT>
     bool 
-    codecvt.cc<_InternT, _ExternT, __enc_traits>::
+    codecvt<_InternT, _ExternT, __enc_traits>::
     do_always_noconv() const throw()
     { return false; }
   
   template<typename _InternT, typename _ExternT>
     int 
-    codecvt.cc<_InternT, _ExternT, __enc_traits>::
+    codecvt<_InternT, _ExternT, __enc_traits>::
     do_length(state_type&, const extern_type* __from, 
 	      const extern_type* __end, size_t __max) const
     { return std::min(__max, static_cast<size_t>(__end - __from)); }
 
   // _GLIBCXX_RESOLVE_LIB_DEFECTS
-  // 74.  Garbled text for codecvt.cc::do_max_length
+  // 74.  Garbled text for codecvt::do_max_length
   template<typename _InternT, typename _ExternT>
     int 
-    codecvt.cc<_InternT, _ExternT, __enc_traits>::
+    codecvt<_InternT, _ExternT, __enc_traits>::
     do_max_length() const throw()
     { return 1; }
 

@@ -31,32 +31,32 @@
 // ISO C++ 14882: 22.1  Locales
 //
   
-// ctype.cc bits to be inlined go here. Non-inlinable (ie virtual do_*)
-// functions go in ctype.cc.cpp
+// ctype bits to be inlined go here. Non-inlinable (ie virtual do_*)
+// functions go in ctype.cpp
   
   bool
-  ctype.cc<char>::
+  ctype<char>::
   is(mask __m, char __c) const
   { return _M_table[static_cast<unsigned char>(__c)] & __m; }
 
   const char*
-  ctype.cc<char>::
-  is(const char* __low, const char* __high, mask* __vec.cc) const
+  ctype<char>::
+  is(const char* __low, const char* __high, mask* __vec) const
   {
     const int __bitmasksize = sizeof(mask) * 8;
-    for (;__low < __high; ++__vec.cc, ++__low)
+    for (;__low < __high; ++__vec, ++__low)
       {
 	mask __m = _M_table[static_cast<unsigned char>(*__low)];
-	int __i = 0; // Lowest bitmask value from ctype.cc_base.
+	int __i = 0; // Lowest bitmask value from ctype_base.
 	while (__i < __bitmasksize && !(__m & static_cast<mask>(1 << __i)))
 	  ++__i;
-	*__vec.cc = static_cast<mask>(1 << __i);
+	*__vec = static_cast<mask>(1 << __i);
       }
     return __high;
   }
 
   const char*
-  ctype.cc<char>::
+  ctype<char>::
   scan_is(mask __m, const char* __low, const char* __high) const
   {
     while (__low < __high 
@@ -66,7 +66,7 @@
   }
 
   const char*
-  ctype.cc<char>::
+  ctype<char>::
   scan_not(mask __m, const char* __low, const char* __high) const
   {
     while (__low < __high 
