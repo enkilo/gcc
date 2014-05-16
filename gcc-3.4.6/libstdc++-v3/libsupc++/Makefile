@@ -72,7 +72,7 @@ CTIME_CC = config/locale/generic/time_members.cc
 CTIME_H = config/locale/generic/time_members.h
 CXX = /opt/MoSync-4.0-Alpha/bin/xgcc -x c++
 CXXCPP = /opt/MoSync-4.0-Alpha/bin/xgcc -x c++ -E
-CXXFLAGS = 
+CXXFLAGS = -g -O2 -fno-rtti -fno-exceptions
 CYGPATH_W = echo
 C_INCLUDE_DIR = ${glibcxx_srcdir}/include/c_std
 DEBUG_FLAGS = -g3 -O0
@@ -360,6 +360,7 @@ am__objects_disabled	= \
 	new_opv.lo \
 	\
 	new_opvnt.lo \
+	pure.lo
 
 am__objects_1	= \
 	eh_alloc.lo \
@@ -375,7 +376,6 @@ am__objects_1	= \
 	eh_throw.lo \
 	eh_type.lo \
 	eh_unex_handler.lo \
-	pure.lo \
 	tinfo.lo \
 	tinfo2.lo \
 	vec.lo \
@@ -465,22 +465,22 @@ distclean-compile:
 	-rm -f *.tab.c
 
 .c.o:
-	$(COMPILE) -S `test -f '$<' || echo '$(srcdir)/'`$<
+	$(COMPILE) -S $<
 
 .c.obj:
 	$(COMPILE) -S `if test -f '$<'; then $(CYGPATH_W) '$<'; else $(CYGPATH_W) '$(srcdir)/$<'; fi`
 
 .c.lo:
-	$(LTCOMPILE) -S -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
+	$(LTCOMPILE) -S -o $@ $<
 
 .cc.o:
-	$(CXXCOMPILE) -S -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
+	$(CXXCOMPILE) -S -o $@ $<
 
 .cc.obj:
 	$(CXXCOMPILE) -S -o $@ `if test -f '$<'; then $(CYGPATH_W) '$<'; else $(CYGPATH_W) '$(srcdir)/$<'; fi`
 
 .cc.lo:
-	$(LTCXXCOMPILE) -S -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
+	$(LTCXXCOMPILE) -S -o $@ $<
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -701,3 +701,4 @@ uninstall-glibcxxinstallHEADERS:
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
+MULTISUBDIR = 
