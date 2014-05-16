@@ -52,7 +52,7 @@ AUTOMAKE = automake-1.7
 AWK = gawk
 BASIC_FILE_CC = config/io/basic_file_stdio.cc
 BASIC_FILE_H = config/io/basic_file_mavsprintf.h
-CC = "$(MOSYNCDIR)/bin/xgcc"
+CC = /opt/MoSync-4.0-Alpha/bin/xgcc
 CCODECVT_CC = config/locale/generic/codecvt_members.cc
 CCODECVT_H = config/locale/generic/codecvt_specializations.h
 CCOLLATE_CC = config/locale/generic/collate_members.cc
@@ -65,13 +65,13 @@ CMESSAGES_CC = config/locale/generic/messages_members.cc
 CMESSAGES_H = config/locale/generic/messages_members.h
 CMONEY_CC = config/locale/generic/monetary_members.cc
 CNUMERIC_CC = config/locale/generic/numeric_members.cc
-CPP = "$(MOSYNCDIR)/bin/xgcc" -E
+CPP = /opt/MoSync-4.0-Alpha/bin/xgcc -E
 CPPFLAGS = -I"$(MOSYNCDIR)/include"
 CSTDIO_H = config/io/c_io_mavsprintf.h
 CTIME_CC = config/locale/generic/time_members.cc
 CTIME_H = config/locale/generic/time_members.h
-CXX = "$(MOSYNCDIR)/bin/xgcc" -x c++
-CXXCPP = "$(MOSYNCDIR)/bin/xgcc" -x c++ -E
+CXX = /opt/MoSync-4.0-Alpha/bin/xgcc -x c++
+CXXCPP = /opt/MoSync-4.0-Alpha/bin/xgcc -x c++ -E
 CXXFLAGS = 
 CYGPATH_W = echo
 C_INCLUDE_DIR = ${glibcxx_srcdir}/include/c_std
@@ -97,7 +97,7 @@ GLIBCXX_C_HEADERS_C_STD_TRUE =
 GLIBCXX_C_HEADERS_C_TRUE = #
 GLIBCXX_HOSTED_FALSE = #
 GLIBCXX_HOSTED_TRUE = 
-GLIBCXX_INCLUDES = -I../include/mapip -I../include -I../include/backward -I../libsupc++
+GLIBCXX_INCLUDES = -Iinclude/mapip -Iinclude -Ilibsupc++
 GLIBCXX_TEST_ABI_FALSE = 
 GLIBCXX_TEST_ABI_TRUE = #
 GLIBCXX_TEST_WCHAR_T_FALSE = 
@@ -128,7 +128,7 @@ PACKAGE_STRING = package-unused version-unused
 PACKAGE_TARNAME = libstdc++
 PACKAGE_VERSION = version-unused
 PATH_SEPARATOR = :
-RANLIB = true
+RANLIB = mapip-ranlib
 SECTION_FLAGS = 
 SECTION_LDFLAGS = 
 SET_MAKE = 
@@ -140,7 +140,7 @@ USE_NLS = no
 VERSION = version-unused
 WARN_FLAGS = -Wall -W -Wwrite-strings -Wcast-qual
 WERROR = 
-ac_ct_AR = 
+ac_ct_AR = ar
 ac_ct_AS = 
 ac_ct_CC = 
 ac_ct_CXX = 
@@ -348,12 +348,39 @@ libsupc___la_LIBADD =
 
 eh_exception.lo: CFLAGS += -frtti
 
-am__objects_1 = del_op.lo del_opnt.lo del_opv.lo del_opvnt.lo \
-	eh_alloc.lo eh_aux_runtime.lo eh_catch.lo eh_exception.lo \
-	eh_globals.lo eh_personality.lo eh_term_handler.lo \
-	eh_terminate.lo eh_throw.lo eh_type.lo eh_unex_handler.lo \
-	guard.lo new_handler.lo new_op.lo new_opnt.lo new_opv.lo \
-	new_opvnt.lo pure.lo tinfo.lo tinfo2.lo vec.lo vterminate.lo
+am__objects_disabled	= \
+	del_op.lo \
+	del_opnt.lo \
+	del_opv.lo \
+	del_opvnt.lo
+
+am__objects_1	= \
+	eh_alloc.lo \
+	eh_aux_runtime.lo \
+	eh_catch.lo \
+	eh_exception.lo \
+	\
+	eh_globals.lo \
+	eh_personality.lo \
+	eh_term_handler.lo \
+	\
+	eh_terminate.lo \
+	eh_throw.lo \
+	eh_type.lo \
+	eh_unex_handler.lo \
+	\
+	guard.lo \
+	new_handler.lo \
+	new_op.lo \
+	new_opnt.lo \
+	new_opv.lo \
+	\
+	new_opvnt.lo \
+	pure.lo \
+	tinfo.lo \
+	tinfo2.lo \
+	vec.lo \
+	vterminate.lo
 am__objects_2 = cp-demangle.lo
 am_libsupc___la_OBJECTS = $(am__objects_1) $(am__objects_2)
 libsupc___la_OBJECTS = $(am_libsupc___la_OBJECTS)
@@ -439,22 +466,22 @@ distclean-compile:
 	-rm -f *.tab.c
 
 .c.o:
-	$(COMPILE) -S $<
+	$(COMPILE) -S `test -f '$<' || echo '$(srcdir)/'`$<
 
 .c.obj:
 	$(COMPILE) -S `if test -f '$<'; then $(CYGPATH_W) '$<'; else $(CYGPATH_W) '$(srcdir)/$<'; fi`
 
 .c.lo:
-	$(LTCOMPILE) -S -o $@ $<
+	$(LTCOMPILE) -S -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
 
 .cc.o:
-	$(CXXCOMPILE) -S -o $@ $<
+	$(CXXCOMPILE) -S -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
 
 .cc.obj:
 	$(CXXCOMPILE) -S -o $@ `if test -f '$<'; then $(CYGPATH_W) '$<'; else $(CYGPATH_W) '$(srcdir)/$<'; fi`
 
 .cc.lo:
-	$(LTCXXCOMPILE) -S -o $@ $<
+	$(LTCXXCOMPILE) -S -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -675,4 +702,3 @@ uninstall-glibcxxinstallHEADERS:
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
-MULTISUBDIR = 

@@ -562,7 +562,7 @@ s,@MAINTAINER_MODE_FALSE@,,;t t
 s,@MAINT@,#,;t t
 s,@LIBTOOL@,$(SHELL) $(top_builddir)/libtool,;t t
 s,@CXXCPP@,/opt/MoSync-4.0-Alpha/bin/xgcc -x c++ -E,;t t
-s,@CPPFLAGS@,-I"\$(MOSYNCDIR)/include",;t t
+s,@CPPFLAGS@,-I"$(MOSYNCDIR)/include",;t t
 s,@enable_shared@,yes,;t t
 s,@enable_static@,yes,;t t
 s,@GLIBCXX_HOSTED_TRUE@,,;t t
@@ -591,7 +591,7 @@ s,@CMONEY_CC@,config/locale/generic/monetary_members.cc,;t t
 s,@CNUMERIC_CC@,config/locale/generic/numeric_members.cc,;t t
 s,@CTIME_H@,config/locale/generic/time_members.h,;t t
 s,@CTIME_CC@,config/locale/generic/time_members.cc,;t t
-s,@CLOCALE_CC@,config/locale/generic/c_locale.cpp,;t t
+s,@CLOCALE_CC@,config/locale/generic/c_locale.cc,;t t
 s,@CLOCALE_INTERNAL_H@,config/locale/generic/c++locale_internal.h,;t t
 s,@ALLOCATOR_H@,config/allocator/new_allocator_base.h,;t t
 s,@ALLOCATOR_NAME@,__gnu_cxx::new_allocator,;t t
