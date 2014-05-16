@@ -352,7 +352,14 @@ am__objects_disabled	= \
 	del_op.lo \
 	del_opnt.lo \
 	del_opv.lo \
-	del_opvnt.lo
+	del_opvnt.lo \
+	guard.lo \
+	new_handler.lo \
+	new_op.lo \
+	new_opnt.lo \
+	new_opv.lo \
+	\
+	new_opvnt.lo \
 
 am__objects_1	= \
 	eh_alloc.lo \
@@ -368,14 +375,6 @@ am__objects_1	= \
 	eh_throw.lo \
 	eh_type.lo \
 	eh_unex_handler.lo \
-	\
-	guard.lo \
-	new_handler.lo \
-	new_op.lo \
-	new_opnt.lo \
-	new_opv.lo \
-	\
-	new_opvnt.lo \
 	pure.lo \
 	tinfo.lo \
 	tinfo2.lo \

@@ -549,7 +549,7 @@ s,@OBJEXT@,s,;t t
 s,@CXX@,/opt/MoSync-4.0-Alpha/bin/xgcc -x c++,;t t
 s,@ac_ct_CXX@,,;t t
 s,@CFLAGS@,-g -O2,;t t
-s,@CXXFLAGS@,,;t t
+s,@CXXFLAGS@,-g -O2 -fno-rtti -fno-exceptions,;t t
 s,@LN_S@,cp -f,;t t
 s,@AS@,mapip-as,;t t
 s,@ac_ct_AS@,,;t t
