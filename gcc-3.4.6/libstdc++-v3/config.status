@@ -628,7 +628,7 @@ s,@glibcxx_prefixdir@,NONE,;t t
 s,@gxx_include_dir@,${prefix}/include/c++/3.4.6,;t t
 s,@glibcxx_toolexecdir@,${libdir}/gcc/${host_alias},;t t
 s,@glibcxx_toolexeclibdir@,${libdir},;t t
-s,@GLIBCXX_INCLUDES@,-Iinclude/mapip -Iinclude -Ilibsupc++,;t t
+s,@GLIBCXX_INCLUDES@,-I../include/mapip -I../include -I../libsupc++,;t t
 s,@TOPLEVEL_INCLUDES@,-I$(toplevel_srcdir)/gcc,;t t
 s,@OPTIMIZE_CXXFLAGS@,,;t t
 s,@WARN_FLAGS@,-Wall -W -Wwrite-strings -Wcast-qual,;t t
