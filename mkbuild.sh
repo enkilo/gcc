@@ -1,6 +1,8 @@
 cat <<EOF| tee build.sh|sed "s/^/build.sh: /"
 
-mkdir -p $builddir/gcc && cp -vf $SRCDIR/gcc/{gengtype-yacc.c,c-parse.c,gengtype-lex.c} $builddir/gcc
+SRCDIR=gcc-3.4.6
+
+mkdir -p $builddir/gcc && cp -vf \$SRCDIR/gcc/{gengtype-yacc.c,c-parse.c,gengtype-lex.c} $builddir/gcc
 
 make -C $builddir {HOST_,}LDFLAGS="-static" all-gcc
 
