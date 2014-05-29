@@ -69,14 +69,15 @@ builddir=build/${host}                       # build directory
                                              # This must be specified in the format shown here
                                              # or gcc won't be able to find it's libraries and includes
                                              # if you move the installation
-
+build=`gcc -dumpmachine`
 
 #---------------------------------------------------------------------------------
 # build and install just the c compiler
 #--------------------------------"-------------------------------------------------
 
 mkdir -p $builddir
-(cd $builddir
+(set -x
+cd $builddir
 
 $SRCDIR/configure \
         --enable-languages="c,c++" \
@@ -84,6 +85,7 @@ $SRCDIR/configure \
         --disable-shared --disable-threads --disable-win32-registry --disable-nls \
         --target=$target \
         --host=$host \
+        --build=$build \
         --without-headers \
         --program-prefix=$progpref -v \
         2>&1 | tee gcc_configure.log
