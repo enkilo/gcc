@@ -54,6 +54,16 @@ export CXXFLAGS='-O2 -pipe'
 export {HOST_,}LDFLAGS='-static'
 export DEBUG_FLAGS=''
 
+
+if [ "$host" != "$build" ]; then
+  
+  echo "$host" $build
+  unset CC
+  export CC=gcc
+  CFLAGS="$CFLAGS -m32"
+  CXXFLAGS="$CFLAGS -m32"
+fi
+
 #---------------------------------------------------------------------------------
 # build and install just the c compiler
 #---------------------------------------------------------------------------------
