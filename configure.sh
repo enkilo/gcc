@@ -2,17 +2,6 @@
 # Source and Install directories
 #---------------------------------------------------------------------------------
 
-SRCDIR=../../gcc-3.4.6                       # the sourcecode dir for gcc
-                                             # This must be specified in the format shown here
-                                             # as one of the tools built during the process will fail
-                                             # if absolute paths are specified
-                                             # the example here assumes that the gcc source directory
-                                             # is at the same level as the script
-
-prefix=build/gcc                        # installation directory
-                                             # This must be specified in the format shown here
-                                             # or gcc won't be able to find it's libraries and includes
-                                             # if you move the installation
 #push() {
 #  eval "shift; $1=\"\${$1:+\$$1
 #}\$*\""
@@ -69,15 +58,25 @@ export CXXFLAGS='-m32 -O2 -pipe'
 export LDFLAGS='-s'
 export DEBUG_FLAGS=''
 
+SRCDIR=../../gcc-3.4.6                       # the sourcecode dir for gcc
+                                             # This must be specified in the format shown here
+                                             # as one of the tools built during the process will fail
+                                             # if absolute paths are specified
+                                             # the example here assumes that the gcc source directory
+                                             # is at the same level as the script
 
-builddir=./build/${host}
+builddir=build/${host}                       # build directory
+                                             # This must be specified in the format shown here
+                                             # or gcc won't be able to find it's libraries and includes
+                                             # if you move the installation
+
 
 #---------------------------------------------------------------------------------
 # build and install just the c compiler
 #--------------------------------"-------------------------------------------------
 
 mkdir -p $builddir
-cd $builddir
+(cd $builddir
 
 $SRCDIR/configure \
         --enable-languages="c,c++" \
@@ -88,11 +87,6 @@ $SRCDIR/configure \
         --without-headers \
         --program-prefix=$progpref -v \
         2>&1 | tee gcc_configure.log
+)
 
-cat <<EOF| tee build.sh|sed "s/^/build.sh: /"
-mkdir -p $builddir/gcc && cp -vf $SRCDIR/gcc/{gengtype-yacc.c,c-parse.c,gengtype-lex.c} $builddir/gcc
-make -C $builddir {HOST_,}LDFLAGS="-static" all-gcc
-strip -v --strip-all $builddir/gcc/{xgcc,cpp,cc1,cc1plus}
-mkdir -p \${MOSYNCDIR:-$prefix}/{mapip/bin,bin} && cp -vf $builddir/gcc/{xgcc,cpp} \${MOSYNCDIR:-$prefix}/bin && cp -vf $builddir/gcc/{cc1,cc1plus} \${MOSYNCDIR:-$prefix}/mapip/bin
-#ln -sf xgcc \${MOSYNCDIR:-$prefix}/bin/gcc
-EOF
+. mkbuild.sh
