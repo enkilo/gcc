@@ -1040,7 +1040,9 @@ switch(PWR)											\
 #define TRULY_NOOP_TRUNCATION(oprec, inprec) 1
 #define FUNCTION_MODE Pmode
 
-#define DOLLARS_IN_IDENTIFIERS 1
+#undef DOLLARS_IN_IDENTIFIERS
+#define NO_DOLLAR_IN_LABEL 1
+
 
 #define TARGET_MEM_FUNCTIONS
 
