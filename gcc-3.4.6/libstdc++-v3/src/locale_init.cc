@@ -35,7 +35,7 @@
 #include <bits/atomicity.h>
 #include <bits/concurrence.h>
 
-#ifdef LOCALES
+#if LOCALES
 
 namespace __gnu_internal
 {
@@ -151,7 +151,7 @@ namespace std
   void  
   locale::_S_initialize()
   {
-#ifdef __GTHREADS
+#if __GTHREADS
     if (__gthread_active_p())
       __gthread_once(&_S_once, _S_initialize_once);
 #endif

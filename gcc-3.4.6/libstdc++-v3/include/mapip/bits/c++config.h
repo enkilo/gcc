@@ -107,6 +107,14 @@ namespace std
 /* #undef _GLIBCXX_HAVE_GETTEXT */
 /* #undef _GLIBCXX_HAVE_STPCPY */
 
+#define LOCALES 0
+
+// No threading
+#define __GTHREADS 0
+#define _GLIBCXX__PTHREADS 0
+#define _GLIBCXX__DCE_THREADS 0
+#define _GLIBCXX__SOLARIS_THREADS 0
+
 // Include I/O support for 'long long' and 'unsigned long long'.
 #define _GLIBCXX_USE_LONG_LONG 1
 
@@ -129,7 +137,7 @@ namespace std
 /* #undef _GLIBCXX_CONCEPT_CHECKS */
 
 // Define to use symbol versioning in the shared library.
-/* #undef _GLIBCXX_SYMVER */
+#define _GLIBCXX_SYMVER 0
 
 // Define symbol versioning in assember directives. If symbol
 // versioning is beigng used, and the assembler supports this kind of
@@ -966,16 +974,16 @@ namespace std
 #define _GLIBCXX_PACKAGE_BUGREPORT ""
 
 /* Define to the full name of this package. */
-#define _GLIBCXX_PACKAGE_NAME "package-unused"
+#define _GLIBCXX_PACKAGE_NAME "libstdc++"
 
 /* Define to the full name and version of this package. */
-#define _GLIBCXX_PACKAGE_STRING "package-unused version-unused"
+#define _GLIBCXX_PACKAGE_STRING "libstdc++ 3.4.6"
 
 /* Define to the one symbol short name of this package. */
 #define _GLIBCXX_PACKAGE_TARNAME "libstdc++"
 
 /* Define to the version of this package. */
-#define _GLIBCXX_PACKAGE__GLIBCXX_VERSION "version-unused"
+#define _GLIBCXX_PACKAGE__GLIBCXX_VERSION "3.4.6"
 
 /* Define to 1 if you have the ANSI C header files. */
 /* #undef STDC_HEADERS */
@@ -984,6 +992,7 @@ namespace std
 #define _GLIBCXX_HOSTED 1
 
 /* Define if the compiler is configured for setjmp/longjmp exceptions. */
+#define __EXCEPTIONS 0
 /* #undef _GLIBCXX_SJLJ_EXCEPTIONS */
 //
 // Systems that have certain non-standard functions prefixed with an

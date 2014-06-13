@@ -350,7 +350,7 @@ namespace __gnu_debug
     _M_message(_Debug_msg_id __id) const;
 
     void
-    _M_error() const;
+    _M_error() const __attribute__((noreturn));
 
   private:
     _Error_formatter(const char* __file, size_t __line)

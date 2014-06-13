@@ -44,6 +44,8 @@
 #include <cwchar>
 #endif
 
+#include "noexcept.ipp"
+
 namespace __gnu_cxx
 {
   template<typename _CharT, typename _Traits = std::char_traits<_CharT> >
@@ -142,9 +144,9 @@ namespace __gnu_cxx
 	int_type __ret;
 	if (traits_type::eq_int_type(__c, traits_type::eof()))
 	  {
-	    if (0) //std::fflush(_M_file))
-	      __ret = traits_type::eof();
-	    else
+	    //if(std::fflush(_M_file))
+	    //  __ret = traits_type::eof();
+	    //else
 	      __ret = traits_type::not_eof(__c);
 	  }
 	else

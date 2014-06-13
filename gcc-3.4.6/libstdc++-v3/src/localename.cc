@@ -30,7 +30,7 @@
 #include <cstring>
 #include <locale>
 
-#ifdef LOCALES
+#if LOCALES
 
 namespace std
 {

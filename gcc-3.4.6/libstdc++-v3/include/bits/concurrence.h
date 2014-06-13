@@ -31,7 +31,7 @@
 #ifndef _CONCURRENCE_H
 #define _CONCURRENCE_H 1
 
-#warning concurrence
+//#warning concurrence
 
 // GCC's thread abstraction layer
 #include "bits/gthr.h"

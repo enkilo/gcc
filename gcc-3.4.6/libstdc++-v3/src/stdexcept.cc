@@ -34,8 +34,6 @@
 #include <string>
 #include <stdexcept>
 
-#if EXCEPTIONS
-
 namespace std 
 {
   logic_error::logic_error(const string& __arg) 
@@ -77,4 +75,3 @@ namespace std
   underflow_error::underflow_error(const string& __arg)
   : runtime_error(__arg) { }
 } // namespace std
-#endif

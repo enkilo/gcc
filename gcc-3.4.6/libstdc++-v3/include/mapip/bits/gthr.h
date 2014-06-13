@@ -29,6 +29,8 @@ Software Foundation, 59 Temple Place - Suite 330, Boston, MA
 #ifndef _GLIBCXX_GCC_GTHR_H
 #define _GLIBCXX_GCC_GTHR_H
 
+#include <bits/c++config.h>
+
 /* If this file is compiled with threads support, it must
        #define __GTHREADS 1
    to indicate that threads support is present.  Also it has define
