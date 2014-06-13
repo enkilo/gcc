@@ -34,6 +34,8 @@
 #include <cxxabi.h>
 # include <cstdio>
 
+#include "noexcept.icc"
+
 using namespace std;
 using namespace abi;
 
@@ -85,7 +87,7 @@ namespace __gnu_cxx
 	// If the exception is derived from std::exception, we can
 	// give more information.
 	try { __throw_exception_again; }
-#ifdef __EXCEPTIONS
+#if __EXCEPTIONS
 	catch (exception &exc)
 	  {
 	    char const *w = exc.what();

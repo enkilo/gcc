@@ -50,7 +50,7 @@ operator new (std::size_t sz) throw (std::bad_alloc)
     {
       new_handler handler = __new_handler;
       if (! handler)
-#ifdef __EXCEPTIONS
+#if __EXCEPTIONS
 	throw bad_alloc();
 #else
 #ifdef MAPIP

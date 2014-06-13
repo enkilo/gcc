@@ -44,7 +44,7 @@
 #include <cwchar>
 #endif
 
-#include "noexcept.ipp"
+#include "noexcept.icc"
 
 namespace __gnu_cxx
 {

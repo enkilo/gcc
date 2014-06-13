@@ -34,6 +34,8 @@
 #include "unwind-cxx.h"
 #include "exception_defines.h"
 
+#include "noexcept.icc"
+
 using namespace __cxxabiv1;
 
 void
