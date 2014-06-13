@@ -217,13 +217,14 @@ optimization_options (optimize, size)
       target_flags |= MASK_NATIVE_CALLS;
     }
 
+#ifdef MOSYNC_COMPILER_MSG
     printf ("--> GCC PIPIL Compiler v2:" __TIME__":"__DATE__" (O%d)", current_opt_level);
 
 /*	if (mapip_archscale_string)
 	    printf (":(Scaled)");
 */
     printf ("\n");
-
+#endif
 }
 
 /***********************************
