@@ -44,8 +44,8 @@ builddir=./build/$host
 target=mapip
 progpref=mapip-
 
-if type "$host-gcc"; then
-  CC=$host-gcc
+if type "$host-${CC-gcc}"; then
+  CC=$host-${CC-gcc}
 fi
 
 export CC
@@ -58,8 +58,6 @@ export DEBUG_FLAGS=''
 if [ "$host" != "$build" ]; then
   
   echo "$host" $build
-  unset CC
-  export CC=gcc
   CFLAGS="$CFLAGS -m32"
   CXXFLAGS="$CFLAGS -m32"
 fi
