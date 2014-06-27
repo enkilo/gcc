@@ -42,6 +42,10 @@ extern struct rtx_def *cmp_ops[2];
     } while (0) 
 
 
+/* Standard include directory. */
+#undef STANDARD_INCLUDE_DIR
+#define STANDARD_INCLUDE_DIR "/include"
+
 #define MASK_NATIVE_CALLS	0x00000001
 #define TARGET_NATIVE_CALLS	(target_flags & MASK_NATIVE_CALLS)
 

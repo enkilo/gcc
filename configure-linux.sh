@@ -8,7 +8,8 @@ while :; do
   ARG=$1
   case "$ARG" in
     --) shift; break ;;
-    *=*) ARG=${ARG#--}; eval "${ARG%%=*}='${ARG#*=}'"; shift ;;
+    --*) ARGS="${ARGS+$ARGS${IFS}}$1"; shift ;;
+    *=*) eval "${VAR%%=*}='${VAR#*=}'"; shift ;;
     *) break ;;
   esac
 done
@@ -44,9 +45,9 @@ builddir=./build/$host
 target=mapip
 progpref=mapip-
 
-if type "$host-${CC-gcc}"; then
-  CC=$host-${CC-gcc}
-fi
+#if type "$host-${CC-gcc}"; then
+#  CC=$host-${CC-gcc}
+#fi
 
 export CC
 export CFLAGS='-O2 -pipe'
@@ -56,8 +57,7 @@ export DEBUG_FLAGS=''
 
 
 if [ "$host" != "$build" ]; then
-  
-  echo "$host" $build
+  #echo "$host" $build
   CFLAGS="$CFLAGS -m32"
   CXXFLAGS="$CFLAGS -m32"
 fi
@@ -66,8 +66,8 @@ fi
 # build and install just the c compiler
 #---------------------------------------------------------------------------------
 (mkdir -p $builddir
+set -x
 cd $builddir
-
 $SRCDIR/configure \
         --enable-languages=c,c++ \
         --with-gcc --with-stabs \
@@ -79,7 +79,7 @@ $SRCDIR/configure \
         --program-prefix=$progpref -v \
 	--build=$build \
 	--host=$host \
-  ) 2>&1 | tee gcc_configure.log
+  $ARGS) 2>&1 | tee gcc_configure.log
 
 . mkbuild.sh
 
