@@ -71,10 +71,11 @@ $SRCDIR/configure \
 	--host=$host \
   ) 2>&1 | tee gcc_configure.log
 
-{
-echo "mkdir -p $builddir/gcc && cp -vf $SRCDIR/gcc/{gengtype-yacc.c,c-parse.c,gengtype-lex.c} $builddir/gcc"
-echo make -C $builddir {HOST_,}LDFLAGS="-static" 
-echo "strip -v --strip-all $builddir/gcc/{xgcc,cc1,cc1plus}"
-echo "mkdir -p $prefix/{mapip/bin,bin} && cp -vf $builddir/gcc/xgcc $prefix/bin && cp -vf $builddir/gcc/cc1* $prefix/mapip/bin"
-echo "ln -sf xgcc $prefix/bin/gcc"
-} |tee build.sh
+cat <<EOF |tee build.sh |sed "s|^|build.sh:|"
+builddir=$builddir
+mkdir -p \$builddir/gcc && cp -vf $SRCDIR/gcc/{gengtype-yacc.c,c-parse.c,gengtype-lex.c} \$builddir/gcc
+make -C \$builddir {HOST_,}LDFLAGS="-static" 
+strip -v --strip-all \$builddir/gcc/{xgcc,cc1,cc1plus}
+mkdir -p $prefix/{mapip/bin,bin} && cp -vf \$builddir/gcc/xgcc $prefix/bin && cp -vf \$builddir/gcc/cc1* $prefix/mapip/bin
+ln -sf xgcc $prefix/bin/gcc
+EOF
