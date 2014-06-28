@@ -2,7 +2,7 @@ cat <<EOF| tee build.sh|sed "s/^/build.sh: /"
 
 builddir=\${1-$builddir}
 
-MOSYNCDIR=${MOSYNCDIR:-$prefix}
+MOSYNCDIR=$prefix
 SRCDIR=gcc-3.4.6
 
 mkdir -p \$builddir/gcc && cp -vf \$SRCDIR/gcc/{gengtype-yacc.c,c-parse.c,gengtype-lex.c} \$builddir/gcc
@@ -13,7 +13,7 @@ $host-strip -v --strip-all \$builddir/gcc/{xgcc,cpp,cc1,cc1plus}*
 
 cat <<EOF2 |tee inst.sh|sed "s/^/inst.sh: /"
 builddir=\\\${1-$builddir}
-MOSYNCDIR=\$MOSYNCDIR
+MOSYNCDIR=\$prefix
 
 mkdir -p "\\\$DESTDIR\\\$MOSYNCDIR"/{mapip/bin,bin} && 
 cp -vf \\\$builddir/gcc/{xgcc,cpp} "\\\$DESTDIR\\\$MOSYNCDIR/bin" && 
