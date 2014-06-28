@@ -50,10 +50,10 @@ progpref=mapip-
 #fi
 
 export CC
-export CFLAGS='-O2 -pipe'
-export CXXFLAGS='-O2 -pipe'
-export {HOST_,}LDFLAGS='-static'
-export DEBUG_FLAGS=''
+export CFLAGS='-g -ggdb -O0'
+export CXXFLAGS='-g -ggdb -O0'
+#export {HOST_,}LDFLAGS='-static'
+export DEBUG_FLAGS='-g -ggdb -O0'
 
 
 if [ "$host" != "$build" ]; then
