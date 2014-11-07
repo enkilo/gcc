@@ -54,6 +54,8 @@ export DEBUG_FLAGS=''
 
 [ -n "$MOSYNCDIR" -a -d "$MOSYNCDIR" ] && SYSROOT="$MOSYNCDIR" || SYSROOT="$prefix/$target"
 
+echo "SYSROOT=$SYSROOT" 1>&2
+
 mkdir -p "$BUILDDIR"
 cd "$BUILDDIR"
 

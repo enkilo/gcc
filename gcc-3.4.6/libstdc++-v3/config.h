@@ -159,13 +159,13 @@
 /* #undef HAVE_WRITEV */
 
 // Define if int64_t is available in <stdint.h>.
-#define HAVE_INT64_T 1
+/* #undef HAVE_INT64_T */
 
 // Define if LC_MESSAGES is available in <locale.h>.
 /* #undef HAVE_LC_MESSAGES */
 
 // Define if <float.h> exists.
-/* #undef HAVE_FLOAT_H */
+#define HAVE_FLOAT_H 1
 
 // Define if modf is present in <math.h>
 /* #undef HAVE_MODF */
@@ -226,7 +226,7 @@
 /* #undef HAVE_COSL */
 
 /* Define to 1 if you have the <endian.h> header file. */
-/* #undef HAVE_ENDIAN_H */
+#define HAVE_ENDIAN_H 1
 
 /* Define to 1 if you have the `expf' function. */
 /* #undef HAVE_EXPF */
@@ -256,7 +256,7 @@
 /* #undef HAVE_FINITEL */
 
 /* Define to 1 if you have the <float.h> header file. */
-/* #undef HAVE_FLOAT_H */
+#define HAVE_FLOAT_H 1
 
 /* Define to 1 if you have the `floorf' function. */
 /* #undef HAVE_FLOORF */
@@ -298,7 +298,7 @@
 /* #undef HAVE_FWSCANF */
 
 /* Define to 1 if you have the <gconv.h> header file. */
-/* #undef HAVE_GCONV_H */
+#define HAVE_GCONV_H 1
 
 /* Define to 1 if you have the `getpagesize' function. */
 /* #undef HAVE_GETPAGESIZE */
@@ -481,7 +481,7 @@
 /* #undef HAVE_SQRTL */
 
 /* Define to 1 if you have the <stdint.h> header file. */
-#define HAVE_STDINT_H 1
+/* #undef HAVE_STDINT_H */
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 /* #undef HAVE_STDLIB_H */
@@ -508,7 +508,7 @@
 /* #undef HAVE_SYS_FILIO_H */
 
 /* Define to 1 if you have the <sys/ioctl.h> header file. */
-/* #undef HAVE_SYS_IOCTL_H */
+#define HAVE_SYS_IOCTL_H 1
 
 /* Define to 1 if you have the <sys/isa_defs.h> header file. */
 /* #undef HAVE_SYS_ISA_DEFS_H */
@@ -520,19 +520,19 @@
 /* #undef HAVE_SYS_PARAM_H */
 
 /* Define to 1 if you have the <sys/resource.h> header file. */
-/* #undef HAVE_SYS_RESOURCE_H */
+#define HAVE_SYS_RESOURCE_H 1
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 /* #undef HAVE_SYS_STAT_H */
 
 /* Define to 1 if you have the <sys/time.h> header file. */
-/* #undef HAVE_SYS_TIME_H */
+#define HAVE_SYS_TIME_H 1
 
 /* Define to 1 if you have the <sys/types.h> header file. */
 /* #undef HAVE_SYS_TYPES_H */
 
 /* Define to 1 if you have the <sys/uio.h> header file. */
-/* #undef HAVE_SYS_UIO_H */
+#define HAVE_SYS_UIO_H 1
 
 /* Define to 1 if you have the `tanf' function. */
 /* #undef HAVE_TANF */

@@ -37,17 +37,17 @@ if test "X${CDPATH+set}" = Xset; then CDPATH=:; export CDPATH; fi
 available_tags=
 
 ### BEGIN LIBTOOL CONFIG
-# Libtool was configured as follows, on host gatling.workgroup:
+# Libtool was configured as follows, on host localhost.localdomain:
 #
 # AR="ar" AR_FLAGS="" LTCC="/opt/MoSync-4.0-Alpha/bin/xgcc" CC="/opt/MoSync-4.0-Alpha/bin/xgcc" \
-# CFLAGS="-g -O2" CPPFLAGS="-I"$(MOSYNCDIR)/include"" \
+# CFLAGS="-g -O2" CPPFLAGS="-I\"\$(MOSYNCDIR)/include\"" \
 # MAGIC_CMD="" LD="/bin/ld" LDFLAGS="" LIBS="" \
-# LN_S="cp -f" NM="nm" RANLIB="true" STRIP="strip" \
-# AS="mapip-as" DLLTOOL="" OBJDUMP="" \
+# LN_S="cp -f" NM="nm" RANLIB="ranlib" STRIP="strip" \
+# AS="as" DLLTOOL="" OBJDUMP="" \
 # objext="" exeext="" reload_flag=" -r" \
 # deplibs_check_method="unknown" \
 # file_magic_cmd="\$MAGIC_CMD" \
-#   ./../../ltconfig --cache-file=/dev/null --with-gcc --with-gnu-ld --no-verify --build=mapip ./../../ltmain.sh mapip
+#   ../../ltconfig --cache-file=/dev/null --with-gcc --with-gnu-ld --no-verify --build=mapip ../../ltmain.sh mapip
 #
 # Compiler and other test output produced by ltconfig, useful for
 # debugging ltconfig, is in ./config.log if it exists.
@@ -79,7 +79,7 @@ echo="echo"
 
 # The archiver.
 AR="ar"
-AR_FLAGS="scru"
+AR_FLAGS="cru"
 
 # A C compiler.
 LTCC="/opt/MoSync-4.0-Alpha/bin/xgcc"
@@ -112,7 +112,7 @@ DLLTOOL="dlltool"
 OBJDUMP="objdump"
 
 # Used on cygwin: assembler.
-AS="mapip-as"
+AS="as"
 
 # The name of the directory that contains temporary libtool files.
 objdir=.libs
@@ -124,7 +124,7 @@ reload_cmds="\$LD\$reload_flag -o \$output\$reload_objs"
 # How to pass a linker flag through the compiler.
 wl="-Wl,"
 
-# Object file suffix (normally "s").
+# Object file suffix (normally "o").
 objext="s"
 
 # Old archive suffix (normally "a").
@@ -193,8 +193,8 @@ library_names_spec=""
 soname_spec=""
 
 # Commands used to build and install an old-style archive.
-RANLIB="true"
-old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs\$old_deplibs~\$MOSYNCDIR/bin/pipe-tool -L \`echo \"\${oldlib}\" | sed \"s|\.libs/lib||;s|\.a\$|.lib|\"\` \$oldobjs"
+RANLIB="ranlib"
+old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs\$old_deplibs~\$RANLIB \$oldlib"
 old_postinstall_cmds="\$RANLIB \$oldlib~chmod 644 \$oldlib"
 old_postuninstall_cmds=""
 
